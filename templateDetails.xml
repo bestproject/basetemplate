@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/2.5/template-install.dtd">
+<extension version="3.6" type="template" client="site">
+	<name>BASETHEME</name>
+	<version>1.0</version>
+	<creationDate>01/01/2000</creationDate>
+	<author>Artur Stępień</author>
+	<authorEmail>artur.stepien@bestproject.pl</authorEmail>
+	<copyright>Copyright (C) 2016 BASETHEME. All rights reserved.</copyright>
+	<description>TPL_BASETHEME_XML_DESCRIPTION</description>
+	
+	<files>
+		<folder>css</folder>
+		<folder>fonts</folder>
+		<folder>html</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>language</folder>
+		<folder>sass</folder>
+		<folder>vendor</folder>
+		<filename>build.php</filename>
+		<filename>error.php</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+	</files>
+	
+	<positions>
+		<position>menu</position>
+		<position>slider</position>
+		<position>left</position>
+		<position>right</position>
+		<position>content-before</position>
+		<position>content-after</position>
+		<position>footer</position>
+	</positions>
+	
+	<languages folder="language">
+		<language tag="pl-PL">pl-PL.tpl_BASETHEME.ini</language>
+		<language tag="pl-PL">pl-PL.tpl_BASETHEME.sys.ini</language>
+	</languages>
+	
+	<config>
+		<fields name="params">
+			
+			<fieldset name="advanced">
+
+				<field name="logoFile" class="" type="media" default=""
+					label="TPL_BASETHEME_LOGO_LABEL"
+					description="TPL_BASETHEME_LOGO_DESC" />
+					
+				<field name="sitetitle"  type="text" default=""
+					label="JGLOBAL_TITLE"
+					description="JFIELD_ALT_PAGE_TITLE_LABEL"
+					filter="string" />
+
+				<field name="sitedescription"  type="text" default=""
+					label="JGLOBAL_DESCRIPTION"
+					description="JGLOBAL_SUBHEADING_DESC"
+					filter="string" />
+			</fieldset>
+			
+		</fields>
+	</config>
+	
+</extension>
