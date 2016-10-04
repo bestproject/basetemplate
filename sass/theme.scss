@@ -1,0 +1,20 @@
+// Variables and basics
+@import 'variables';
+@import 'fonts';
+
+// Theme parts
+@import 'bootstrap/theme';
+@import 'components/com_content';
+@import 'components/com_contact';
+@import 'modules/mod_custom';
+@import 'modules/mod_menu';
+@import 'modules/mod_articles_category';
+
+// Pages custom styles
+@import 'pages/homepage';
+
+// Basics
+html,body,html>body {
+    max-width:100%;overflow-x:hidden;font-family:$fontMain;
+    font-size:16px;line-height:1.6;font-weight:400;color:#000;
+}
