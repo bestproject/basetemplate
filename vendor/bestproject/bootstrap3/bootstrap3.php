@@ -1,5 +1,7 @@
 <?php
 
+namespace BestProject;
+
 /**
  * Build to return Bootstrap3 classes in modules and templates.
  */
