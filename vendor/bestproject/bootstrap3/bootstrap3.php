@@ -64,7 +64,7 @@ abstract class Bootstrap3
 	 * @return	string
 	 */
 	public static function renderModulesPosition($position, $columns = true, $classSfx = null, $responsive_classes = true){
-		$modules = JModuleHelper::getModules($position);
+		$modules = \JModuleHelper::getModules($position);
 
 		$html = '';
 
@@ -72,7 +72,7 @@ abstract class Bootstrap3
 		if( $columns ) {
 			$html.= '<div class="row">';
 		}
-		
+
 		foreach( $modules AS $module ){
 			$module_params	= new \Joomla\Registry\Registry($module->params);
 
@@ -86,14 +86,14 @@ abstract class Bootstrap3
 			if( !is_null($classSfx) ){
 				$column_class.=' '.$classSfx;
 			}
-			
+
 			$html.= '<div class="'.$column_class.'">';
 			if( $module->showtitle ) {
 				$h			= $module_params->get('header_tag','h3');
 				$h_class	= $module_params->get('header_class','')!=='' ? ' class="'.$module_params->get('header_class','').'"':'';
 				$html		.='<'.$h.$h_class.'>'.$module->title.'</'.$h.'>';
 			}
-			$html.= JModuleHelper::renderModule($module);
+			$html.= \JModuleHelper::renderModule($module);
 			$html.= '</div>';
 		}
 
