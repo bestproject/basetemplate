@@ -6,10 +6,16 @@ error_reporting(E_ALL);
 // Disable caching
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() - 3600));
 
+
+
 class TemplateBuilder {
 
 	protected $name;
 	protected $base;
+	public $override_extensions = array(
+		'mod_articles_category','mod_menu',
+		'com_content','com_contact',
+	);
 
 	/**
 	 * Create template overrides for currently installed extensions
@@ -21,8 +27,8 @@ class TemplateBuilder {
 		// Create overrides for components
 		foreach( glob($this->base.'/components/*') AS $directory ) {
 
-			// Ommit placeholders
-			if( basename($directory)==='index.html' ) {
+			// If this extension views should not be overriden, skip it
+			if(  !in_array(basename($directory), $this->override_extensions) ) {
 				continue;
 			}
 
@@ -75,8 +81,8 @@ class TemplateBuilder {
 		// Create overrides for modules
 		foreach( glob($this->base.'/modules/*') AS $directory ) {
 
-			// Ommit placeholders
-			if( basename($directory)==='index.html' ) {
+			// If this extension views should not be overriden, skip it
+			if(  !in_array(basename($directory), $this->override_extensions) ) {
 				continue;
 			}
 
