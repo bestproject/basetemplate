@@ -43,6 +43,11 @@ body {
             border-bottom:1px solid $colorBorder;
             .wrapper {
                 padding:15px 15px;line-height:20px;
+                .row {
+                    &>div,&>article {
+                        padding-top:0;padding-bottom:0;
+                    }
+                }
             }
         }
         .logo {
