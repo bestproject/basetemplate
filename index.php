@@ -4,7 +4,7 @@ defined('_JEXEC') or die;
 /**
  * == TEMPLATE CLASSES =====================
  */
-require_once __DIR__.'/vendors/bestproject/bootstrap3/bootstrap3.php';
+require_once __DIR__.'/vendor/bestproject/bootstrap3/bootstrap3.php';
 use BestProject\Bootstrap3;
 
 
@@ -35,7 +35,7 @@ $layout			= $app->input->get('layout');
 JHTML::_('jquery.framework');
 $doc->addScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.'.($debug?'':'min.').'js');
 if( $this->params->get('vendors_colorbox') ) {
-	$doc->addScript($this->baseurl.'/templates/'.$this->template.'/vendors/jackmoore/colorbox/jquery.colorbox'.($debug?'':'-min.').'js');
+	$doc->addScript($this->baseurl.'/templates/'.$this->template.'/vendor/jackmoore/colorbox/jquery.colorbox'.($debug?'':'-min.').'js');
 	$doc->addScriptDeclaration('
 		// Setup lightbox for anchors
 		jQuery(document).ready(function($){
@@ -45,7 +45,7 @@ if( $this->params->get('vendors_colorbox') ) {
 	');
 }
 if( $this->params->get('vendors_animated') ) {
-	$doc->addScript($this->baseurl.'/templates/'.$this->template.'/vendors/bestproject/animated/animated-1.0.0.'.($debug?'':'min.').'js');
+	$doc->addScript($this->baseurl.'/templates/'.$this->template.'/vendor/bestproject/animated/animated-1.0.0.'.($debug?'':'min.').'js');
 	$doc->addScriptDeclaration('
 		// Run animations when element enters the screen
 		jQuery(document).ready(function($){
@@ -80,10 +80,10 @@ if( $this->params->get('back_to_top') ) {
  */
 $doc->addStyleSheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.'.($debug?'':'min.').'css');
 if( $this->params->get('vendors_colorbox') ) {
-	$doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/vendors/jackmoore/colorbox/example2/colorbox.css'); // Chosen default theme
+	$doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/vendor/jackmoore/colorbox/example2/colorbox.css'); // Chosen default theme
 }
 if( $this->params->get('vendors_animated') ) {
-	$doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/vendors/daneden/animate.css/animate.'.($debug?'':'min.').'css'); // Animate.CSS
+	$doc->addStyleSheet($this->baseurl.'/templates/'.$this->template.'/vendor/daneden/animate.css/animate.'.($debug?'':'min.').'css'); // Animate.CSS
 }
 if( $this->params->get('vendors_fontawesome') ) {
 	$doc->addStyleSheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.'.($debug?'':'min.').'css');// Font Awesome Icons
