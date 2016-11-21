@@ -63,6 +63,16 @@ body {
     }
 }
 
+#content_before {
+    border-bottom:1px solid $colorBorder;padding-bottom:25px;padding-top:5px;
+}
+#content {
+    padding-top:20px;
+}
+#content_after {
+    padding-top:20px;margin-top:40px;border-top:1px solid $colorBorder;
+}
+
 #back-to-top {
     bottom:0;opacity:0;float:right;right:30px;transition:0.5s all linear;
     position:fixed;

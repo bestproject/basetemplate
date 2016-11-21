@@ -286,22 +286,9 @@ $toolbar_position			= $this->params->get('toolbar_position');
 
 		<?php if( $has_content_before ): ?>
 		<!--Content before-->
-		<div id="content_before" class="animated-bounceInUp">
+		<div id="content_before" class="animated-flipInX">
 			<div class="container">
-				<div class="row">
-					<?php if( $has_content_before_left ): ?>
-					<div class="col-sm-12 col-md-6 left">
-						<span><img src="templates/bony/images/sales-title.png" alt="" /></span>
-						<?php echo Bootstrap3::renderModulesPosition('content-before-left') ?>
-					</div>
-					<?php endif; ?>
-					<?php if( $has_content_before_right ): ?>
-					<div class="col-sm-12 col-md-6 right">
-						<span><img src="templates/bony/images/support-title.png" alt="" /></span>
-						<?php echo Bootstrap3::renderModulesPosition('content-before-right') ?>
-					</div>
-					<?php endif; ?>
-				</div>
+				<?php echo Bootstrap3::renderModulesPosition('content-before') ?>
 			</div>
 		</div>
 		<?php endif ?>
@@ -338,8 +325,8 @@ $toolbar_position			= $this->params->get('toolbar_position');
 		<?php endif ?>
 
 		<?php if( $has_content_after ): ?>
-		<div class="gray">
-			<div id="content_after" class="container">
+		<div id="content_after" class="animated-flipInX">
+			<div class="container">
 				<?php echo Bootstrap3::renderModulesPosition('content-after') ?>
 			</div>
 		</div>
@@ -361,7 +348,7 @@ $toolbar_position			= $this->params->get('toolbar_position');
 				<?php if( $has_footer ): ?>
 				<!--Footer modules-->
 				<div id="footer">
-					<?php echo Bootstrap3::renderModulesPosition('footer', true) ?>
+					<?php echo Bootstrap3::renderModulesPosition('footer', true, 'animated-flipInY') ?>
 				</div>
 				<?php endif ?>
 
