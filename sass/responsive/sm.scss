@@ -1,5 +1,28 @@
-@import '../variables';
+@import '../_variables';
+@import '../_mixins';
+
 
 @media (min-width:768px) and (max-width:991px) {
-   
+   .sm-block {
+        display:block !important;float:none !important;clear:both !important;
+        @include clr()
+    }
+    .sm-inline-block {
+        display:inline-block !important;
+    }
+    .sm-text-left {
+        text-align:left;
+    }
+    .sm-text-right {
+        text-align:left;
+    }
+    .sm-text-center {
+        text-align:left;
+    }
+    .sm-pull-left {
+        float:left !important;
+    }
+    .sm-pull-right {
+        float:left !important;
+    }
 }

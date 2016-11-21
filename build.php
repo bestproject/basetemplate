@@ -147,6 +147,7 @@ class TemplateBuilder {
 		$path = __DIR__.'/templateDetails.xml';
 		$buff = file_get_contents($path);
 		$buff = str_replace('BASETHEME', strtoupper($this->name), $buff);
+		$buff = str_replace('basetheme', strtolower($this->name), $buff);
 		$buff = str_ireplace('01/01/2000', date('Y/m/d'), $buff);
 		file_put_contents($path, $buff);
 	}

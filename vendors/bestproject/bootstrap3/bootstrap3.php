@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * A Boostrap3 class for processing Joomla 3 modules position.
+ */
 namespace BestProject;
 
 /**

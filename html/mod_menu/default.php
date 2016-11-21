@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 $default = JFactory::getApplication()->getMenu()->getDefault(JFactory::getLanguage()->getTag());
 
 ?>
-<ul class="nav nav-pills<?php echo $class_sfx ?> <?php echo $params->get('moduleclass_sfx') ?>"<?php
+<ul class="nav nav-pills nav-stacked<?php echo $class_sfx ?> <?php echo $params->get('moduleclass_sfx') ?>"<?php
 		$tag = '';
 
 		if ($params->get('tag_id') != null)

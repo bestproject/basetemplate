@@ -1,6 +1,7 @@
 // Variables and basics
 @import 'variables';
 @import 'fonts';
+@import 'mixins'; 
 
 // Theme parts
 @import 'bootstrap/theme';
@@ -14,7 +15,72 @@
 @import 'pages/homepage';
 
 // Basics
-html,body,html>body {
+html,body,html body {
     max-width:100%;overflow-x:hidden;font-family:$fontMain;
-    font-size:16px;line-height:1.6;font-weight:400;color:#000;
+    font-size:16px;line-height:1.6;font-weight:400;color:$colorText;
+}
+a,button,input[type='button'],input[type='submit'],input[type='reset'].btn {
+    outline:none !important;
+}
+p {
+    margin:0;
+}
+body {
+    &>header {
+        /*transition:0.5s linear all;*/
+        .navbar-container {
+            position:relative;
+            .navbar {
+                transition:0.5s linear all;
+            }
+            &.scrolled {
+                .navbar {
+                    position:fixed;top:0;box-shadow:0 0 30px rgba(0,0,0,0.5);width:100%;
+                }
+            }
+        }
+        #toolbar {
+            border-bottom:1px solid $colorBorder;
+            .wrapper {
+                padding:10px 15px;
+            }
+        }
+        .logo {
+            margin:0;font-size:18px;font-weight:500;line-height:1;
+            .navbar-brand {
+                height:auto;
+                small {
+                    font-size:13px;line-height:1;
+                }
+            }
+        }
+
+        #main-navigation {
+            .fa {
+                margin-left:5px;
+            }
+        }
+    }
+}
+
+#back-to-top {
+    bottom:0;opacity:0;float:right;right:30px;transition:0.5s all linear;
+    position:fixed;
+    &.show {
+        bottom:30px;opacity:1;
+    }
+}
+
+footer {
+    border-top:1px solid $colorBorder;margin-top:40px;
+    #footer {
+        padding:20px 0;border-bottom:1px solid $colorBorder;
+    }
+    .subfooter {
+        padding:10px;font-size:13px;margin-top:10px;
+        .copyrights {
+            padding:10px 15px;
+        }
+        @include clr();
+    }
 }

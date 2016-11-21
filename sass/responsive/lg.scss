@@ -1,3 +1,38 @@
+@import '../_variables';
+@import '../_mixins';
+
 @media (min-width:1200px) {
-    
+    body {
+        &>header {
+            .navbar-container.centered {
+                &.scrolled {
+                    .navbar {
+                        width:1140px;
+                    }
+                }
+            }
+        }
+    }
+    .lg-block {
+        display:block !important;float:none !important;clear:both !important;
+        @include clr()
+    }
+    .lg-inline-block {
+        display:inline-block !important;
+    }
+    .lg-text-left {
+        text-align:left;
+    }
+    .lg-text-right {
+        text-align:left;
+    }
+    .lg-text-center {
+        text-align:left;
+    }
+    .lg-pull-left {
+        float:left !important;
+    }
+    .lg-pull-right {
+        float:left !important;
+    }
 }

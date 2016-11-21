@@ -18,7 +18,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 
 ?>
 <?php // The menu class is deprecated. Use nav instead. ?>
-<div class=" collapse navbar-collapse <?php echo $moduleclass_sfx ?>" <?php echo ($tag_id ? 'id="'.$tag_id.'"' : '') ?>>
+<div class="<?php echo $moduleclass_sfx ?>" <?php echo ($tag_id ? 'id="'.$tag_id.'"' : '') ?>>
 	<ul class="nav navbar-nav<?php echo $class_sfx;?>">
 	<?php
 	foreach ($list as $i => &$item)
@@ -26,12 +26,6 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 
 		// No images allowed in this menu type
 		$item->menu_image = null;
-
-		// Fix a bug with marking active item as default
-//		if( $item->id==$default->id ) {
-//			$item->id = end($item->tree);
-//			$item->flink = JRoute::_($item->link.'&Itemid='.$item->id);
-//		}
 		
 		$class = 'item-' . $item->id;
 
@@ -90,11 +84,11 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 			case 'url':
 			case 'component':
 			case 'heading':
-				require JModuleHelper::getLayoutPath('mod_menu', 'responsive_' . $item->type);
+				require JModuleHelper::getLayoutPath('mod_menu', 'dropdown_' . $item->type);
 				break;
 
 			default:
-				require JModuleHelper::getLayoutPath('mod_menu', 'responsive_url');
+				require JModuleHelper::getLayoutPath('mod_menu', 'dropdown_url');
 				break;
 		endswitch;
 

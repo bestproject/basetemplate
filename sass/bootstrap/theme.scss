@@ -1,1 +1,25 @@
 @import '../variables';
+@import '../mixins';
+
+div.pagination {
+    width:100%;display:block;margin:30px 0;
+    @include clr();
+    ul.pagination {
+        margin-top:0;
+    }
+}
+
+.navbar-default {
+    border-color:$colorBorder;
+}
+
+.btn-group {
+    li {
+        .fa:first-child {
+            margin-right:5px;
+        }
+    }
+}
+.navbar {
+    z-index:999999;
+}
