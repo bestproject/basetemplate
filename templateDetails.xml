@@ -63,23 +63,7 @@
 					filter="string" />
 			</fieldset>
             
-            <fieldset name="design">
-                <field name="vendors_colorbox" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_COLORBOX_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_COLORBOX_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="vendors_animated" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_ANIMATED_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_ANIMATED_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
+            <fieldset name="layout">
                 <field name="navbar_full_width" type="radio"
                     default="0" class="btn-group btn-group-yesno"
                     label="TPL_BASETHEME_FIELD_NAVBAR_FULL_WIDTH_LABEL"
@@ -96,13 +80,22 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                 <field name="menu_position" type="radio"
+                <field name="menu_position" type="radio"
                     default="right" class="btn-group"
                     label="TPL_BASETHEME_FIELD_MENU_POSITION_LABEL"
                     description="TPL_BASETHEME_FIELD_MENU_POSITION_DESC"
                 >
                     <option value="left">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_LEFT</option>
                     <option value="right">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_RIGHT</option>
+                    <option value="bottom">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_BOTTOM</option>
+                </field>
+                <field name="toolbar_position" type="radio"
+                    default="top" class="btn-group" showon="menu_position:bottom"
+                    label="TPL_BASETHEME_FIELD_TOOLBAR_POSITION_LABEL"
+                    description="TPL_BASETHEME_FIELD_TOOLBAR_POSITION_DESC"
+                >
+                    <option value="top">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_TOP</option>
+                    <option value="logo">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_LOGO</option>
                 </field>
                 <field name="menu_fixed" type="radio"
                     default="0" class="btn-group btn-group-yesno"
@@ -136,6 +129,25 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+            </fieldset>
+            
+            <fieldset name="functionality">
+                <field name="vendors_colorbox" type="radio"
+                    default="1" class="btn-group btn-group-yesno"
+                    label="TPL_BASETHEME_FIELD_VENDORS_COLORBOX_LABEL"
+                    description="TPL_BASETHEME_FIELD_VENDORS_COLORBOX_DESC"
+                    filter="INT">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="vendors_animated" type="radio"
+                    default="1" class="btn-group btn-group-yesno"
+                    label="TPL_BASETHEME_FIELD_VENDORS_ANIMATED_LABEL"
+                    description="TPL_BASETHEME_FIELD_VENDORS_ANIMATED_DESC"
+                    filter="INT">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
                 <field name="back_to_top" type="radio"
                     default="1" class="btn-group btn-group-yesno"
                     label="TPL_BASETHEME_FIELD_BACK_TO_TOP_LABEL"
@@ -144,6 +156,10 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+            </fieldset>
+            
+            <fieldset name="design">
+                
             </fieldset>
             
             <fieldset name="fonts">

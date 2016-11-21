@@ -152,9 +152,10 @@ $has_navbar_full_width		= $this->params->get('navbar_full_width');
 $has_menu_container			= $this->params->get('menu_container');
 $has_menu_fixed				= $this->params->get('menu_fixed');
 $has_menu_fixed_on_scroll	= $this->params->get('menu_fixed_on_scroll');
-$has_menu_position			= $this->params->get('menu_position');
+$menu_position				= $this->params->get('menu_position');
 $has_footer_full_width		= $this->params->get('footer_full_width');
 $has_footer_container		= $this->params->get('footer_container');
+$toolbar_position			= $this->params->get('toolbar_position');
 
 //$app->enqueueMessage('This is a sample error message. Suspendisse pretium sodales mauris, quis semper lacus fermentum eu.', 'error');
 //$app->enqueueMessage('This is a sample warning message. Suspendisse pretium sodales mauris, quis semper lacus fermentum eu.', 'warning');
@@ -184,7 +185,7 @@ $has_footer_container		= $this->params->get('footer_container');
 			<div class="navbar-container <?php echo (!$has_navbar_full_width?'centered':'') ?>">
             <nav id="nav" class="navbar navbar-default <?php echo (($has_menu_fixed AND !$has_menu_fixed_on_scroll) ? 'navbar-fixed-top':'') ?>">
 				
-				<?php if( $has_toolbar ): ?>
+				<?php if( $has_toolbar AND $toolbar_position=='top' ): ?>
 				<!--Toolbar-->
 				<div id="toolbar">
 					<?php if( $has_navbar_full_width AND !$has_menu_container ): ?>
@@ -240,17 +241,38 @@ $has_footer_container		= $this->params->get('footer_container');
 						<?php endif ?>
 					</div>
 
-					<?php if( $has_menu ): ?>
+					<?php if( $has_menu AND in_array($menu_position, array('left','right'))): ?>
 						<!--Main navigation-->
-						<div id="main-navigation" class="navbar-collapse collapse navbar-<?php echo $has_menu_position ?> sm-block animated-slideInRight">
+						<div id="main-navigation" class="navbar-collapse collapse navbar-<?php echo $menu_position ?> sm-block animated-slideInRight">
 							<?php echo Bootstrap3::renderModulesPosition('menu',false) ?>
 						</div>
+					<?php else: ?>
+						<?php if( $has_toolbar AND $toolbar_position=='logo' ): ?>
+						<!--Toolbar-->
+						<div id="toolbar" class="navbar-right">
+							<div class="wrapper animated-slideInRight">
+								<?php echo Bootstrap3::renderModulesPosition('toolbar',true, 'module') ?>
+							</div>
+						</div>
+						<?php endif ?>
 					<?php endif ?>
 
 				<?php if( $has_navbar_full_width AND !$has_menu_container ): ?>
 				</div>
 				<?php endif ?>
 
+				<?php if( $has_menu AND $menu_position==='bottom' ): ?>
+					<!--Main navigation-->
+					<div id="main-navigation" class="navbar-collapse collapse navbar-<?php echo $menu_position ?> sm-block animated-slideInRight">
+						<?php if( $has_navbar_full_width AND !$has_menu_container  ): ?>
+						<div class="container">
+						<?php endif ?>
+								<?php echo Bootstrap3::renderModulesPosition('menu',false) ?>
+						<?php if( $has_navbar_full_width AND !$has_menu_container ): ?>
+						</div>
+						<?php endif ?>
+					</div>
+				<?php endif ?>
             </nav>
 			</div>
 			

@@ -9,10 +9,6 @@ div.pagination {
     }
 }
 
-.navbar-default {
-    border-color:$colorBorder;
-}
-
 .btn-group {
     li {
         .fa:first-child {
@@ -20,6 +16,19 @@ div.pagination {
         }
     }
 }
-.navbar {
-    z-index:999999;
+header {
+    .navbar {
+        z-index:999999;
+        &.navbar-default {
+            border-color:$colorBorder;
+        }
+    }
+    .navbar-collapse.navbar-bottom {
+        clear:both;width:100%;padding:0;border-top:1px solid $colorBorder;
+    }
+    #toolbar {
+        &.navbar-right {
+            border:0;
+        }
+    }
 }
