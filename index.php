@@ -25,6 +25,7 @@ $sitename		= $app->get('sitename');
 $sitetitle		= $this->params->get('sitetitle');
 $logoFile		= JUri::root().$this->params->get('logoFile');
 $slogan			= $this->params->get('sitedescription');
+$copyrights		= $this->params->get('copyrights', $sitename);
 $is_frontpage	= ( ($active AND $active->id==$default->id) ? true : false );
 $view			= $app->input->get('view');
 $layout			= $app->input->get('layout');
@@ -353,7 +354,7 @@ $toolbar_position			= $this->params->get('toolbar_position');
 				<?php endif ?>
 
 				<div class="subfooter">
-					<p class="copyrights pull-left">© <?php echo date('Y') ?> Smart-Up Sp. z o.o.</p>
+					<p class="copyrights pull-left">© <?php echo date('Y') ?> <?php echo $copyrights ?></p>
 
 					<?php if( $has_footer_menu ): ?>
 					<!--Footer menu-->
