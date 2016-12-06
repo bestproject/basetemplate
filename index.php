@@ -280,6 +280,13 @@ $toolbar_position			= $this->params->get('toolbar_position');
 			<?php if( !$has_navbar_full_width ): ?>
 			</div>
 			<?php endif ?>
+
+			<?php if( $has_slider ): ?>
+			<div class="slider">
+				<?php echo Bootstrap3::renderModulesPosition('slider', 'jumbotron text-center animated-slideInDown', false) ?>
+			</div>
+			<?php endif ?>
+			
         </header>
 
         <!--System messages-->
