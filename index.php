@@ -207,12 +207,16 @@ $toolbar_position			= $this->params->get('toolbar_position');
 					
 					<!--Navigation header-->
 					<div class="navbar-header navbar-left sm-block">
+
+						<?php if( $has_menu ): ?>
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
-							<span class="sr-only"><?php echo JText::_('TPL_STOMED_TOGGLE_NAVIGATION') ?></span>
+							<span class="sr-only"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
+						<?php endif ?>
+
 						<?php if( $is_frontpage ): ?>
 							<h1 class="logo animated-slideInLeft">
 							   <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
