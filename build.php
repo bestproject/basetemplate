@@ -14,7 +14,7 @@ class TemplateBuilder {
 	protected $base;
 	public $override_extensions = array(
 		'mod_articles_category','mod_menu',
-		'com_content','com_contact',
+		'com_content','com_contact','com_phocagallery',
 	);
 
 	/**
@@ -53,7 +53,7 @@ class TemplateBuilder {
 					$view = basename($path_view);
 
 					// if view have layouts
-					if( file_exists($path_view.'/tmpl') ) {
+					if( is_dir($path_view) AND file_exists($path_view.'/tmpl') ) {
 
 						// Create view override directory
 						$path_override_view = $path_overrides.'/'.$view;
