@@ -172,6 +172,16 @@ class TemplateBuilder {
 	}
 
 	/**
+	 * Override index.php translations
+	 */
+	public function prepareIndexFile(){
+		$path = __DIR__.'/index.php';
+		$buff = file_get_contents($path);
+		$buff = str_replace('BASETHEME', strtoupper($this->name), $buff);
+		file_put_contents($path, $buff);
+	}
+
+	/**
 	 * Execute the builder.
 	 */
 	public function build() {
@@ -180,6 +190,7 @@ class TemplateBuilder {
 		$this->createTemplateOverrides();
 		$this->prepareLanguageFiles();
 		$this->prepareDetailsFile();
+		$this->prepareIndexFile();
 	}
 
 }
