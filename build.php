@@ -1,4 +1,6 @@
 <?php
+define('_JEXEC',1);
+
 // Enable Error reporting
 ini_set('display_errors', -1);
 error_reporting(E_ALL);
@@ -6,16 +8,26 @@ error_reporting(E_ALL);
 // Disable caching
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() - 3600));
 
-
-
+/**
+ * TemplateBuilder class takes care of customizing template name and
+ */
 class TemplateBuilder {
 
+	public $override_extensions = array();
 	protected $name;
 	protected $base;
-	public $override_extensions = array(
-		'mod_articles_category','mod_menu',
-		'com_content','com_contact','com_phocagallery',
-	);
+
+
+	/**
+	 * Run all required methods to create new theme.
+	 */
+	public function __construct() {
+
+		// Get required directories
+		$this->base = dirname(dirname(__DIR__));
+		$this->name = basename(__DIR__);
+
+	}
 
 	/**
 	 * Create template overrides for currently installed extensions
@@ -39,12 +51,15 @@ class TemplateBuilder {
 			// There are views
 			$path_views = $directory.'/views';
 			if( file_exists($path_views) ) {
+
+				// Make sure component views oferride exists
 				if( !file_exists($path_overrides) ) {
 					mkdir($path_overrides);
 				}
 
 				// Crawl over views
 				foreach( glob($path_views.'/*') AS $path_view)  {
+					
 					// Ommit placeholders
 					if( basename($directory)==='index.html' ) {
 						continue;
@@ -57,19 +72,18 @@ class TemplateBuilder {
 
 						// Create view override directory
 						$path_override_view = $path_overrides.'/'.$view;
-						if( !file_exists($path_overrides) ) {
+						if( !file_exists($path_override_view) ) {
 							mkdir($path_override_view);
 						}
 
 						// Copy layouts
 						foreach( glob($path_view.'/tmpl/*.php') AS $path_layout ) {
-							if( !file_exists($path_override_view) ) {
-								mkdir($path_override_view);
+
+							// Copy only layotus that don't exists in template
+							$path_override_layout = $path_override_view.'/'.basename($path_layout);
+							if( !file_exists($path_override_layout) ) {
+								copy($path_layout, $path_override_layout);
 							}
-							copy(
-								$path_layout,
-								$path_override_view.'/'.basename($path_layout)
-							);
 						}
 					}
 				}
@@ -100,7 +114,12 @@ class TemplateBuilder {
 
 				// Copy layouts
 				foreach( glob($directory.'/tmpl/*.php') AS $path_layout ) {
-					copy($path_layout, $path_overrides.'/'.basename($path_layout));
+
+					// Copy only layotus that don't exists in template
+					$path_override_layout = $path_overrides.'/'.basename($path_layout);
+					if( !file_exists($path_override_layout) ) {
+						copy($path_layout, $path_override_layout);
+					}
 				}
 			}
 
@@ -153,13 +172,9 @@ class TemplateBuilder {
 	}
 
 	/**
-	 * Run all required methods to create new theme.
+	 * Execute the builder.
 	 */
-	public function __construct() {
-
-		// Get required directories
-		$this->base = dirname(dirname(__DIR__));
-		$this->name = basename(__DIR__);
+	public function build() {
 
 		// Run build task
 		$this->createTemplateOverrides();
@@ -170,5 +185,6 @@ class TemplateBuilder {
 }
 
 $template = new TemplateBuilder();
+$template->build();
 
 die('DONE.');

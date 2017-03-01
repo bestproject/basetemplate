@@ -6,7 +6,7 @@
 	<creationDate>01/01/2000</creationDate>
 	<author>Artur Stępień</author>
 	<authorEmail>artur.stepien@bestproject.pl</authorEmail>
-	<copyright>Copyright (C) 2016 BASETHEME. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2017 BASETHEME. All rights reserved.</copyright>
 	<description>TPL_BASETHEME_XML_DESCRIPTION</description>
 	
 	<files>
@@ -27,20 +27,18 @@
 	</files>
 	
 	<positions>
-		<position>toolbar</position>
 		<position>menu</position>
 		<position>slider</position>
 		<position>left</position>
 		<position>right</position>
-		<position>content-before</position>
-		<position>content-after</position>
 		<position>footer</position>
-		<position>footer-menu</position>
 	</positions>
 	
 	<languages folder="language">
 		<language tag="pl-PL">pl-PL.tpl_basetheme.ini</language>
 		<language tag="pl-PL">pl-PL.tpl_basetheme.sys.ini</language>
+		<language tag="en-GB">en-GB.tpl_basetheme.ini</language>
+		<language tag="en-GB">en-GB.tpl_basetheme.sys.ini</language>
 	</languages>
 	
 	<config>
@@ -70,67 +68,10 @@
 			</fieldset>
             
             <fieldset name="layout">
-                <field name="navbar_full_width" type="radio"
-                    default="0" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_NAVBAR_FULL_WIDTH_LABEL"
-                    description="TPL_BASETHEME_FIELD_NAVBAR_FULL_WIDTH_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="menu_container" type="radio" showon="navbar_full_width:1"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_MENU_CONTAINER_LABEL"
-                    description="TPL_BASETHEME_FIELD_MENU_CONTAINER_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="menu_position" type="radio"
-                    default="right" class="btn-group"
-                    label="TPL_BASETHEME_FIELD_MENU_POSITION_LABEL"
-                    description="TPL_BASETHEME_FIELD_MENU_POSITION_DESC"
-                >
-                    <option value="left">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_LEFT</option>
-                    <option value="right">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_RIGHT</option>
-                    <option value="bottom">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_BOTTOM</option>
-                </field>
-                <field name="toolbar_position" type="radio"
-                    default="top" class="btn-group" showon="menu_position:bottom"
-                    label="TPL_BASETHEME_FIELD_TOOLBAR_POSITION_LABEL"
-                    description="TPL_BASETHEME_FIELD_TOOLBAR_POSITION_DESC"
-                >
-                    <option value="top">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_TOP</option>
-                    <option value="logo">TPL_BASETHEME_FIELD_MENU_POSITION_OPTION_LOGO</option>
-                </field>
                 <field name="menu_fixed" type="radio"
                     default="0" class="btn-group btn-group-yesno"
                     label="TPL_BASETHEME_FIELD_MENU_FIXED_LABEL"
                     description="TPL_BASETHEME_FIELD_MENU_FIXED_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="menu_fixed_on_scroll" type="radio" showon="menu_fixed:1"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_MENU_FIXED_ON_SCROLL_LABEL"
-                    description="TPL_BASETHEME_FIELD_MENU_FIXED_ON_SCROLL_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="footer_full_width" type="radio"
-                    default="0" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_FOOTER_FULL_WIDTH_LABEL"
-                    description="TPL_BASETHEME_FIELD_FOOTER_FULL_WIDTH_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="footer_container" type="radio" showon="footer_full_width:1"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_FOOTER_CONTAINER_LABEL"
-                    description="TPL_BASETHEME_FIELD_FOOTER_CONTAINER_DESC"
                     filter="INT">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -184,24 +125,6 @@
                     filter="INT">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
-                </field>
-                <field name="font_main" type="text"
-                    label="TPL_BASETHEME_FIELD_FONT_MAIN_LABEL"
-                    description="TPL_BASETHEME_FIELD_FONT_MAIN_DESC" />
-                <field name="font_second" type="text"
-                    label="TPL_BASETHEME_FIELD_FONT_SECOND_LABEL"
-                    description="TPL_BASETHEME_FIELD_FONT_SECOND_DESC" />
-                <field name="font_languages" type="list"
-                    class="btn-group btn-group-yesno" multiple="true"
-                    label="TPL_BASETHEME_FIELD_FONT_LANGUAGES_LABEL"
-                    description="TPL_BASETHEME_FIELD_FONT_LANGUAGES_DESC"
-                >
-                    <option value="latin-ext">TPL_BASETHEME_FIELD_FONT_LANGUAGES_OPTION_LATIN_EXTENDED</option>
-                    <option value="cyrillic">TPL_BASETHEME_FIELD_FONT_LANGUAGES_OPTION_CYRILLIC</option>
-                    <option value="cyrillic-ext">TPL_BASETHEME_FIELD_FONT_LANGUAGES_OPTION_CYRILLIC_EXTENDED</option>
-                    <option value="greek">TPL_BASETHEME_FIELD_FONT_LANGUAGES_OPTION_GREEK</option>
-                    <option value="greek-ext">TPL_BASETHEME_FIELD_FONT_LANGUAGES_OPTION_GREEK_EXTENDED</option>
-                    <option value="vietnamese">TPL_BASETHEME_FIELD_FONT_LANGUAGES_OPTION_VIETNAMESE</option>
                 </field>
             </fieldset>
 			
