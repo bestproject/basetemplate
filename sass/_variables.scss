@@ -1,8 +1,8 @@
 
 // Fonts
-$fontMain: 'Open Sans',Arial,Sans;
-$fontSecond: 'Roboto';
-$fontThird: 'Exo 2';
+$fontMain: 'Open Sans','Arial','Sans';
+$fontSecond: $fontMain;
+$fontThird: $fontMain;
 
 // Colors
 $colorText: #333;
