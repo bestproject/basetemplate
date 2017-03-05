@@ -35,7 +35,7 @@ $layout			= $app->input->get('layout');
 JHTML::_('jquery.framework');
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.'.($debug?'':'min.').'js');
 if( $this->params->get('vendors_colorbox') ) {
-	$doc->addScript($this->baseurl.'/templates/'.$this->template.'/vendor/jackmoore/colorbox/jquery.colorbox'.($debug?'':'-min.').'js');
+	$doc->addScript($this->baseurl.'/templates/'.$this->template.'/vendor/jackmoore/colorbox/jquery.colorbox'.($debug?'':'-min').'.js');
 	$doc->addScriptDeclaration('
 		// Setup lightbox for anchors
 		jQuery(document).ready(function($){
