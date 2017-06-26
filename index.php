@@ -82,7 +82,7 @@ use BestProject\Bootstrap3;
 
 			<?php if( $has_slider ): ?>
 			<div class="slider">
-				<?php echo Bootstrap3::renderModulesPosition('slider', 'jumbotron text-center') ?>
+				<?php echo Bootstrap3::renderModulesPosition('slider', false, 'jumbotron text-center') ?>
 			</div>
 			<?php endif ?>
 			
