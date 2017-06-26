@@ -26,7 +26,7 @@ use BestProject\Bootstrap3;
         <header>
 
             <!--Page navigation-->
-            <nav id="nav" class="navbar navbar-default" >
+            <nav id="nav" class="navbar navbar-default" <?php echo ($has_menu_fixed ? ' data-spy="affix" data-offset-top="1"':'') ?>>
 					
 				<!--Navigation header-->
 				<div class="navbar-header navbar-left sm-block">

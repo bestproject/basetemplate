@@ -5,3 +5,26 @@
     }
     
 }
+
+@mixin placeholder($color) {
+     /* Chrome/Opera/Safari */
+    &::-webkit-input-placeholder {
+        color: $color;opacity:1;
+    }
+    /* Firefox 19+ */
+    &::-moz-placeholder { 
+        color: $color;opacity:1;
+    }
+     /* IE 10+ */
+    &:-ms-input-placeholder {
+        color: $color;opacity:1;
+    }
+     /* Firefox 18- */
+    &:-moz-placeholder {
+        color: $color;opacity:1;
+    }
+}
+
+@mixin anim($time:0.5s) {
+    transition:$time linear all;
+}

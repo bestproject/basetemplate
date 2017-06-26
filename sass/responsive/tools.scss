@@ -1,0 +1,43 @@
+@import '../_variables';
+@import '../_mixins';
+
+@media (min-width:1200px) {
+    .lg-block {
+        display:block !important;
+        @include clr()
+    }
+    .lg-inline-block {
+        display:inline-block !important;
+    }
+}
+
+@media (min-width:992px) {
+    .md-block {
+        display:block !important;
+        @include clr()
+    }
+    .md-inline-block {
+        display:inline-block !important;
+    }
+}
+
+@media (min-width:768px) {
+    .sm-block {
+        display:block !important;
+        @include clr()
+    }
+    .sm-inline-block {
+        display:inline-block !important;
+    }
+}
+
+
+@media (min-width:0px) {
+    .xs-block {
+        display:block !important;
+        @include clr()
+    }
+    .xs-inline-block {
+        display:inline-block !important;
+    }
+}
