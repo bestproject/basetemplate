@@ -13,13 +13,6 @@
             }
         }
     }
-    .lg-block {
-        display:block !important;float:none !important;clear:both !important;
-        @include clr()
-    }
-    .lg-inline-block {
-        display:inline-block !important;
-    }
     .lg-text-left {
         text-align:left;
     }

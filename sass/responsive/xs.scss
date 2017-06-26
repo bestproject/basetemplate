@@ -12,15 +12,6 @@
             }
         }
     }
-    .xs-block {
-        display:block !important;float:none !important;clear:both !important;
-        &:after {
-            clear:both;content:'';
-        }
-    }
-    .xs-inline-block {
-        display:inline-block !important;
-    }
     .xs-text-left {
         text-align:left;
     }

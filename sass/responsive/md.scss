@@ -2,13 +2,6 @@
 @import '../_mixins';
 
 @media (min-width:992px) and (max-width:1199px) {
-    .md-block {
-        display:block !important;float:none !important;clear:both !important;
-        @include clr()
-    }
-    .md-inline-block {
-        display:inline-block !important;
-    }
     .md-text-left {
         text-align:left;
     }
