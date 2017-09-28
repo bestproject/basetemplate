@@ -69,5 +69,27 @@
             });
         }
     };
+    
+    /**
+     * Scroll to section if link starts with #
+     */
+    $.fn.scrollToSection = function(){
+        var $elements = $('a[href*="#"]');
+        
+        for(var i=0, ic=$elements.length; i<ic; i++) {
+            var $href = $($elements[i]).attr('href');
+            if( $href.charAt(0)==='#' && $($elements[i]).attr('id')!=='back-to-top' ) {
+                $($elements[i]).click(function(e){
+                    e.preventDefault();
+                    
+                    $('html,body').animate({
+                        scrollTop: $($(this).attr('href')).offset().top
+                    }, 700); 
+                });
+            }
+            
+        }
+        
+    };
  
 }( jQuery ));
