@@ -125,6 +125,11 @@ if( $active ) {
 if( !empty($app->input->get('layout')) ) {
 	$class.=' layout-'.$app->input->get('layout');
 }
+if( $is_frontpage ) {
+    $class.=' frontpage';
+} else {
+    $class.=' subpage';
+}
 
 
 /**
