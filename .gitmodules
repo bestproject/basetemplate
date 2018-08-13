@@ -1,9 +1,0 @@
-[submodule "vendor/bestproject/animated"]
-	path = vendor/bestproject/animated
-	url = https://github.com/bestproject/animated.git
-[submodule "vendor/daneden/animate.css"]
-	path = vendor/daneden/animate.css
-	url = https://github.com/daneden/animate.css.git
-[submodule "vendor/jackmoore/colorbox"]
-	path = vendor/jackmoore/colorbox
-	url = https://github.com/jackmoore/colorbox.git

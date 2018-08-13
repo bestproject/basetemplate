@@ -1,0 +1,20 @@
+//----------------------------------------
+// This is the file where you add your custom sass source files.
+// Try to keep style split into modules/components, this will make it a lot
+// easier to manage.
+//----------------------------------------
+
+// Bootstrap updates
+@import "bootstrap/theme";
+
+// Components styling
+@import "components/com_content";
+@import "components/com_contact";
+
+// Modules styling
+@import "modules/mod_articles_category";
+@import "modules/mod_custom";
+@import "modules/mod_menu";
+
+// Page styling
+@import "pages/homepage";

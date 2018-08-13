@@ -1,0 +1,9 @@
+
+ul.navbar-nav {
+    button.btn.dropdown-toggle {
+        background:none;padding-left:0;padding-right:10px;
+        &:focus,&:hover {
+            box-shadow:none; 
+        }
+    }
+}

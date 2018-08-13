@@ -19,7 +19,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 ?>
 <?php // The menu class is deprecated. Use nav instead. ?>
 <div class="<?php echo $moduleclass_sfx ?>" <?php echo ($tag_id ? 'id="'.$tag_id.'"' : '') ?>>
-	<ul class="nav navbar-nav<?php echo $class_sfx;?>">
+	<ul class="navbar-nav mr-auto<?php echo $class_sfx;?>">
 	<?php
 	foreach ($list as $i => &$item)
 	{
@@ -27,7 +27,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 		// No images allowed in this menu type
 		$item->menu_image = null;
 		
-		$class = 'item-' . $item->id;
+		$class = 'nav-item item-' . $item->id;
 
 		if (($item->id == $active_id) OR ($item->type == 'alias' AND $item->params->get('aliasoptions') == $active_id))
 		{
@@ -63,7 +63,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 
 		if ($item->deeper)
 		{
-			$class .= ' dropdown';
+			$class .= ' dropdown d-flex';
 		}
 
 		if ($item->parent)
@@ -84,11 +84,11 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 			case 'url':
 			case 'component':
 			case 'heading':
-				require JModuleHelper::getLayoutPath('mod_menu', 'dropdown_' . $item->type);
+				require JModuleHelper::getLayoutPath('mod_menu', 'default_' . $item->type);
 				break;
 
 			default:
-				require JModuleHelper::getLayoutPath('mod_menu', 'dropdown_url');
+				require JModuleHelper::getLayoutPath('mod_menu', 'default_url');
 				break;
 		endswitch;
 

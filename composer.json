@@ -1,0 +1,19 @@
+{
+    "name": "bestproject/basetheme",
+    "description": "Joomla! 3 base theme build on Bootstrap 4",
+    "type": "project",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Artur Stępień",
+            "email": "artur.stepien@bestproject.pl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "BestProject\\":"libraries/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}

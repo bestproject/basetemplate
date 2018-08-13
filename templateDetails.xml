@@ -6,7 +6,7 @@
 	<creationDate>01/01/2000</creationDate>
 	<author>Artur Stępień</author>
 	<authorEmail>artur.stepien@bestproject.pl</authorEmail>
-	<copyright>Copyright (C) 2017 BASETHEME. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2018 BASETHEME. All rights reserved.</copyright>
 	<description>TPL_BASETHEME_XML_DESCRIPTION</description>
 	
 	<files>
@@ -29,16 +29,21 @@
 	<positions>
 		<position>menu</position>
 		<position>slider</position>
+		<position>slider-after</position>
 		<position>left</position>
+		<position>content-before</position>
+		<position>content-after</position>
 		<position>right</position>
+		<position>footer-before</position>
 		<position>footer</position>
+		<position>footer-menu</position>
 	</positions>
 	
 	<languages folder="language">
-		<language tag="pl-PL">pl-PL.tpl_basetheme.ini</language>
-		<language tag="pl-PL">pl-PL.tpl_basetheme.sys.ini</language>
-		<language tag="en-GB">en-GB.tpl_basetheme.ini</language>
-		<language tag="en-GB">en-GB.tpl_basetheme.sys.ini</language>
+		<language tag="pl-PL">pl-PL/pl-PL.tpl_basetheme.ini</language>
+		<language tag="pl-PL">pl-PL/pl-PL.tpl_basetheme.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_basetheme.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_basetheme.sys.ini</language>
 	</languages>
 	
 	<config>
@@ -79,10 +84,10 @@
             </fieldset>
             
             <fieldset name="functionality">
-                <field name="vendors_colorbox" type="radio"
+                <field name="vendors_lightbox" type="radio"
                     default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_COLORBOX_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_COLORBOX_DESC"
+                    label="TPL_BASETHEME_FIELD_VENDORS_LIGHTBOX_LABEL"
+                    description="TPL_BASETHEME_FIELD_VENDORS_LIGHTBOX_DESC"
                     filter="INT">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
@@ -107,25 +112,6 @@
             
             <fieldset name="design">
                 
-            </fieldset>
-            
-            <fieldset name="fonts">
-                <field name="vendors_fontawesome" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_FONTAWESOME_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_FONTAWESOME_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="vendors_googleicons" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_GOOGLEICONS_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_GOOGLEICONS_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
             </fieldset>
 			
 		</fields>

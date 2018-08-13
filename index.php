@@ -2,7 +2,18 @@
 
 // Prepare document head
 require_once __DIR__.'/includes.php';
-use BestProject\Bootstrap3;
+
+use BestProject\Bootstrap4;
+use Joomla\CMS\Document\HtmlDocument;
+use Joomla\CMS\Menu\MenuItem;
+use Joomla\CMS\Menu\SiteMenu;
+use Joomla\Registry\Registry;
+
+/* @var $doc HtmlDocument */
+/* @var $menu SiteMenu */
+/* @var $active MenuItem */
+/* @var $default MenuItem */
+/* @var $params Registry */
 
 /**
  * == CUSTOM VARIABLES =========================================================
@@ -16,7 +27,7 @@ use BestProject\Bootstrap3;
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <jdoc:include type="head" />
         <!--[if lt IE 9]>
-            <script src="<?php echo JUri::root(true); ?>/media/jui/js/html5.js"></script>
+            <script src="media/jui/js/html5.js"></script>
         <![endif]-->
     </head>
 
@@ -26,67 +37,62 @@ use BestProject\Bootstrap3;
         <header>
 
             <!--Page navigation-->
-            <nav id="nav" class="navbar navbar-default" <?php echo ($has_menu_fixed ? ' data-spy="affix" data-offset-top="1"':'') ?>>
+            <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
 					
 				<!--Navigation header-->
-				<div class="navbar-header navbar-left sm-block">
+                <div class="container">
 
-					<!--Menu button-->
-					<?php if( $has_menu ): ?>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navigation" aria-expanded="false">
-						<span class="sr-only"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<?php endif ?>
+                       <!--Logo-->
+                       <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
+                            <?php if ($this->params->get('logoFile')): ?>
+                                <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
+                            <?php else: ?>
+                                <?php echo $sitename ?>
+                            <?php endif ?>
 
-					<!--Logo-->
-					<?php if( $is_frontpage ): ?>
-						<h1 class="logo">
-						   <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
-								<?php if ($this->params->get('logoFile')): ?>
-									<img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
-								<?php else: ?>
-									<?php echo $sitename ?>
-								<?php endif ?>
-								<?php if( !empty($slogan) ): ?>
-									<small class="xs-block"><?php echo $slogan ?></small>
-								<?php endif ?>
-							</a>
-						</h1>
-					<?php else: ?>
-						<figure class="logo">
-							<a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
-								<?php if ($this->params->get('logoFile')): ?>
-									<img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
-								<?php else: ?>
-									<?php echo $sitename ?>
-								<?php endif ?>
-								<?php if( !empty($slogan) ): ?>
-									<small class="xs-block"><?php echo $slogan ?></small>
-								<?php endif ?>
-							</a>
-						</figure>
-					<?php endif ?>
-					
-				</div>
+                            <?php if( !empty($slogan) ): ?>
+                                <small class="navbar-text"><?php echo $slogan ?></small>
+                            <?php endif ?>
+                        </a>
+                        
+                        <!--Menu button-->
+                        <?php if( $has_menu ): ?>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
+                            <span class="navbar-toggler-icon"></span>
+                            <span class="sr-only"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
+                        </button>
+                        <?php endif ?>
 
-				<?php if( $has_menu ): ?>
-					<!--Main navigation-->
-					<div id="main-navigation" class="navbar-collapse collapse navbar-right sm-block">
-						<?php echo Bootstrap3::renderModulesPosition('menu',false) ?>
-					</div>
-				<?php endif ?>
+                    <?php if( $has_menu ): ?>
+                        <!--Main navigation-->
+                        <div id="main-navigation" class="collapse navbar-collapse">
+                            <?php echo Bootstrap4::position('menu', '', false) ?>
+                        </div>
+                    <?php endif ?>
+                </div>
+
             </nav>
 
 			<?php if( $has_slider ): ?>
 			<div class="slider">
-				<?php echo Bootstrap3::renderModulesPosition('slider', false, 'jumbotron text-center') ?>
+                <div class="wrapper">
+                    <?php echo Bootstrap4::position('slider', 'jumbotron text-center') ?>
+                </div>
 			</div>
 			<?php endif ?>
 			
         </header>
+
+        <?php if( $has_slider_after ): ?>
+        <!--After slider-->
+        <aside id="slider-after">
+            <div class="container">
+                <div class="wrapper">
+                    <?php echo Bootstrap4::position('slider-after') ?>
+                </div>
+            </div>
+        </aside>
+        <?php endif ?>
 
         <!--System messages-->
         <jdoc:include type="message" />
@@ -102,22 +108,40 @@ use BestProject\Bootstrap3;
 
 					<?php if( $has_left ): ?>
 					<!--Left column-->
-					<aside class="col-xs-12 <?php echo ($has_right?'col-sm-3':'col-sm-4') ?>">
-						<?php echo Bootstrap3::renderModulesPosition('left') ?>
+					<aside class="col-12 <?php echo ($has_right?'col-lg-3':'col-lg-4') ?>">
+						<?php echo Bootstrap4::position('left') ?>
 					</aside>
 					<?php endif ?>
 
 					<!--Main content-->
-					<main class="col-xs-12 <?php echo $content_class ?>">
+                    <div class="content col-12 <?php echo $content_class ?>">
 
-						<jdoc:include type="component" />
+                        <?php if( $has_content_before ): ?>
+                        <!--Before content-->
+                        <aside id="content-before">
+                            <?php echo Bootstrap4::position('content-before') ?>
+                        </aside>
+                        <?php endif ?>
 
-					</main>
+                        <main class="col-12 <?php echo $content_class ?>">
+
+                            <jdoc:include type="component" />
+
+                        </main>
+
+                        <?php if( $has_content_after ): ?>
+                        <!--After content-->
+                        <aside id="content-after">
+                            <?php echo Bootstrap4::position('content-after') ?>
+                        </aside>
+                        <?php endif ?>
+                        
+                    </div>
 
 					<?php if( $has_right ): ?>
 					<!--Right column-->
-					<aside class="col-xs-12 <?php echo ($has_left?'col-sm-3':'col-sm-4') ?>">
-						<?php echo Bootstrap3::renderModulesPosition('right') ?>
+					<aside class="col-12 <?php echo ($has_left?'col-lg-3':'col-lg-4') ?>">
+						<?php echo Bootstrap4::position('right') ?>
 					</aside>
 					<?php endif ?>
 					
@@ -125,20 +149,49 @@ use BestProject\Bootstrap3;
 			</div>
 		<?php endif ?>
 
+        <?php if( $has_footer_before ): ?>
+        <!--Before footer-->
+        <aside id="footer-before">
+            <div class="container">
+                <div class="wrapper">
+                    <?php echo Bootstrap4::position('footer-before') ?>
+                </div>
+            </div>
+        </aside>
+        <?php endif ?>
+		
+        <!--Footer-->
+        <footer>
+
+            <?php if( $has_footer ): ?>
+            <!--Footer modules-->
+            <div class="container">
+                <div class="container">
+                    <jdoc:include type="modules" name="debug" style="none" />
+                </div>
+            </div>
+            <?php endif ?>
+
+            <div class="container">
+                <div class="wrapper row">
+                    <!--Copyrights info-->
+                    <span class="copyrights muted col nav-link">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
+
+                    <?php if( $has_footer_menu ): ?>
+                        <!--Footer menu-->
+                        <?php echo Bootstrap4::position('footer-menu','col') ?>
+                    <?php endif ?>
+                </div>
+            </div>
+
+        </footer>
+
         <?php if( $has_debug ): ?>
         <!--System debug data-->
         <div class="container">
             <jdoc:include type="modules" name="debug" style="none" />
         </div>
         <?php endif ?>
-		
-        <!--Footer-->
-        <footer>
-
-			<!--Copyrights info-->
-			<p class="copyrights pull-left muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></p>
-
-        </footer>
 
     </body>
 </html>

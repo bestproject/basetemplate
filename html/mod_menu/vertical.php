@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 $default = JFactory::getApplication()->getMenu()->getDefault(JFactory::getLanguage()->getTag());
 
 ?>
-<ul class="nav <?php echo $class_sfx ?> <?php echo $params->get('moduleclass_sfx') ?>"<?php
+<ul class="nav flex-column<?php echo $class_sfx ?> <?php echo $params->get('moduleclass_sfx') ?>"<?php
 		$tag = '';
 
 		if ($params->get('tag_id') != null)
@@ -64,6 +64,11 @@ $default = JFactory::getApplication()->getMenu()->getDefault(JFactory::getLangua
 		{
 			$class .= ' divider';
 		}
+
+//		if ($item->deeper)
+//		{
+//			$class .= ' dropdown';
+//		}
 
 		if ($item->parent)
 		{
