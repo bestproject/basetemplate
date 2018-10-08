@@ -34,7 +34,7 @@ else
 }
 
 if( $item->deeper ) {
-	$linktype.= '<i class="fa fa-angle-down"></i>';
+	
 }
 
 $flink = $item->flink;

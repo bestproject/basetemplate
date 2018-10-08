@@ -1,4 +1,7 @@
 <?php
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Document\HtmlDocument;
 /**
  * @package     Joomla.Site
  * @subpackage  mod_menu
@@ -16,6 +19,26 @@ $default = JFactory::getApplication()->getMenu()->getDefault(JFactory::getLangua
 $tag_id = $params->get('tag_id');
 $moduleclass_sfx = $params->get('moduleclass_sfx');
 
+/* @var $doc HtmlDocument */
+$doc = Factory::getDocument();
+$doc->addScriptDeclaration('
+    jQuery(function($){
+        $(".dropdown-menu a.dropdown-toggle").on("click", function(e) {
+            if (!$(this).next().hasClass("show")) {
+                $(this).parents(".dropdown-menu").first().find(".show").removeClass("show");
+            }
+
+            var $subMenu = $(this).next(".dropdown-menu");
+            $subMenu.toggleClass("show");
+
+            $(this).parents("li.nav-item.dropdown.show").on("hidden.bs.dropdown", function(e) {
+                $(".dropdown-submenu .show").removeClass("show");
+            });
+
+            return false;
+        });
+    });
+');
 ?>
 <?php // The menu class is deprecated. Use nav instead. ?>
 <div class="<?php echo $moduleclass_sfx ?>" <?php echo ($tag_id ? 'id="'.$tag_id.'"' : '') ?>>
@@ -63,7 +86,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx');
 
 		if ($item->deeper)
 		{
-			$class .= ' dropdown d-flex';
+			$class .= ' dropdown';
 		}
 
 		if ($item->parent)
