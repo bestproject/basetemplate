@@ -54,25 +54,25 @@ abstract class Bootstrap4
         $html = '';
 
         // Wrap around modules if columns are enabled
-        if ($columns OR !empty($row)) {
-            $html .= '<div class="'.$row.'">';
+        if ($columns OR !empty($rowClass)) {
+            $html .= '<div class="'.$rowClass.'">';
         }
 
         foreach ($modules AS $module) {
             $module_params = new Registry($module->params);
 
             // Use columns
-            $column_class = 'module';
+            $column_class = '';
             if ($columns) {
                 $column_class = self::getColumnClass($module_params->get('bootstrap_size', '0'));
             }
 
             // Add each module a class
-            if (!is_null($itemClassSfx)) {
+            if (!empty($itemClassSfx)) {
                 $column_class .= ' '.$itemClassSfx;
             }
 
-            $html .= '<div class="'.$column_class.'">';
+            $html .= '<div class="'.trim($column_class).'">';
             if ($module->showtitle) {
                 $h       = $module_params->get('header_tag', 'h3');
                 $h_class = $module_params->get('header_class', '') !== '' ? ' class="'.$module_params->get('header_class',
@@ -84,7 +84,7 @@ abstract class Bootstrap4
         }
 
         // Wrap around modules if columns are enabled
-        if ($columns OR !empty($row)) {
+        if ($columns OR !empty($rowClass)) {
             $html .= '</div>';
         }
 
