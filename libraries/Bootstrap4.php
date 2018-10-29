@@ -50,7 +50,6 @@ abstract class Bootstrap4
     public static function position($position, $itemClassSfx = '', $rowClass = 'row', $columns = true)
     {
         $modules = \JModuleHelper::getModules($position);
-
         $html = '';
 
         // Wrap around modules if columns are enabled
@@ -60,11 +59,14 @@ abstract class Bootstrap4
 
         foreach ($modules AS $module) {
             $module_params = new Registry($module->params);
+            $module_tag = $module_params->get('module_tag', 'h3');
+            $header_class = $module_params->get('header_class');
+            $header_class = $header_class ?? null;
 
             // Use columns
-            $column_class = '';
+            $column_class = 'module ';
             if ($columns) {
-                $column_class = self::getColumnClass($module_params->get('bootstrap_size', '0'));
+                $column_class.= self::getColumnClass($module_params->get('bootstrap_size', '0'));
             }
 
             // Add each module a class
@@ -72,15 +74,14 @@ abstract class Bootstrap4
                 $column_class .= ' '.$itemClassSfx;
             }
 
-            $html .= '<div class="'.trim($column_class).'">';
+            $html .= '<'.$module_tag.' class="'.trim($column_class).'">';
             if ($module->showtitle) {
                 $h       = $module_params->get('header_tag', 'h3');
-                $h_class = $module_params->get('header_class', '') !== '' ? ' class="'.$module_params->get('header_class',
-                        '').'"' : '';
+                $h_class = ' class="'.($header_class ?? 'module-title').'"';
                 $html    .= '<'.$h.$h_class.'>'.$module->title.'</'.$h.'>';
             }
             $html .= \JModuleHelper::renderModule($module);
-            $html .= '</div>';
+            $html .= '</'.$module_tag.'>';
         }
 
         // Wrap around modules if columns are enabled
