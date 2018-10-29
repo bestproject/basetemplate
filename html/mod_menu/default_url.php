@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 // Note. It is important to remove spaces between elements.
-$item->anchor_css.= 'nav-link';
+$item->anchor_css.= ' nav-link';
 if( $item->deeper ) {
 	$item->anchor_css.= ' dropdown-toggle';
 	$attrib = ' data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ';
@@ -34,7 +34,7 @@ else
 }
 
 if( $item->deeper ) {
-	
+
 }
 
 $flink = $item->flink;

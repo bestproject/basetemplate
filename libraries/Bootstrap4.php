@@ -41,19 +41,20 @@ abstract class Bootstrap4
      * Render a selected modules position.
      *
      * @param	string	$position				Name of the position to render
-     * @param	string	$classSfx				A prefix for each module/column.
+     * @param	string	$itemClassSfx				A prefix for each module/column.
+     * @param	string	$rowClass				A prefix for items row.
      * @param	bool	$columns				Should this position be rendered as a columns row.
      *
      * @return	string
      */
-    public static function position($position, $classSfx = null, $columns = true)
+    public static function position($position, $itemClassSfx = '', $rowClass = 'row', $columns = true)
     {
         $modules = \JModuleHelper::getModules($position);
         $html = '';
 
         // Wrap around modules if columns are enabled
-        if ($columns) {
-            $html .= '<div class="row">';
+        if ($columns OR !empty($rowClass)) {
+            $html .= '<div class="'.$rowClass.'">';
         }
 
         foreach ($modules AS $module) {
@@ -69,11 +70,11 @@ abstract class Bootstrap4
             }
 
             // Add each module a class
-            if (!is_null($classSfx)) {
-                $column_class .= ' '.$classSfx;
+            if (!empty($itemClassSfx)) {
+                $column_class .= ' '.$itemClassSfx;
             }
 
-            $html .= '<'.$module_tag.' class="'.$column_class.'">';
+            $html .= '<'.$module_tag.' class="'.trim($column_class).'">';
             if ($module->showtitle) {
                 $h       = $module_params->get('header_tag', 'h3');
                 $h_class = ' class="'.($header_class ?? 'module-title').'"';
@@ -84,7 +85,7 @@ abstract class Bootstrap4
         }
 
         // Wrap around modules if columns are enabled
-        if ($columns) {
+        if ($columns OR !empty($rowClass)) {
             $html .= '</div>';
         }
 

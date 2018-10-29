@@ -66,7 +66,7 @@ use Joomla\Registry\Registry;
                     <?php if( $has_menu ): ?>
                         <!--Main navigation-->
                         <div id="main-navigation" class="collapse navbar-collapse">
-                            <?php echo Bootstrap4::position('menu', '', false) ?>
+                            <?php echo Bootstrap4::position('menu', '', '', false) ?>
                         </div>
                     <?php endif ?>
                 </div>
@@ -76,7 +76,7 @@ use Joomla\Registry\Registry;
 			<?php if( $has_slider ): ?>
 			<div class="slider">
                 <div class="wrapper">
-                    <?php echo Bootstrap4::position('slider', 'jumbotron text-center') ?>
+                    <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper') ?>
                 </div>
 			</div>
 			<?php endif ?>
@@ -179,7 +179,7 @@ use Joomla\Registry\Registry;
 
                     <?php if( $has_footer_menu ): ?>
                         <!--Footer menu-->
-                        <?php echo Bootstrap4::position('footer-menu','col') ?>
+                        <?php echo Bootstrap4::position('footer-menu', 'col') ?>
                     <?php endif ?>
                 </div>
             </div>

@@ -4,6 +4,10 @@
 // easier to manage.
 //----------------------------------------
 
+// Basics
+@import "fonts";
+@import "mixins";
+
 // Bootstrap updates
 @import "bootstrap/theme";
 
@@ -17,4 +21,6 @@
 @import "modules/mod_menu";
 
 // Page styling
+@import "pages/all";
 @import "pages/homepage";
+@import "pages/subpage";
