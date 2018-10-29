@@ -64,7 +64,7 @@ var theme = {
     sass: function () {
         return gulp.src([
             '.dev/sass/**/*.scss',
-            '.dev/sass/**/*.sass',
+            '.dev/sass/**/*.sass'
         ])
         .pipe(sass({
                 outputStyle: 'expanded',
@@ -102,8 +102,8 @@ var theme = {
         return gulp.watch([
             '.dev/js/**/*.js'
         ], series('theme:js'));
-    },
-}
+    }
+};
 
 /**
  * Vendor assets building.
@@ -170,7 +170,7 @@ var vendor = {
             vendorPackage,
         );
     }
-}
+};
 
 // Theme javascript
 gulp.task('theme:js', theme.js);
