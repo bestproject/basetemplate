@@ -70,7 +70,7 @@ defined('_JEXEC') or die;
  */
 function pagination_list_footer($list)
 {
-	$html = "<nav class=\"pagination-container\">\n";
+	$html = "<nav class=\"pagination-container\" aria-label=\"Page navigation\">\n";
 	$html .= $list['pageslinks'];
 	$html .= "\n<input type=\"hidden\" name=\"" . $list['prefix'] . "limitstart\" value=\"" . $list['limitstart'] . "\" />";
 	$html .= "\n</nav>";
@@ -112,8 +112,8 @@ function pagination_list_render($list)
 		}
 	}
 
-	$html = '<ul class="pagination pull-left">';
-	$html .= $list['start']['data'];
+	$html = '<ul class="pagination">';
+	//$html .= $list['start']['data'];
 	$html .= $list['previous']['data'];
 
 	foreach ($list['pages'] as $k => $page)
@@ -130,7 +130,7 @@ function pagination_list_render($list)
 	}
 
 	$html .= $list['next']['data'];
-	$html .= $list['end']['data'];
+	//$html .= $list['end']['data'];
 
 	$html .= '</ul>';
 	return $html;
@@ -147,40 +147,40 @@ function pagination_list_render($list)
  */
 function pagination_item_active(&$item)
 {
-	$class = '';
+	$class = 'page-item';
 
 	// Check for "Start" item
 	if ($item->text == JText::_('JLIB_HTML_START'))
 	{
-		$display = '<span class="fa fa-angle-double-left"></span>';
+		$display = '<span class="fas fa-angle-double-left"></span>';
 	}
 
 	// Check for "Prev" item
 	if ($item->text == JText::_('JPREV'))
 	{
-		$display = '<span class="fa fa-angle-left"></span>';
+		$display = '<span class="fas fa-angle-left"></span>';
 	}
 
 	// Check for "Next" item
 	if ($item->text == JText::_('JNEXT'))
 	{
-		$display = '<span class="fa fa-angle-right"></span>';
+		$display = '<span class="fas fa-angle-right"></span>';
 	}
 
 	// Check for "End" item
 	if ($item->text == JText::_('JLIB_HTML_END'))
 	{
-		$display = '<span class="fa fa-angle-double-right"></span>';
+		$display = '<span class="fas fa-angle-double-right"></span>';
 	}
 
 	// If the display object isn't set already, just render the item with its text
 	if (!isset($display))
 	{
 		$display = $item->text;
-		$class   = ' class="hidden-phone"';
+		$class.= ' hidden-phone';
 	}
 
-	return '<li' . $class . '><a title="' . $item->text . '" href="' . $item->link . '" class="pagenav">' . $display . '</a></li>';
+	return '<li class="'.$class.'"><a title="' . $item->text . '" href="' . $item->link . '" class="page-link">' . $display . '</a></li>';
 }
 
 /**
@@ -197,33 +197,33 @@ function pagination_item_inactive(&$item)
 	// Check for "Start" item
 	if ($item->text == JText::_('JLIB_HTML_START'))
 	{
-		return '<li class="disabled"><a><span class="fa fa-angle-double-left"></span></a></li>';
+		return '<li class="page-item disabled"><a class="page-link"><span class="fas fa-angle-double-left"></span></a></li>';
 	}
 
 	// Check for "Prev" item
 	if ($item->text == JText::_('JPREV'))
 	{
-		return '<li class="disabled"><a><span class="fa fa-angle-left"></span></a></li>';
+		return '<li class="page-item disabled"><a class="page-link"><span class="fas fa-angle-left"></span></a></li>';
 	}
 
 	// Check for "Next" item
 	if ($item->text == JText::_('JNEXT'))
 	{
-		return '<li class="disabled"><a><span class="fa fa-angle-right"></span></a></li>';
+		return '<li class="page-item disabled"><a class="page-link"><span class="fas fa-angle-right"></span></a></li>';
 	}
 
 	// Check for "End" item
 	if ($item->text == JText::_('JLIB_HTML_END'))
 	{
-		return '<li class="disabled"><a><span class="fa fa-angle-double-right"></span></a></li>';
+		return '<li class="page-item disabled"><a class="page-link"><span class="fas fa-angle-double-right"></span></a></li>';
 	}
 
 	// Check if the item is the active page
 	if (isset($item->active) && ($item->active))
 	{
-		return '<li class="active hidden-phone"><a>' . $item->text . '</a></li>';
+		return '<li class="page-item active hidden-phone"><a class="page-link">' . $item->text . '</a></li>';
 	}
 
 	// Doesn't match any other condition, render a normal item
-	return '<li class="disabled hidden-phone"><a>' . $item->text . '</a></li>';
+	return '<li class="page-item disabled hidden-phone"><a class="page-link">' . $item->text . '</a></li>';
 }
