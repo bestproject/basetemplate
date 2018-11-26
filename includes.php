@@ -36,8 +36,8 @@ $layout       = $app->input->get('layout');
  * == JAVA SCRIPT ==============================================================
  */
 JHTML::_('jquery.framework');
-$doc->addScriptVersion('templates/'.$this->template.'/js/theme'.($debug ? '':'.min').'.js'); // Main Theme JS
-$doc->addScriptVersion('templates/'.$this->template.'/js/vendor'.($debug ? '':'.min').'.js'); // Theme Vendor JS
+$doc->addScript('templates/'.$this->template.'/js/theme'.($debug ? '':'.min').'.js', ['version'=>'auto']); // Main Theme JS
+$doc->addScript('templates/'.$this->template.'/js/vendor'.($debug ? '':'.min').'.js', ['version'=>'auto']); // Theme Vendor JS
 
 if( $params->get('vendors_animated') ) {
 	$doc->addScriptDeclaration('
@@ -65,7 +65,7 @@ if( $params->get('back_to_top') ) {
  */
 
 // Project styles
-$doc->addStyleSheetVersion('templates/'.$this->template.'/css/index.css'); // MAIN THEME
+$doc->addStyleSheet('templates/'.$this->template.'/css/index.css', ['version'=>'auto']); // MAIN THEME
 
 
 /**

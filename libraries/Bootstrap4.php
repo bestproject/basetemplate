@@ -22,17 +22,17 @@ abstract class Bootstrap4
     public static function getColumnClass($size)
     {
         switch ($size) {
-            case 11: return 'col-lg-11 col-12';
-            case 10: return 'col-lg-10 col-12';
-            case 9: return 'col-lg-9 col-12';
-            case 8: return 'col-lg-8 col-12';
-            case 7: return 'col-lg-7 col-12';
-            case 6: return 'col-lg-6 col-12';
-            case 5: return 'col-lg-5 col-md-6 col-12';
-            case 4: return 'col-lg-4 col-md-6 col-12';
-            case 3: return 'col-lg-3 col-md-6 col-12';
-            case 2: return 'col-lg-2 col-md-6 col-12';
-            case 1: return 'col-lg-1 col-md-6 col-12';
+            case 11: return 'col-xl-11 col-12';
+            case 10: return 'col-xl-10 col-12';
+            case 9: return 'col-xl-9 col-12';
+            case 8: return 'col-xl-8 col-12';
+            case 7: return 'col-xl-7 col-12';
+            case 6: return 'col-xl-6 col-12';
+            case 5: return 'col-xl-5 col-md-6 col-12';
+            case 4: return 'col-xl-4 col-md-6 col-12';
+            case 3: return 'col-xl-3 col-md-6 col-12';
+            case 2: return 'col-xl-2 col-md-6 col-12';
+            case 1: return 'col-xl-1 col-md-6 col-12';
             default : return 'col-12';
         }
     }
@@ -77,7 +77,7 @@ abstract class Bootstrap4
             $html .= '<'.$module_tag.' class="'.trim($column_class).'">';
             if ($module->showtitle) {
                 $h       = $module_params->get('header_tag', 'h3');
-                $h_class = ' class="'.($header_class ?? 'module-title').'"';
+                $h_class = ' class="module-title '.($header_class ?? '').'"';
                 $html    .= '<'.$h.$h_class.'>'.$module->title.'</'.$h.'>';
             }
             $html .= \JModuleHelper::renderModule($module);

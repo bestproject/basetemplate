@@ -1,5 +1,11 @@
 <?php defined('_JEXEC') or die;
 
+// Preload resources
+//$this->addHeadLink('templates/'.$this->template.'/assets/webfonts/fa-brands-400.woff2', 'preload', 'rel', ['as'=>'font']);
+//$this->addHeadLink('templates/'.$this->template.'/css/style.css', 'preload', 'rel', ['as'=>'style']);
+//$this->addHeadLink('templates/'.$this->template.'/js/script.js', 'preload', 'rel', ['as'=>'script']);
+//$this->addHeadLink('templates/'.$this->template.'/images/image.jpg', 'preload', 'rel', ['as'=>'image']);
+
 // Prepare document head
 require_once __DIR__.'/includes.php';
 
@@ -37,7 +43,7 @@ use Joomla\Registry\Registry;
         <header>
 
             <!--Page navigation-->
-            <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav id="nav" class="navbar navbar-expand-xl navbar-light bg-light">
 					
 				<!--Navigation header-->
                 <div class="container">
@@ -108,7 +114,7 @@ use Joomla\Registry\Registry;
 
 					<?php if( $has_left ): ?>
 					<!--Left column-->
-					<aside class="col-12 <?php echo ($has_right?'col-lg-3':'col-lg-4') ?>">
+					<aside class="col-12 <?php echo ($has_right?'col-xl-3':'col-xl-4') ?>">
 						<?php echo Bootstrap4::position('left') ?>
 					</aside>
 					<?php endif ?>
@@ -140,7 +146,7 @@ use Joomla\Registry\Registry;
 
 					<?php if( $has_right ): ?>
 					<!--Right column-->
-					<aside class="col-12 <?php echo ($has_left?'col-lg-3':'col-lg-4') ?>">
+					<aside class="col-12 <?php echo ($has_left?'col-xl-3':'col-xl-4') ?>">
 						<?php echo Bootstrap4::position('right') ?>
 					</aside>
 					<?php endif ?>
