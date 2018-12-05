@@ -41,12 +41,12 @@ $layout       = $app->input->get('layout');
  * == JAVA SCRIPT ==============================================================
  */
 JHTML::_('jquery.framework');
-$doc->addScript('templates/'.$this->template.'/js/theme'.($debug ? '':'.min').'.js', ['version'=>'auto']); // Main Theme JS
-$doc->addScript('templates/'.$this->template.'/js/vendor'.($debug ? '':'.min').'.js', ['version'=>'auto']); // Theme Vendor JS
+BestProject\TemplateHelper::addAsyncScripts('templates/'.$this->template.'/js/vendor'.($debug ? '':'.min').'.js');
+BestProject\TemplateHelper::addAsyncScripts('templates/'.$this->template.'/js/theme'.($debug ? '':'.min').'.js');
 $doc->addScript('media/jui/js/html5.js', ['conditional'=>'lt IE 9']);
 
 if( $params->get('vendors_animated') ) {
-	$doc->addScriptDeclaration('
+	BestProject\TemplateHelper::addAsyncScripts('
 
 		// Run animations when element enters the screen
 		jQuery(document).ready(function($){
@@ -56,11 +56,11 @@ if( $params->get('vendors_animated') ) {
 	');
 }
 if( $params->get('back_to_top') ) {
-	$doc->addScriptDeclaration('
+	BestProject\TemplateHelper::addAsyncScripts('
 
 		// Change menu position on scroll
 		jQuery(document).ready(function($){
-			$(document).backToTopButton("'.JText::_('TPL_BASETHEME_BACK_TO_TOP').'");
+			$(document).backToTopButton("'.JText::_('TPL_NEURENO_BACK_TO_TOP').'");
 		});
 
 	');

@@ -2,6 +2,7 @@
 
 namespace BestProject;
 
+use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
 
@@ -81,12 +82,12 @@ abstract class TemplateHelper
     /**
      * Add asynchronous (Firefox/Chrome) scripts.
      *
-     * @param string        $url        URL for a script file.
-     * @param string|array  $options    String for inline script or array of tag attributes
+     * @param string    $url        URL for a script file.
+     * @param array     $attributes String for inline script or array of tag attributes
      */
-    public static function addAsyncScripts(string $url, $options = [])
+    public static function addAsyncScripts(string $url, array $attributes = [])
     {
-        self::$scripts = array_merge(self::$scripts, [$url => $options]);
+        self::$scripts = array_merge(self::$scripts, [$url => $attributes]);
     }
 
     /**
@@ -95,19 +96,24 @@ abstract class TemplateHelper
     public static function renderAsyncScripts()
     {
         $buffer = '';
+        /* @var $doc HtmlDocument */
+        $doc = Factory::getDocument();
+        $mediaVersion = $doc->getMediaVersion();
 
         foreach (self::$scripts AS $url => $attributes) {
 
-            if( !empty($url) ) {
+            if( stripos($url, "\n")=== false ) {
                 $attributes_string = '';
                 foreach ($attributes AS $attribute => $value) {
                     $attributes_string .= ' '.$attribute.(!empty($value) ? '="'.$value.'"' : '');
                 }
 
-                $buffer .= '<script src="'.$url.'" type="text/javascript" '.trim($attributes_string).'></script>'."\n";
+                $script_url = (substr_compare($url, 'http', 0, 4)===0 ? $url:$url.'?'.$mediaVersion);
+
+                $buffer .= '<script src="'.$script_url.'" type="text/javascript" '.trim($attributes_string).'></script>'."\n";
 
             } else {
-                $buffer .= '<script type="text/javascript">'.$attributes.'</script>'."\n";
+                $buffer .= '<script type="text/javascript">'.$url.'</script>'."\n";
             }
 
 
