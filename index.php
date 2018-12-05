@@ -6,20 +6,23 @@
 //$this->addHeadLink('templates/'.$this->template.'/js/script.js', 'preload', 'rel', ['as'=>'script']);
 //$this->addHeadLink('templates/'.$this->template.'/images/image.jpg', 'preload', 'rel', ['as'=>'image']);
 
-// Prepare document head
-require_once __DIR__.'/includes.php';
 
 use BestProject\Bootstrap4;
+use BestProject\TemplateHelper;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Menu\MenuItem;
 use Joomla\CMS\Menu\SiteMenu;
 use Joomla\Registry\Registry;
 
 /* @var $doc HtmlDocument */
+/* @var $this HtmlDocument */
 /* @var $menu SiteMenu */
 /* @var $active MenuItem */
 /* @var $default MenuItem */
 /* @var $params Registry */
+
+// Prepare document head
+require_once __DIR__.'/includes.php';
 
 /**
  * == CUSTOM VARIABLES =========================================================
@@ -31,20 +34,19 @@ use Joomla\Registry\Registry;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $language; ?>" lang="<?php echo $language; ?>" dir="<?php echo $direction; ?>">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <?php echo TemplateHelper::renderCodeHeadTop() ?>
         <jdoc:include type="head" />
-        <!--[if lt IE 9]>
-            <script src="media/jui/js/html5.js"></script>
-        <![endif]-->
+        <?php echo TemplateHelper::renderCodeHeadBottom() ?>
     </head>
 
     <body class="site <?php echo $class ?>">
-		
+		<?php echo TemplateHelper::renderCodeBodyTop() ?>
         <!--Page header-->
         <header>
 
             <!--Page navigation-->
             <nav id="nav" class="navbar navbar-expand-xl navbar-light bg-light">
-					
+
 				<!--Navigation header-->
                 <div class="container">
 
@@ -60,7 +62,7 @@ use Joomla\Registry\Registry;
                                 <small class="navbar-text"><?php echo $slogan ?></small>
                             <?php endif ?>
                         </a>
-                        
+
                         <!--Menu button-->
                         <?php if( $has_menu ): ?>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
@@ -86,7 +88,7 @@ use Joomla\Registry\Registry;
                 </div>
 			</div>
 			<?php endif ?>
-			
+
         </header>
 
         <?php if( $has_slider_after ): ?>
@@ -104,10 +106,10 @@ use Joomla\Registry\Registry;
         <jdoc:include type="message" />
 
 		<?php if( $has_content ):
-		$content_class = ($has_left AND $has_right) ? 'col-sm-6' : ''; // Both columns has content
-		$content_class = (empty($content_class) AND ($has_left OR $has_right)) ? 'col-sm-8': $content_class; // Only one column has content
+		$content_class = ($has_left AND $has_right) ? 'col-xl-6' : ''; // Both columns has content
+		$content_class = (empty($content_class) AND ($has_left OR $has_right)) ? 'col-xl-8': $content_class; // Only one column has content
 		?>
-		
+
 			<!--Content blocks-->
 			<div class="container">
 				<div id="content" class="row">
@@ -141,7 +143,7 @@ use Joomla\Registry\Registry;
                             <?php echo Bootstrap4::position('content-after') ?>
                         </aside>
                         <?php endif ?>
-                        
+
                     </div>
 
 					<?php if( $has_right ): ?>
@@ -150,7 +152,7 @@ use Joomla\Registry\Registry;
 						<?php echo Bootstrap4::position('right') ?>
 					</aside>
 					<?php endif ?>
-					
+
 				</div>
 			</div>
 		<?php endif ?>
@@ -165,7 +167,7 @@ use Joomla\Registry\Registry;
             </div>
         </aside>
         <?php endif ?>
-		
+
         <!--Footer-->
         <footer>
 
@@ -198,12 +200,12 @@ use Joomla\Registry\Registry;
             <jdoc:include type="modules" name="debug" style="none" />
         </div>
         <?php endif ?>
-
+        <?php echo TemplateHelper::renderAsyncScripts() ?>
+        <?php echo TemplateHelper::renderCodeBodyBottom() ?>
     </body>
 </html>
 <?php
 
 // Remove Bootstrap 2
-$document = JFactory::getDocument();
-unset($document->_scripts['/media/jui/js/bootstrap.min.js']);
-unset($document->_scripts['/media/jui/js/bootstrap.js']);
+unset($this->_scripts['/media/jui/js/bootstrap.min.js']);
+unset($this->_scripts['/media/jui/js/bootstrap.js']);

@@ -1,5 +1,7 @@
 <?php
 
+use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die;
@@ -13,6 +15,9 @@ require_once __DIR__.'/vendor/autoload.php';
 /**
  * == BASIC VARIABLES ==========================================================
  */
+/* @var $doc HtmlDocument */
+/* @var $app CMSApplication */
+
 $app          = Factory::getApplication();
 $params       = $this->params;
 $debug        = (bool) $app->get('debug', 0);
@@ -38,6 +43,7 @@ $layout       = $app->input->get('layout');
 JHTML::_('jquery.framework');
 $doc->addScript('templates/'.$this->template.'/js/theme'.($debug ? '':'.min').'.js', ['version'=>'auto']); // Main Theme JS
 $doc->addScript('templates/'.$this->template.'/js/vendor'.($debug ? '':'.min').'.js', ['version'=>'auto']); // Theme Vendor JS
+$doc->addScript('media/jui/js/html5.js', ['conditional'=>'lt IE 9']);
 
 if( $params->get('vendors_animated') ) {
 	$doc->addScriptDeclaration('

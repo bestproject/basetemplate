@@ -82,7 +82,7 @@
                     <option value="0">JNO</option>
                 </field>
             </fieldset>
-            
+
             <fieldset name="functionality">
                 <field name="vendors_lightbox" type="radio"
                     default="1" class="btn-group btn-group-yesno"
@@ -110,7 +110,29 @@
                 </field>
             </fieldset>
             
-            <fieldset name="design">
+            <fieldset name="advanced" label="TPL_BASETHEME_FIELDSET_ADVANCED_LABEL">
+                
+                <field name="code_head"  type="spacer"
+					label="TPL_BASETHEME_FIELD_CODE_HEAD_LABEL" />
+                <field name="code_head_top"  type="textarea" default=""
+					label="TPL_BASETHEME_FIELD_CODE_TOP_LABEL"
+					description="TPL_BASETHEME_FIELD_CODE_HEAD_TOP_DESC"
+					filter="string" />
+                <field name="code_head_bottom"  type="textarea" default=""
+					label="TPL_BASETHEME_FIELD_CODE_BOTTOM_LABEL"
+					description="TPL_BASETHEME_FIELD_CODE_HEAD_BOTTOM_DESC"
+					filter="string" />
+                
+                <field name="code_body"  type="spacer"
+					label="TPL_BASETHEME_FIELD_CODE_BODY_LABEL" />
+                <field name="code_body_top"  type="textarea" default=""
+					label="TPL_BASETHEME_FIELD_CODE_TOP_LABEL"
+					description="TPL_BASETHEME_FIELD_CODE_BODY_TOP_DESC"
+					filter="string" />
+                <field name="code_body_bottom"  type="textarea" default=""
+					label="TPL_BASETHEME_FIELD_CODE_BOTTOM_LABEL"
+					description="TPL_BASETHEME_FIELD_CODE_BODY_BOTTOM_DESC"
+					filter="string" />
                 
             </fieldset>
 			
