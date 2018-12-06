@@ -95,30 +95,44 @@ abstract class TemplateHelper
      */
     public static function renderAsyncScripts()
     {
-        $buffer = '';
+        $buffer       = '';
         /* @var $doc HtmlDocument */
-        $doc = Factory::getDocument();
+        $doc          = Factory::getDocument();
         $mediaVersion = $doc->getMediaVersion();
 
         foreach (self::$scripts AS $url => $attributes) {
 
-            if( stripos($url, "\n")=== false ) {
+            if (stripos($url, "\n") === false) {
                 $attributes_string = '';
                 foreach ($attributes AS $attribute => $value) {
                     $attributes_string .= ' '.$attribute.(!empty($value) ? '="'.$value.'"' : '');
                 }
 
-                $script_url = (substr_compare($url, 'http', 0, 4)===0 ? $url:$url.'?'.$mediaVersion);
+                $script_url = (substr_compare($url, 'http', 0, 4) === 0 ? $url : $url.'?'.$mediaVersion);
 
                 $buffer .= '<script src="'.$script_url.'" type="text/javascript" '.trim($attributes_string).'></script>'."\n";
-
             } else {
                 $buffer .= '<script type="text/javascript">'.$url.'</script>'."\n";
             }
-
-
         }
 
         return $buffer;
+    }
+
+    /**
+     * Convert fields array mapped by ID to NAME mapped array.
+     *
+     * @param array $fields Fields array to convert.
+     *
+     * @return array
+     */
+    public static function &getFieldsMap(&$fields): array
+    {
+        $map = [];
+        foreach ($fields AS $id => &$field) {
+            $map[$field->name] = &$fields[$id];
+        }
+
+        return $map;
     }
 }
