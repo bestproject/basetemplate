@@ -175,7 +175,7 @@ require_once __DIR__.'/includes.php';
             <!--Footer modules-->
             <div class="container">
                 <div class="container">
-                    <jdoc:include type="modules" name="debug" style="none" />
+                    <jdoc:include type="modules" name="footer" style="none" />
                 </div>
             </div>
             <?php endif ?>
