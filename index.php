@@ -122,7 +122,7 @@ require_once __DIR__.'/includes.php';
 					<?php endif ?>
 
 					<!--Main content-->
-                    <div class="content col-12 <?php echo $content_class ?>">
+                    <div class="content <?php echo $content_class ?>">
 
                         <?php if( $has_content_before ): ?>
                         <!--Before content-->
