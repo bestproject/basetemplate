@@ -1,4 +1,4 @@
-import 'path';
+var path = require('path');
 
 var templateName = path.basename(__dirname);
 var Encore = require('@symfony/webpack-encore');
