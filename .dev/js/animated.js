@@ -10,44 +10,42 @@
 	Requires:		animated.css and jQuery
 	How to use:		See example.html
 */
-(function ($) {
+import $ from 'jquery';
 
-	$.fn.Animated = function () {
+$.fn.Animated = function () {
 
-		var $window = $(window);
+    var $window = $(window);
 
-		$window.on('scroll', revealOnScroll);
+    $window.on('scroll', revealOnScroll);
 
-		function revealOnScroll() {
-			var win_height_padded = $window.height() * 1.1;
-			var scrolled = $window.scrollTop(),
-					win_height_padded = $window.height() * 1.1;
+    function revealOnScroll() {
+        var win_height_padded = $window.height() * 1.1;
+        var scrolled = $window.scrollTop(),
+                win_height_padded = $window.height() * 1.1;
 
-			// Showed...
-			$('[class*="animated-"]').each(function () {
-				var $this = $(this);
-				var offsetTop = $this.offset().top;
+        // Showed...
+        $('[class*="animated-"]').each(function () {
+            var $this = $(this);
+            var offsetTop = $this.offset().top;
 
-				if (scrolled + win_height_padded > offsetTop) {
-					$this[0].className = $this[0].className.replace('animated-','animated ');
-				}
-			});
+            if (scrolled + win_height_padded > offsetTop) {
+                $this[0].className = $this[0].className.replace('animated-','animated ');
+            }
+        });
 
-			// Hidden...
-			$(".animated").each(function (index) {
-				var $this = $(this);
-				var offsetTop = $this.offset().top;
-				if (scrolled + win_height_padded < offsetTop) {
-					$this[0].className = $this[0].className.replace('animated ','animated-');
-				}
-			});
-		}
+        // Hidden...
+        $(".animated").each(function (index) {
+            var $this = $(this);
+            var offsetTop = $this.offset().top;
+            if (scrolled + win_height_padded < offsetTop) {
+                $this[0].className = $this[0].className.replace('animated ','animated-');
+            }
+        });
+    }
 
-		setTimeout(function(){
-			revealOnScroll();
-		}, 100);
+    setTimeout(function(){
+        revealOnScroll();
+    }, 100);
 
-		return this;
-	};
-
-}(jQuery));
+    return this;
+};

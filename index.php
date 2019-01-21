@@ -24,9 +24,11 @@ use Joomla\Registry\Registry;
 // Prepare document head
 require_once __DIR__.'/includes.php';
 
-/**
- * == CUSTOM VARIABLES =========================================================
- */
+/** == FONTS ========================================================= */
+$this->addHeadLink('https://fonts.gstatic.com', 'preconnect', 'rel');
+$this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,800,900&amp;subset=latin-ext', 'preload', 'rel', ['as'=>'style']);
+
+/** == CUSTOM VARIABLES ============================================== */
 // Enter your custom variables here
 
 ?>
@@ -122,7 +124,7 @@ require_once __DIR__.'/includes.php';
 					<?php endif ?>
 
 					<!--Main content-->
-                    <div class="content <?php echo $content_class ?>">
+                    <div class="columns-container">
 
                         <?php if( $has_content_before ): ?>
                         <!--Before content-->
@@ -181,13 +183,13 @@ require_once __DIR__.'/includes.php';
             <?php endif ?>
 
             <div class="container">
-                <div class="wrapper row">
+                <div class="wrapper row justify-content-center justify-content-xl-between">
                     <!--Copyrights info-->
-                    <span class="copyrights muted col nav-link">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
+                    <span class="copyrights muted col-12 col-xl-5">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
 
                     <?php if( $has_footer_menu ): ?>
                         <!--Footer menu-->
-                        <?php echo Bootstrap4::position('footer-menu', 'col') ?>
+                        <?php echo Bootstrap4::position('footer-menu', 'col-12 col-xl-7') ?>
                     <?php endif ?>
                 </div>
             </div>

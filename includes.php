@@ -1,5 +1,6 @@
 <?php
 
+use BestProject\TemplateHelper;
 use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
@@ -41,26 +42,25 @@ $layout       = $app->input->get('layout');
  * == JAVA SCRIPT ==============================================================
  */
 JHTML::_('jquery.framework');
-BestProject\TemplateHelper::addAsyncScripts('templates/'.$this->template.'/js/vendor'.($debug ? '':'.min').'.js');
-BestProject\TemplateHelper::addAsyncScripts('templates/'.$this->template.'/js/theme'.($debug ? '':'.min').'.js');
+TemplateHelper::addAsyncScripts(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.js'));
 $doc->addScript('media/jui/js/html5.js', ['conditional'=>'lt IE 9']);
 
 if( $params->get('vendors_animated') ) {
-	BestProject\TemplateHelper::addAsyncScripts('
+	TemplateHelper::addAsyncScripts('
 
 		// Run animations when element enters the screen
-		jQuery(document).ready(function($){
+		jQuery(function($){
 			$(document).Animated();
 		});
 
 	');
 }
 if( $params->get('back_to_top') ) {
-	BestProject\TemplateHelper::addAsyncScripts('
+	TemplateHelper::addAsyncScripts('
 
 		// Change menu position on scroll
-		jQuery(document).ready(function($){
-			$(document).backToTopButton("'.JText::_('TPL_NEURENO_BACK_TO_TOP').'");
+		jQuery(function($){
+			$(document).backToTopButton("'.JText::_('TPL_POLISA_BACK_TO_TOP').'");
 		});
 
 	');
@@ -71,7 +71,7 @@ if( $params->get('back_to_top') ) {
  */
 
 // Project styles
-$doc->addStyleSheet('templates/'.$this->template.'/css/index.css', ['version'=>'auto']); // MAIN THEME
+$doc->addStyleSheet(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.css'), ['version'=>'auto']); // MAIN THEME
 
 
 /**

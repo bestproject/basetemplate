@@ -15,37 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function ( $ ) {
- 
-    /**
-     * Adds a back to top button when page is scrolled
-     */
-    $.fn.backToTopButton = function(button_text){
-        
-        var $btn = $("<a href='#' id='back-to-top' class='btn btn-default'><i class='fa fa-angle-up'></i><span class='sr-only'>"+button_text+"</span></a>");
-        $('body').append($btn);
-        
-        if ($('#back-to-top').length) {
-            var scrollTrigger = 100, // px
-                backToTop = function () {
-                    var scrollTop = $(window).scrollTop();
-                    if (scrollTop > scrollTrigger) {
-                        $('#back-to-top').addClass('show');
-                    } else {
-                        $('#back-to-top').removeClass('show');
-                    }
-                };
+import $ from 'jquery';
+
+/**
+ * Adds a back to top button when page is scrolled
+ */
+$.fn.backToTopButton = function(button_text){
+
+    var $btn = $("<a href='#' id='back-to-top' class='btn btn-default'><i class='fa fa-angle-up'></i><span class='sr-only'>"+button_text+"</span></a>");
+    $('body').append($btn);
+
+    if ($('#back-to-top').length) {
+        var scrollTrigger = 100, // px
+            backToTop = function () {
+                var scrollTop = $(window).scrollTop();
+                if (scrollTop > scrollTrigger) {
+                    $('#back-to-top').addClass('show');
+                } else {
+                    $('#back-to-top').removeClass('show');
+                }
+            };
+        backToTop();
+        $(window).on('scroll', function () {
             backToTop();
-            $(window).on('scroll', function () {
-                backToTop();
-            });
-            $('#back-to-top').on('click', function (e) {
-                e.preventDefault();
-                $('html,body').animate({
-                    scrollTop: 0
-                }, 700);
-            });
-        }
-    };
- 
-}( jQuery ));
+        });
+        $('#back-to-top').on('click', function (e) {
+            e.preventDefault();
+            $('html,body').animate({
+                scrollTop: 0
+            }, 700);
+        });
+    }
+};
