@@ -15,7 +15,7 @@ defined('_JEXEC') or die;
 <?php foreach( $list AS $item ):
 $images = json_decode($item->images);
 ?>
-	<li class="col-xs-12 col-sm-6 col-md-3">
+	<li class="col-12 col-lg-6 col-xl-3">
 		<?php if ($params->get('link_titles') == 1) : ?>
 		<a class="mod-articles-category-title <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
 		<?php endif ?>

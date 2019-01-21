@@ -19,6 +19,13 @@ abstract class TemplateHelper
     private static $params;
 
     /**
+     * Current templae name.
+     *
+     * @var string
+     */
+    private static $template;
+
+    /**
      * Scripts that should be placed in the bottom of body tag.
      *
      * @var array
@@ -80,6 +87,20 @@ abstract class TemplateHelper
     }
 
     /**
+     * Get current template name.
+     *
+     * @return string
+     */
+    private static function getTemplate(): string
+    {
+        if (is_null(self::$template)) {
+            self::$template = Factory::getApplication()->getTemplate();
+        }
+
+        return self::$template;
+    }
+
+    /**
      * Add asynchronous (Firefox/Chrome) scripts.
      *
      * @param string    $url        URL for a script file.
@@ -134,5 +155,28 @@ abstract class TemplateHelper
         }
 
         return $map;
+    }
+
+    /**
+     * Get asset url using manifest.json build by webpack in /templates/THEME_NAME/assets/build.
+     *
+     * @param string $url Internal URL (eg. templates/test/assets/build/theme.css)
+     *
+     * @return string
+     */
+    public static function getAssetUrl(string $url): string
+    {
+        $public_url  = $url;
+        $manifestUrl = JPATH_THEMES.'/'.self::getTemplate().'/assets/build/manifest.json';
+
+        if (file_exists($manifestUrl)) {
+            $manifest = file_get_contents($manifestUrl);
+            $manifest = json_decode($manifest, true);
+            if (key_exists(ltrim($url, '/'), $manifest)) {
+                $public_url = $manifest[ltrim($url, '/')];
+            }
+        }
+
+        return $public_url;
     }
 }

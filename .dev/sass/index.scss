@@ -4,11 +4,11 @@
 // Boostrap SASS functions
 @import "node_modules/bootstrap/scss/functions";
 
-// Boostrap SASS default variables
-@import "node_modules/bootstrap/scss/variables";
-
 // Variables overrides
 @import "variables";
+
+// Boostrap SASS default variables
+@import "node_modules/bootstrap/scss/variables";
 
 // Boostrap SASS default styles
 @import "node_modules/bootstrap/scss/bootstrap";
