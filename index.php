@@ -213,3 +213,6 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 // Remove Bootstrap 2
 unset($this->_scripts['/media/jui/js/bootstrap.min.js']);
 unset($this->_scripts['/media/jui/js/bootstrap.js']);
+
+// Combine system scripts
+TemplateHelper::combineSystemScripts($this->_scripts);

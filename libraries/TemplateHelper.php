@@ -4,6 +4,7 @@ namespace BestProject;
 
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Version;
 use Joomla\Registry\Registry;
 
 /**
@@ -178,5 +179,72 @@ abstract class TemplateHelper
         }
 
         return $public_url;
+    }
+
+    /**
+     * Combining system scripts from /media directory into chunks per page.
+     * @note Use after </html> tag.
+     *
+     * @param array $scripts Reference to document scripts array.
+     */
+    public static function combineSystemScripts(&$scripts)
+    {
+        $origin = $scripts;
+
+        $media = [];
+        $files = [];
+
+        // Look for scripts included from media directory
+        $entry_details = [];
+        foreach( $scripts AS $path=>$details ) {
+
+            if( substr_compare($path, '/media/', 0, 7)===0 ) {
+                $media[] = $path;
+                $files [] = pathinfo($path, PATHINFO_FILENAME);
+                $entry_details = $details;
+            }
+
+        }
+
+        // If there is anything to combine
+        if( !empty($media) ) {
+
+        }
+
+        // Create a build sign
+        $sign = Version::MAJOR_VERSION.'-'.Version::MINOR_VERSION.'-'.Version::PATCH_VERSION.'-';
+        $sign.= md5(implode('|', $files));
+
+        $cache_path = '/cache/system/'.$sign.'.js';
+
+        // Combine files and store them in a cache directory
+        if( !file_exists(JPATH_ROOT.$cache_path) ) {
+
+            $buffer = '';
+            foreach( $media AS $media_path ) {
+                $buffer.= ';'.file_get_contents(JPATH_ROOT.'/'.$media_path);
+            }
+
+            // Create cache directory
+            if ( !file_exists(JPATH_CACHE.'/system') ) {
+                mkdir(JPATH_CACHE.'/system', 0755);
+            }
+
+            file_put_contents(JPATH_ROOT.$cache_path, trim($buffer, ';'));
+        }
+
+        // Create combined scripts entry
+        $entry = [
+            $cache_path => $entry_details
+        ];
+
+        // Remove references to old scripts
+        foreach( $media as $path ) {
+            unset($scripts[$path]);
+        }
+
+        // Swap scripts definitions for a new one
+        $scripts = array_merge($entry, $scripts);
+
     }
 }
