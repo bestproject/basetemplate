@@ -1,4 +1,3 @@
-@import "fonts";
 @import "mixins";
 
 // Boostrap SASS functions
@@ -12,9 +11,6 @@
 
 // Boostrap SASS default styles
 @import "node_modules/bootstrap/scss/bootstrap";
-
-// External libraries
-@import "vendor";
 
 // Youre custom changes to theme
 @import "theme";
