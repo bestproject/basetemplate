@@ -37,13 +37,35 @@ $is_frontpage = ( ($active AND $active->id == $default->id) ? true : false );
 $view         = $app->input->get('view');
 $layout       = $app->input->get('layout');
 
-
-/**
- * == JAVA SCRIPT ==============================================================
- */
+/** == JAVA SCRIPT ============================================================== */
 JHTML::_('jquery.framework');
-TemplateHelper::addAsyncScripts(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.js'));
 $doc->addScript('media/jui/js/html5.js', ['conditional'=>'lt IE 9']);
+
+/** == ENTRY POINTS ============================================================== */
+
+try {
+
+    $path_entrypoints = __DIR__.'/assets/build/entrypoints.json';
+    if( !file_exists($path_entrypoints) ) {
+        throw new Exception('There is no entrypoints.json file in youre template assets directory. Did you run [npm run dev] ?', 500);
+    }
+
+    $entrypoints = json_decode(file_get_contents($path_entrypoints), true);
+    if( empty($entrypoints['entrypoints']) ) {
+        throw new Exception('Youre entry points definitions is empty. Did you run [npm run dev] ?', 500);
+    }
+
+    // Include Java Script entry point at the bottom
+    TemplateHelper::addAsyncScripts(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.js'));
+
+    // Include CSS entry point in the head section
+    $doc->addStyleSheet(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.css'), ['version'=>'auto']); // MAIN THEME
+
+} catch(Exception $e) {
+    echo $e->getMessage();
+    http_response_code($e->getCode());
+    $app->close();
+}
 
 if( $params->get('vendors_animated') ) {
 	TemplateHelper::addAsyncScripts('
@@ -60,19 +82,11 @@ if( $params->get('back_to_top') ) {
 
 		// Change menu position on scroll
 		jQuery(function($){
-			$(document).backToTopButton("'.JText::_('TPL_BASETHEME_BACK_TO_TOP').'");
+			$(document).backToTopButton("'.JText::_('TPL_NFSI_BACK_TO_TOP').'");
 		});
 
 	');
 }
-
-/**
- * == STYLE SHEETS =============================================================
- */
-
-// Project styles
-$doc->addStyleSheet(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.css'), ['version'=>'auto']); // MAIN THEME
-
 
 /**
  * == MODULES POSITIONS ========================================================

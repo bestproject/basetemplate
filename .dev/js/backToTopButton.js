@@ -22,7 +22,7 @@ import $ from 'jquery';
  */
 $.fn.backToTopButton = function(button_text){
 
-    var $btn = $("<a href='#' id='back-to-top' class='btn btn-default'><i class='fa fa-angle-up'></i><span class='sr-only'>"+button_text+"</span></a>");
+    var $btn = $("<a href='#' id='back-to-top' class='btn btn-default'><i class='fas fa-angle-up'></i><span class='sr-only'>"+button_text+"</span></a>");
     $('body').append($btn);
 
     if ($('#back-to-top').length) {
