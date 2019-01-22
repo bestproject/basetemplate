@@ -109,23 +109,23 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
         <!--System messages-->
         <jdoc:include type="message" />
 
-		<?php if( $has_content ):
-		$content_class = ($has_left AND $has_right) ? 'col-xl-6' : ''; // Both columns has content
-		$content_class = (empty($content_class) AND ($has_left OR $has_right)) ? 'col-xl-8': $content_class; // Only one column has content
-		?>
+        <?php if( $has_content ):
+        $content_class = ($has_left AND $has_right) ? 'col-xl-6' : ''; // Both columns has content
+        $content_class = (empty($content_class) AND ($has_left OR $has_right)) ? 'col-xl-8': $content_class; // Only one column has content
+        ?>
 
-			<!--Content blocks-->
-			<div class="container">
-				<div id="content" class="row">
+            <!--Content blocks-->
+            <div class="container">
+                <div id="content" class="row">
 
-					<?php if( $has_left ): ?>
-					<!--Left column-->
-					<aside class="col-12 <?php echo ($has_right?'col-xl-3':'col-xl-4') ?>">
-						<?php echo Bootstrap4::position('left') ?>
-					</aside>
-					<?php endif ?>
+                    <?php if( $has_left ): ?>
+                    <!--Left column-->
+                    <aside class="col-12 <?php echo ($has_right?'col-xl-3':'col-xl-4') ?>">
+                        <?php echo Bootstrap4::position('left') ?>
+                    </aside>
+                    <?php endif ?>
 
-					<!--Main content-->
+                    <!--Main content-->
                     <div class="columns-container">
 
                         <?php if( $has_content_before ): ?>
@@ -135,7 +135,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                         </aside>
                         <?php endif ?>
 
-                        <main class="col-12 <?php echo $content_class ?>">
+                        <main>
 
                             <jdoc:include type="component" />
 
@@ -150,16 +150,16 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
                     </div>
 
-					<?php if( $has_right ): ?>
-					<!--Right column-->
-					<aside class="col-12 <?php echo ($has_left?'col-xl-3':'col-xl-4') ?>">
-						<?php echo Bootstrap4::position('right') ?>
-					</aside>
-					<?php endif ?>
+                    <?php if( $has_right ): ?>
+                    <!--Right column-->
+                    <aside class="col-12 <?php echo ($has_left?'col-xl-3':'col-xl-4') ?>">
+                        <?php echo Bootstrap4::position('right') ?>
+                    </aside>
+                    <?php endif ?>
 
-				</div>
-			</div>
-		<?php endif ?>
+                </div>
+            </div>
+        <?php endif ?>
 
         <?php if( $has_footer_before ): ?>
         <!--Before footer-->
