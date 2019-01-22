@@ -1,8 +1,10 @@
 var path = require('path');
 
 var templateName = path.basename(__dirname);
+
 var Encore = require('@symfony/webpack-encore');
 
+// Template front-end build configuration
 Encore
     .setOutputPath('assets/build')
     .setPublicPath('/templates/'+templateName+'/assets/build')
@@ -17,7 +19,23 @@ Encore
     .addEntry('theme',[
         './.dev/sass/index.scss',
         './.dev/js/theme.js'
-    ])
-;
+    ]);
+    
+const themeConfig = Encore.getWebpackConfig();
 
-module.exports = Encore.getWebpackConfig();
+// Template editor build configuration
+Encore.reset();
+Encore
+    .setOutputPath('assets/build')
+    .setPublicPath('/templates/'+templateName+'/assets/build')
+    .enableBuildNotifications()
+    .enableSassLoader()
+    .disableSingleRuntimeChunk()
+    .addEntry('editor',[
+        './.dev/sass/editor.scss'
+    ]);
+    
+const editorConfig = Encore.getWebpackConfig();
+
+// Export configurations
+module.exports = [themeConfig, editorConfig];

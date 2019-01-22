@@ -1,1 +1,23 @@
-@import 'index';
+@import "mixins";
+
+// Boostrap SASS functions
+@import "~bootstrap/scss/functions";
+
+// Variables overrides
+@import "variables";
+
+// Boostrap SASS default variables
+@import "~bootstrap/scss/variables";
+
+// Boostrap SASS default styles
+@import "~bootstrap/scss/bootstrap";
+
+// Youre custom changes to theme
+body {
+    &#tinymce,&.mce-content-body  {
+        max-width:1200px;
+        margin:4rem auto;
+        box-shadow:0 0 1rem 0 rgba($black,.1);
+        @import 'typography';
+    }
+}
