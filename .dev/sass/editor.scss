@@ -16,8 +16,21 @@
 body {
     &#tinymce,&.mce-content-body  {
         max-width:1200px;
-        margin:4rem auto;
+        margin:4rem auto;padding:3rem;box-sizing: content-box;
         box-shadow:0 0 1rem 0 rgba($black,.1);
-        @import 'typography';
+    }
+}
+@import 'typography';
+
+#system-readmore {
+    border-color:transparent;height:auto;border:0;
+    background:transparent;margin:1.5rem -3rem;text-align:center;
+    &::before {
+        content:'Intro';color:red;display:block;
+        padding:.5rem 0;
+    }
+    &::after {
+        border-top:.1rem dashed gray;display:block;padding-top:.5rem;padding-bottom:.5rem;
+        content:'Full text';color:red;
     }
 }
