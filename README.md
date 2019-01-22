@@ -1,5 +1,5 @@
 # Joomla! base theme
-A Joomla! template that can be used to create templates for Bootstrap 3. It contains a basic files structure as well as template overrides to match Boostrap 4 syntax.
+A Joomla! template that can be used to create templates for Bootstrap 4. It contains a basic files structure as well as template overrides to match Boostrap 4 syntax.
 
 ## Requirements
 * PHP 7
@@ -30,6 +30,18 @@ In development build Webpack will build all the required assets once and finish 
 ### Notes
 * Keep your article/text styling `./dev/sass/_typography.scss` file. This way the build system will automaticaly keep the front-end styling available also in your wysiwyg editor.
 * If you need to change the `Intro`/`Full text` you can do it in `./dev/sass/editor.scss`.
+
+## Libraries included by default
+### Front-end 
+* Font Awesome: 5.6.3
+* Animate.css: 3.7.0
+* Bootstrap: 4.1.3
+* Magnific Popup 1.1.0
+* Popper.js 1.14.6
+
+### Back-end
+* Webpack Encore 0.22.4
+* Node Sass 4.11.0
 
 ## Module positions
 * toolbar
