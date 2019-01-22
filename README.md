@@ -16,7 +16,7 @@ A Joomla! template that can be used to create templates for Bootstrap 3. It cont
 Template uses `Webpack Encore` to build assets. Most of the required things should be configured out of the box in template. If you need something more please refer the [documentation](https://symfony.com/doc/current/frontend.html).
 
 ### Development environment start
-Webpack can build youre template assets on the fly after reach change in JS or SCSS files. Just run the command below:
+Webpack can build youre template assets on the fly after each change in JS or SCSS files. Just run the command below:
 * `npm run watch`
 
 ### Build template for production
@@ -27,9 +27,15 @@ In production build Webpack will compress all the required assets:
 In development build Webpack will build all the required assets once and finish its job:
 * `npm run dev`
 
+### Notes
+* Keep your article/text styling `./dev/sass/_typography.scss` file. This way the build system will automaticaly keep the front-end styling available also in your wysiwyg editor.
+* If you need to change the `Intro`/`Full text` you can do it in `./dev/sass/editor.scss`.
+
 ## Module positions
 * toolbar
 * menu
+* slider
+* slider-after
 * content-before
 * left
 * right
