@@ -126,7 +126,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                     <?php endif ?>
 
                     <!--Main content-->
-                    <div class="columns-container">
+                    <div class="columns-container col-12 <?php echo $content_class ?>">
 
                         <?php if( $has_content_before ): ?>
                         <!--Before content-->
