@@ -22,7 +22,7 @@ use Joomla\Registry\Registry;
 /* @var $params Registry */
 
 // Prepare document head
-require_once __DIR__.'/includes.php';
+require_once 'includes.php';
 
 /** == FONTS ========================================================= */
 $this->addHeadLink('https://fonts.gstatic.com', 'preconnect', 'rel');
@@ -47,7 +47,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
         <header>
 
             <!--Page navigation-->
-            <nav id="nav" class="navbar navbar-expand-xl navbar-light bg-light">
+            <nav id="nav" class="navbar navbar-expand-xl navbar-light">
 
 				<!--Navigation header-->
                 <div class="container">
@@ -87,9 +87,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
 			<?php if( $has_slider ): ?>
 			<div class="slider">
-                <div class="wrapper">
-                    <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper') ?>
-                </div>
+                <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper') ?>
 			</div>
 			<?php endif ?>
 
@@ -179,7 +177,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <!--Footer modules-->
             <div class="container">
                 <div class="container">
-                    <jdoc:include type="modules" name="footer" style="none" />
+	                <?php echo Bootstrap4::position('footer') ?>
                 </div>
             </div>
             <?php endif ?>
