@@ -69,7 +69,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                         <?php if( $has_menu ): ?>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
                             <span class="d-flex align-items-center">
-                                <span class="navbar-toggler-icon"></span>
+                                <i class="fas fa-bars" aria-hidden="true"></i>
                                 <span class="toggler-text"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
                             </span>
                         </button>
