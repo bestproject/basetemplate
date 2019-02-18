@@ -117,22 +117,22 @@
                 <field name="code_head_top"  type="textarea" default=""
 					label="TPL_BASETHEME_FIELD_CODE_TOP_LABEL"
 					description="TPL_BASETHEME_FIELD_CODE_HEAD_TOP_DESC"
-					filter="string" />
+					filter="raw" />
                 <field name="code_head_bottom"  type="textarea" default=""
 					label="TPL_BASETHEME_FIELD_CODE_BOTTOM_LABEL"
 					description="TPL_BASETHEME_FIELD_CODE_HEAD_BOTTOM_DESC"
-					filter="string" />
+					filter="raw" />
                 
                 <field name="code_body"  type="spacer"
 					label="TPL_BASETHEME_FIELD_CODE_BODY_LABEL" />
                 <field name="code_body_top"  type="textarea" default=""
 					label="TPL_BASETHEME_FIELD_CODE_TOP_LABEL"
 					description="TPL_BASETHEME_FIELD_CODE_BODY_TOP_DESC"
-					filter="string" />
+					filter="raw" />
                 <field name="code_body_bottom"  type="textarea" default=""
 					label="TPL_BASETHEME_FIELD_CODE_BOTTOM_LABEL"
 					description="TPL_BASETHEME_FIELD_CODE_BODY_BOTTOM_DESC"
-					filter="string" />
+					filter="raw" />
                 
             </fieldset>
 			

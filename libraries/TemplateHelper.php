@@ -2,6 +2,7 @@
 
 namespace BestProject;
 
+use Exception;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Version;
@@ -77,6 +78,8 @@ abstract class TemplateHelper
      * Get template parameters.
      *
      * @return Registry
+     *
+     * @throws Exception
      */
     private static function getParams(): Registry
     {
@@ -91,6 +94,8 @@ abstract class TemplateHelper
      * Get current template name.
      *
      * @return string
+     *
+	 * @throws Exception
      */
     private static function getTemplate(): string
     {
@@ -189,8 +194,6 @@ abstract class TemplateHelper
      */
     public static function combineSystemScripts(&$scripts)
     {
-        $origin = $scripts;
-
         $media = [];
         $files = [];
 
@@ -201,7 +204,9 @@ abstract class TemplateHelper
             if( substr_compare($path, '/media/', 0, 7)===0 ) {
                 $media[] = $path;
                 $files [] = pathinfo($path, PATHINFO_FILENAME);
-                $entry_details = $details;
+	            if( empty($entry_details) ) {
+		            $entry_details = $details;
+	            }
             }
 
         }
@@ -209,42 +214,42 @@ abstract class TemplateHelper
         // If there is anything to combine
         if( !empty($media) ) {
 
+	        // Create a build sign
+	        $sign = Version::MAJOR_VERSION.'-'.Version::MINOR_VERSION.'-'.Version::PATCH_VERSION.'-';
+	        $sign.= md5(implode('|', $files));
+
+	        $cache_path = '/cache/system/'.$sign.'.js';
+
+	        // Combine files and store them in a cache directory
+	        if( !file_exists(JPATH_ROOT.$cache_path) ) {
+
+	            $buffer = '';
+	            foreach( $media AS $media_path ) {
+	                $buffer.= ';'.file_get_contents(JPATH_ROOT.'/'.$media_path);
+	            }
+
+	            // Create cache directory
+	            if ( !file_exists(JPATH_CACHE.'/system') ) {
+	                mkdir(JPATH_CACHE.'/system', 0755);
+	            }
+
+	            file_put_contents(JPATH_ROOT.$cache_path, trim($buffer, ';'));
+	        }
+
+	        // Create combined scripts entry
+	        $entry = [
+	            $cache_path => $entry_details
+	        ];
+
+	        // Remove references to old scripts
+	        foreach( $media as $path ) {
+	            unset($scripts[$path]);
+	        }
+
+	        // Swap scripts definitions for a new one
+	        $scripts = array_merge($entry, $scripts);
         }
 
-        // Create a build sign
-        $sign = Version::MAJOR_VERSION.'-'.Version::MINOR_VERSION.'-'.Version::PATCH_VERSION.'-';
-        $sign.= md5(implode('|', $files));
-
-        $cache_path = '/cache/system/'.$sign.'.js';
-
-        // Combine files and store them in a cache directory
-        if( !file_exists(JPATH_ROOT.$cache_path) ) {
-
-            $buffer = '';
-            foreach( $media AS $media_path ) {
-                $buffer.= ';'.file_get_contents(JPATH_ROOT.'/'.$media_path);
-            }
-
-            // Create cache directory
-            if ( !file_exists(JPATH_CACHE.'/system') ) {
-                mkdir(JPATH_CACHE.'/system', 0755);
-            }
-
-            file_put_contents(JPATH_ROOT.$cache_path, trim($buffer, ';'));
-        }
-
-        // Create combined scripts entry
-        $entry = [
-            $cache_path => $entry_details
-        ];
-
-        // Remove references to old scripts
-        foreach( $media as $path ) {
-            unset($scripts[$path]);
-        }
-
-        // Swap scripts definitions for a new one
-        $scripts = array_merge($entry, $scripts);
 
     }
 }
