@@ -1,36 +1,36 @@
-
 // Fonts
-$fontMain:   'Open Sans','Arial','Sans';
+$fontMain: 'Open Sans', 'Arial', 'Sans';
 $fontSecond: $fontMain;
-$fontThird:  $fontMain;
+$fontThird: $fontMain;
 
 // Colors
-$colorText:   #333;
-$colorTextLight:   lighten($colorText, 30%);
+$colorText: #333;
+$colorTextLight: lighten($colorText, 30%);
 $colorBorder: #e7e7e7;
-$colorGray:   #f0f0f0;
-$colorMain:   #000;
+$colorGray: #f0f0f0;
+$colorMain: #000;
 $colorSecond: #FF0000;
-$colorThird:  #00FF00;
+$colorThird: #00FF00;
 
-$primary: $colorMain; 
+$primary: $colorMain;
 $secondary: $colorSecond;
 
-$body-color:                $colorText;
+$body-color: $colorText;
+$body-bg: white;
 
-$enable-caret:              true;
-$enable-rounded:            true;
-$enable-shadows:            false;
-$enable-gradients:          false;
-$enable-transitions:        true;
+$enable-caret: true;
+$enable-rounded: true;
+$enable-shadows: false;
+$enable-gradients: false;
+$enable-transitions: true;
 
-$font-family-sans-serif:      $fontMain;
-$font-family-monospace:       $fontSecond;
-$font-family-base:            $font-family-sans-serif;
+$font-family-sans-serif: $fontMain;
+$font-family-monospace: $fontSecond;
+$font-family-base: $font-family-sans-serif;
 
-$font-size-base:              1.4rem ; // Assumes the browser default, typically `16px`
-$font-size-lg:                ($font-size-base * 1.25);
-$font-size-sm:                ($font-size-base * .875);
+$font-size-base: 1.4rem; // Assumes the browser default, typically `16px`
+$font-size-lg: ($font-size-base * 1.25);
+$font-size-sm: ($font-size-base * .875);
 
 // Paginatoin
 $pagination-border-color: $colorBorder;
