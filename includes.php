@@ -32,6 +32,7 @@ $sitename     = $app->get('sitename');
 $sitetitle    = $params->get('sitetitle');
 $logoFile     = $params->get('logoFile');
 $logoFile     = empty($logoFile) ? '' : JUri::base() . '/images/logo/' . $logoFile;$slogan       = $params->get('sitedescription');
+$faviconFile   = $params->get('faviconFile');
 $copyrights   = $params->get('copyrights', $sitename);
 $is_frontpage = ( ($active AND $active->id == $default->id) ? true : false );
 $view         = $app->input->get('view');
@@ -86,6 +87,13 @@ if( $params->get('back_to_top') ) {
 		});
 
 	');
+}
+
+/**
+ * == TEMPLATE SETTINGS
+ */
+if( !empty($faviconFile) ) {
+	$this->addFavicon('images/icons/'.$faviconFile);
 }
 
 /**

@@ -54,6 +54,10 @@
 				<field name="logoFile" class="" type="media" default="" directory="images/logo" filter="(jpeg|jpg|png|gif|svg)" hide_default="true"
 					label="TPL_BASETHEME_LOGO_LABEL"
 					description="TPL_BASETHEME_LOGO_DESC" />
+
+				<field name="faviconFile" class="" type="filelist" default="" directory="images/icons" filter="(jpeg|jpg|png|gif|svg)" hide_default="true"
+					   label="TPL_BASETHEME_FAVICON_LABEL"
+					   description="TPL_BASETHEME_FAVICON_DESC" />
 					
 				<field name="sitetitle"  type="text" default="BP Basetheme"
 					label="JGLOBAL_TITLE"
