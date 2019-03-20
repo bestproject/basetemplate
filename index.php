@@ -176,20 +176,18 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <?php if( $has_footer ): ?>
             <!--Footer modules-->
             <div class="container">
-                <div class="container">
-	                <?php echo Bootstrap4::position('footer') ?>
-                </div>
+                <?php echo Bootstrap4::position('footer') ?>
             </div>
             <?php endif ?>
 
             <div class="container">
-                <div class="wrapper row justify-content-center justify-content-xl-between">
+                <div class="wrapper row justify-content-center justify-content-xl-between align-items-center">
                     <!--Copyrights info-->
-                    <span class="copyrights muted col-12 col-xl-5">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
+                    <span class="copyrights muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
 
                     <?php if( $has_footer_menu ): ?>
                         <!--Footer menu-->
-                        <?php echo Bootstrap4::position('footer-menu', 'col-12 col-xl-7') ?>
+                        <?php echo Bootstrap4::position('footer-menu', '', 'footer-menu') ?>
                     <?php endif ?>
                 </div>
             </div>
