@@ -51,7 +51,7 @@
 			
 			<fieldset name="basic">
 
-				<field name="logoFile" class="" type="media" default="" directory="images/logo" filter="(jpeg|jpg|png|gif|svg)" hide_default="true"
+				<field name="logoFile" class="" type="filelist" default="" directory="images/logo" filter="(jpeg|jpg|png|gif|svg)" hide_default="true"
 					label="TPL_BASETHEME_LOGO_LABEL"
 					description="TPL_BASETHEME_LOGO_DESC" />
 
