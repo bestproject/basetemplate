@@ -13,29 +13,27 @@ Encore
     .enableSassLoader()
     .enableVersioning(Encore.isProduction())
     .disableSingleRuntimeChunk()
+    .enableSourceMaps(!Encore.isProduction())
+    .configureBabel(function(babelConfig) {}, {
+        include_node_modules: ['swiper','dom7','ssr-window']
+    })
     .addExternals({
-        jquery: 'jQuery'
+        jquery: 'jQuery',
+        joomla: 'Joomla'
     })
     .addEntry('theme',[
         './.dev/sass/index.scss',
         './.dev/js/theme.js'
-    ]);
-    
-const themeConfig = Encore.getWebpackConfig();
-
-// Template editor build configuration
-Encore.reset();
-Encore
-    .setOutputPath('assets/build')
-    .setPublicPath('/templates/'+templateName+'/assets/build')
-    .enableBuildNotifications()
-    .enableSassLoader()
-    .disableSingleRuntimeChunk()
-    .addEntry('editor',[
+    ])
+    .addStyleEntry('editor',[
         './.dev/sass/editor.scss'
-    ]);
-    
-const editorConfig = Encore.getWebpackConfig();
+    ])
+    .configureFilenames({
+        css: function(e) {
+            return (e.chunk.id=='editor' ? '[name].css': '[name]-[hash:6].css');
+        },
+        js: '[name]-[hash:6].js'
+    });
 
 // Export configurations
-module.exports = [themeConfig, editorConfig];
+module.exports = Encore.getWebpackConfig();
