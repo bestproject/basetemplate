@@ -55,7 +55,7 @@
 					label="TPL_BASETHEME_LOGO_LABEL"
 					description="TPL_BASETHEME_LOGO_DESC" />
 
-				<field name="faviconFile" class="" type="filelist" default="" directory="images/icons" filter="(jpeg|jpg|png|gif|svg)" hide_default="true"
+				<field name="faviconFile" class="" type="filelist" default="" directory="images/icons" filter="(jpeg|jpg|png|gif|svg|ico)" hide_default="true"
 					   label="TPL_BASETHEME_FAVICON_LABEL"
 					   description="TPL_BASETHEME_FAVICON_DESC" />
 					
