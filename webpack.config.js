@@ -12,7 +12,7 @@ Encore
     .enableBuildNotifications()
     .enableSassLoader()
     .enableVersioning(Encore.isProduction())
-    .disableSingleRuntimeChunk()
+    .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
     .configureBabel(function(babelConfig) {}, {
         include_node_modules: ['swiper','dom7','ssr-window']

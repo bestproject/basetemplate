@@ -56,11 +56,9 @@ try {
         throw new Exception('Youre entry points definitions is empty. Did you run [npm run dev] ?', 500);
     }
 
-    // Include Java Script entry point at the bottom
-    TemplateHelper::addAsyncScripts(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.js'));
-
-    // Include CSS entry point in the head section
-    $doc->addStyleSheet(TemplateHelper::getAssetUrl('templates/'.$this->template.'/assets/build/theme.css'), ['version'=>'auto']); // MAIN THEME
+	// Include Java Script entry point at the bottom
+	TemplateHelper::addEntryPointAssets('runtime');
+	TemplateHelper::addEntryPointAssets('theme');
 
 } catch(Exception $e) {
     echo $e->getMessage();
