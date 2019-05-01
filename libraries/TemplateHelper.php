@@ -118,9 +118,10 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.0.0
 	 */
-	public static function renderAsyncScripts()
+	public static function renderScripts()
 	{
 		$buffer = '';
+
 		/* @var $doc HtmlDocument */
 		$doc          = Factory::getDocument();
 		$mediaVersion = $doc->getMediaVersion();
@@ -128,21 +129,21 @@ abstract class TemplateHelper
 		foreach (self::$scripts AS $url => $attributes)
 		{
 
+			$attributes_string = '';
+			foreach ($attributes AS $attribute => $value)
+			{
+				$attributes_string .= ' ' . $attribute . (!empty($value) ? '="' . $value . '"' : '');
+			}
+			$attributes_string = (!empty($attributes_string) ? ' '.trim($attributes_string):'');
+
 			if (stripos($url, "\n") === false)
 			{
-				$attributes_string = '';
-				foreach ($attributes AS $attribute => $value)
-				{
-					$attributes_string .= ' ' . $attribute . (!empty($value) ? '="' . $value . '"' : '');
-				}
-
 				$script_url = (substr_compare($url, 'http', 0, 4) === 0 ? $url : $url . '?' . $mediaVersion);
-
-				$buffer .= '<script src="' . $script_url . '" type="text/javascript" ' . trim($attributes_string) . '></script>' . "\n";
+				$buffer .= '<script src="' . $script_url . '"' . $attributes_string . '></script>' . "\n";
 			}
 			else
 			{
-				$buffer .= '<script type="text/javascript">' . $url . '</script>' . "\n";
+				$buffer .= '<script' . $attributes_string . '>' . $url . '</script>' . "\n";
 			}
 		}
 
@@ -152,20 +153,30 @@ abstract class TemplateHelper
 	/**
 	 * Convert fields array mapped by ID to NAME mapped array.
 	 *
-	 * @param   array  $fields  Fields array to convert.
+	 * @param   array|object  $item  Fields array or an object with jcfields property.
 	 *
-	 * @return array
+	 * @return ObjectFields
 	 * @since 1.0.0
 	 */
-	public static function &getFieldsMap(&$fields): array
+	public static function getFieldsMap($item): ObjectFields
 	{
+
+		// Find fields list
+		$fields = $item;
+		if (is_object($item))
+		{
+			$fields = $item->jcfields;
+		}
+
+		// Map fields
 		$map = [];
 		foreach ($fields AS $id => &$field)
 		{
 			$map[$field->name] = &$fields[$id];
 		}
 
-		return $map;
+		// Return item fields object
+		return new ObjectFields($map);
 	}
 
 	/**
@@ -257,21 +268,34 @@ abstract class TemplateHelper
 		// If js asset exists
 		if (key_exists($jsFilePath, $manifest))
 		{
-			static::addAsyncScripts($manifest[$jsFilePath]);
+			static::addScript($manifest[$jsFilePath]);
 		}
 	}
 
 	/**
-	 * Add asynchronous (Firefox/Chrome) scripts.
+	 * Add asynchronous script.
 	 *
 	 * @param   string  $url         URL for a script file.
-	 * @param   array   $attributes  String for inline script or array of tag attributes
+	 * @param   array   $attributes  Tag attributes
 	 *
 	 * @since 1.0.0
 	 */
-	public static function addAsyncScripts(string $url, array $attributes = [])
+	public static function addScript(string $url, array $attributes = [])
 	{
 		self::$scripts = array_merge(self::$scripts, [$url => $attributes]);
+	}
+
+	/**
+	 * Add asynchronous script declaration
+	 *
+	 * @param   string  $code        Script code.
+	 * @param   array   $attributes  Tag attributes
+	 *
+	 * @since 1.0.0
+	 */
+	public static function addScriptDeclaration(string $code, array $attributes = [])
+	{
+		static::addScript($code, $attributes);
 	}
 
 	/**

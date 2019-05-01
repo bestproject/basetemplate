@@ -26,7 +26,7 @@
             var scroll = $(window).scrollTop();
             var $nav = $(".navbar-container");
             if (scroll > 0) {
-                var $navbar = $(".navbar.navbar-default");
+                var $navbar = $(".navbar");
                 $nav.addClass("scrolled");
                 $('body>header').css('padding-bottom',($navbar.outerHeight()+parseInt($navbar.css('margin-bottom')))+'px');
             } else {

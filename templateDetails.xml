@@ -112,6 +112,14 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+				<field name="messages_debug" type="radio"
+					   default="0" class="btn-group btn-group-yesno"
+					   label="TPL_BASETHEME_FIELD_MESSAGES_DEBUG_LABEL"
+					   description="TPL_BASETHEME_FIELD_MESSAGES_DEBUG_DESC"
+					   filter="INT">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
             </fieldset>
             
             <fieldset name="advanced" label="TPL_BASETHEME_FIELDSET_ADVANCED_LABEL">

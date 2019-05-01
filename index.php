@@ -200,7 +200,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <jdoc:include type="modules" name="debug" style="none" />
         </div>
         <?php endif ?>
-        <?php echo TemplateHelper::renderAsyncScripts() ?>
+        <?php echo TemplateHelper::renderScripts() ?>
         <?php echo TemplateHelper::renderCodeBodyBottom() ?>
     </body>
 </html>
