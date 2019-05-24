@@ -84,7 +84,7 @@ if ($params->get('back_to_top'))
 
 		// Change menu position on scroll
 		jQuery(function($){
-			$(document).backToTopButton("' . JText::_('TPL_NFSI_BACK_TO_TOP') . '");
+			$(document).backToTopButton("' . JText::_('TPL_BASETHEME_BACK_TO_TOP') . '");
 		});
 
 	');
