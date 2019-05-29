@@ -183,7 +183,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <div class="container">
                 <div class="wrapper row justify-content-center justify-content-xl-between align-items-center">
                     <!--Copyrights info-->
-                    <span class="copyrights muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
+                    <span class="copyrights text-muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
 
                     <?php if( $has_footer_menu ): ?>
                         <!--Footer menu-->
