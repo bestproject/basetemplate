@@ -43,3 +43,20 @@ $pagination-disabled-bg: transparent;
 $pagination-disabled-color: #aaa;
 $pagination-hover-bg: transparent;
 $pagination-hover-color: $secondary;
+
+// Spacers
+$spacers: ();
+$spacers: map-merge(
+                (
+                        0: 0,
+                        1: 1rem,
+                        2: 2rem,
+                        3: 3rem,
+                        4: 5rem,
+                        5: 7rem,
+                        100: 100%,
+                        169: 56.25%,
+                        43: 75%
+                ),
+                $spacers
+);

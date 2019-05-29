@@ -4,3 +4,8 @@ html {
 .button,input,a,img {
     outline: 0 !important;
 }
+
+
+.bg-image {
+    background-size:cover;background-position:center center;background-repeat: no-repeat;
+}
