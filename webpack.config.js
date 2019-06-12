@@ -25,6 +25,9 @@ Encore
         './.dev/sass/index.scss',
         './.dev/js/theme.js'
     ])
+    .addEntry('slider',[
+        './.dev/js/slider.js'
+    ])
     .addStyleEntry('editor',[
         './.dev/sass/editor.scss'
     ])
