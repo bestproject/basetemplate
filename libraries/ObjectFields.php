@@ -54,6 +54,26 @@ final class ObjectFields
 	}
 
 	/**
+	 * Get selected field from item and convert its JSON contents to array.
+	 *
+	 * @param   string  $name  Name of a field.
+	 *
+	 * @return array
+	 *
+	 * @throws Exception
+	 * @since 1.5.0
+	 */
+	public function getArrayFromJSON(string $name): array
+	{
+		if (!$this->has($name))
+		{
+			throw new Exception('This item does not have a field called "'.$name.'"".', 500);
+		}
+
+		return (array)json_decode($this->get($name)->rawvalue);
+	}
+
+	/**
 	 * Render selected item field.
 	 *
 	 * @param   string  $name  Name of a field.
