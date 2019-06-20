@@ -19,10 +19,8 @@ if ($item->menu_image)
 }
 else
 {
-	$linktype = $item->title;
+	$linktype = '';
 }
 
 ?>
-<span class="separator"<?php echo $title; ?>>
-	<?php echo $linktype; ?>
-</span>
+<?php echo $linktype; ?>

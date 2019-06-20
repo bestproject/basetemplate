@@ -82,9 +82,20 @@ if ($params->get('back_to_top'))
 {
 	TemplateHelper::addScriptDeclaration('
 
-		// Change menu position on scroll
+		// Add scroll to top button
 		jQuery(function($){
 			$(document).backToTopButton("' . JText::_('TPL_NFSI_BACK_TO_TOP') . '");
+		});
+
+	');
+}
+if ($params->get('menu_fixed'))
+{
+	TemplateHelper::addScriptDeclaration('
+
+		// Add "scrolled" class to #nav after windows scroll
+		jQuery(function($){
+			$(document).menuClassOnScroll();
 		});
 
 	');

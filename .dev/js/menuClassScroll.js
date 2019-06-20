@@ -15,28 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function ( $ ) {
- 
-    /**
-    * Changes navbar position to fixed on scroll
-    */
-    $.fn.menuClassOnScroll = function(){
-        
-        this.scrollTest = function(){
-            var scroll = $(window).scrollTop();
-            var $nav = $(".navbar-container");
-            if (scroll > 0) {
-                var $navbar = $(".navbar");
-                $nav.addClass("scrolled");
-                $('body>header').css('padding-bottom',($navbar.outerHeight()+parseInt($navbar.css('margin-bottom')))+'px');
-            } else {
-                $nav.removeClass("scrolled");
-                 $('body>header').css('padding-bottom','0px'); 
-            }
-        };
+import $ from 'jquery';
 
-		$(window).scroll(this.scrollTest);
-        
-	};
- 
-}( jQuery ));
+/**
+ * Changes navbar class on scroll
+ */
+$.fn.menuClassOnScroll = function(scrolledClass = "scrolled"){
+
+    this.scrollTest = function(){
+        var scroll = $(window).scrollTop();
+        var $nav = $("#nav");
+        if (scroll > 0) {
+            $nav.addClass(scrolledClass);
+        } else {
+            $nav.removeClass(scrolledClass);
+        }
+    };
+
+    $(window).scroll(this.scrollTest);
+
+};

@@ -12,6 +12,8 @@ use Joomla\CMS\Document\HtmlDocument;
 
 defined('_JEXEC') or die;
 
+$class_sfx = 'nav '.$class_sfx;
+
 // Note. It is important to remove spaces between elements.
 
 $default = JFactory::getApplication()->getMenu()->getDefault(JFactory::getLanguage()->getTag());
@@ -42,7 +44,7 @@ $doc->addScriptDeclaration('
 ?>
 <?php // The menu class is deprecated. Use nav instead. ?>
 <div class="<?php echo $moduleclass_sfx ?>" <?php echo ($tag_id ? 'id="'.$tag_id.'"' : '') ?>>
-	<ul class="navbar-nav mr-auto<?php echo $class_sfx;?>">
+	<ul class="<?php echo $class_sfx ?>">
 	<?php
 	foreach ($list as $i => &$item)
 	{
@@ -81,7 +83,7 @@ $doc->addScriptDeclaration('
 
 		if ($item->type == 'separator')
 		{
-			$class .= ' divider';
+			$class .= ' dropdown-divider';
 		}
 
 		if ($item->deeper)

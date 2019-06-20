@@ -5,4 +5,12 @@
             margin-right:1rem;
         }
     }
+
+    // How to display menu on a scrolled class
+    @include anim();
+    @include media-breakpoint-up(lg) {
+        &.scrolled {
+            position:sticky;top:0;background:white;box-shadow: 0 0 1.5rem 0 rgba(black, .15);z-index:1500;
+        }
+    }
 }

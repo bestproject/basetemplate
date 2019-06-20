@@ -43,55 +43,50 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
     <body class="site <?php echo $class ?>">
 		<?php echo TemplateHelper::renderCodeBodyTop() ?>
-        <!--Page header-->
-        <header>
+        <!--Page navigation-->
+        <nav id="nav" class="navbar navbar-expand-xl navbar-light">
 
-            <!--Page navigation-->
-            <nav id="nav" class="navbar navbar-expand-xl navbar-light">
+            <!--Navigation header-->
+            <div class="container">
 
-				<!--Navigation header-->
-                <div class="container">
-
-                       <!--Logo-->
-                       <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
-                            <?php if ($this->params->get('logoFile')): ?>
-                                <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
-                            <?php else: ?>
-                                <?php echo $sitename ?>
-                            <?php endif ?>
-
-                            <?php if( !empty($slogan) ): ?>
-                                <small class="navbar-text"><?php echo $slogan ?></small>
-                            <?php endif ?>
-                        </a>
-
-                        <!--Menu button-->
-                        <?php if( $has_menu ): ?>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
-                            <span class="d-flex align-items-center">
-                                <i class="fas fa-bars" aria-hidden="true"></i>
-                                <span class="toggler-text"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
-                            </span>
-                        </button>
+                   <!--Logo-->
+                   <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
+                        <?php if ($this->params->get('logoFile')): ?>
+                            <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
+                        <?php else: ?>
+                            <?php echo $sitename ?>
                         <?php endif ?>
 
+                        <?php if( !empty($slogan) ): ?>
+                            <small class="navbar-text"><?php echo $slogan ?></small>
+                        <?php endif ?>
+                    </a>
+
+                    <!--Menu button-->
                     <?php if( $has_menu ): ?>
-                        <!--Main navigation-->
-                        <div id="main-navigation" class="collapse navbar-collapse">
-                            <?php echo Bootstrap4::position('menu', '', '', false) ?>
-                        </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
+                        <span class="d-flex align-items-center">
+                            <i class="fas fa-bars" aria-hidden="true"></i>
+                            <span class="toggler-text"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
+                        </span>
+                    </button>
                     <?php endif ?>
-                </div>
 
-            </nav>
+                <?php if( $has_menu ): ?>
+                    <!--Main navigation-->
+                    <div id="main-navigation" class="collapse navbar-collapse">
+                        <?php echo Bootstrap4::position('menu', '', '', false) ?>
+                    </div>
+                <?php endif ?>
+            </div>
 
-			<?php if( $has_slider ): ?>
-			<div class="slider">
-                <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper') ?>
-			</div>
-			<?php endif ?>
+        </nav>
 
-        </header>
+        <?php if( $has_slider ): ?>
+        <div class="slider">
+            <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper') ?>
+        </div>
+        <?php endif ?>
 
         <?php if( $has_slider_after ): ?>
         <!--After slider-->
