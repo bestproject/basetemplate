@@ -11,10 +11,12 @@
 @import "bootstrap/pagination";
 
 // Components styling
+@import "components/components";
 @import "components/com_content";
 @import "components/com_contact";
 
 // Modules styling
+@import "modules/modules";
 @import "modules/mod_articles_category";
 @import "modules/mod_custom";
 @import "modules/mod_menu";
@@ -26,3 +28,4 @@
 
 // Parts
 @import "parts/back_to_top";
+@import "parts/flip";

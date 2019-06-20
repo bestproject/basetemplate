@@ -33,8 +33,8 @@ $sitetitle    = $params->get('sitetitle');
 $logoFile     = $params->get('logoFile');
 $logoFile     = empty($logoFile) ? '' : JUri::base() . '/images/logo/' . $logoFile;
 $slogan       = $params->get('sitedescription');
-$faviconFile  = $params->get('faviconFile');
-$copyrights   = $params->get('copyrights', $sitename);
+$faviconFile  = $params->get('faviconFile','');
+$faviconFile  = $faviconFile!=='-1' ? $faviconFile : '';$copyrights   = $params->get('copyrights', $sitename);
 $is_frontpage = (($active AND $active->id == $default->id) ? true : false);
 $is_subpage   = !$is_frontpage;
 $view         = $app->input->get('view');
@@ -84,7 +84,7 @@ if ($params->get('back_to_top'))
 
 		// Add scroll to top button
 		jQuery(function($){
-			$(document).backToTopButton("' . JText::_('TPL_NFSI_BACK_TO_TOP') . '");
+			$(document).backToTopButton("' . JText::_('TPL_BASETHEME_BACK_TO_TOP') . '");
 		});
 
 	');
