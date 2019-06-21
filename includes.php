@@ -53,6 +53,10 @@ try
 	if (!file_exists($path_entrypoints))
 	{
 		throw new Exception('There is no entrypoints.json file in youre template assets directory. Did you run [npm run dev] ?', 500);
+	} else {
+
+		// Force media version update
+		$doc->setMediaVersion(filemtime($path_entrypoints));
 	}
 
 	// Include Java Script entry point at the bottom
