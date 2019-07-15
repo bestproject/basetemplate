@@ -153,18 +153,28 @@ abstract class TemplateHelper
 	/**
 	 * Convert fields array mapped by ID to NAME mapped array.
 	 *
-	 * @param   array|object  $item  Fields array or an object with jcfields property.
+	 * @param   array|object    $item       Fields array or an object with jcfields property.
+	 * @param   string          $context    Plugin context eg. com_content.article
 	 *
 	 * @return ObjectFields
+	 *
 	 * @since 1.0.0
 	 */
-	public static function getFieldsMap($item): ObjectFields
+	public static function getFieldsMap($item, string $context = 'com_content.article'): ObjectFields
 	{
 
 		// Find fields list
 		$fields = $item;
-		if (is_object($item))
+
+		// If this is object, try to look for its fields list
+		if (is_object($item));
 		{
+
+			// Fields property doesn't exists so load them using fields plugin
+			if( !property_exists($item,'jcfields') ) {
+				static::getObjectFields($item, $context);
+			}
+
 			$fields = $item->jcfields;
 		}
 
@@ -177,6 +187,31 @@ abstract class TemplateHelper
 
 		// Return item fields object
 		return new ObjectFields($map);
+	}
+
+	/**
+	 * Load object custom fields using Content plugin onContentPrepare event.
+	 *
+	 * @param object $item      Object holding the fields.
+	 * @param string $context   Plugin context. eg. com_content.article
+	 *
+	 * @since 1.5
+	 */
+	public static function getObjectFields(object &$item, string $context = 'com_content.article')
+	{
+		$dispatcher = JEventDispatcher::getInstance();
+		PluginHelper::importPlugin('content');
+
+		// Make sure event has something to work on
+		if( !property_exists($item, 'text') ) {
+
+			// If this is an article, join its text into one property
+			if( property_exists($item, 'introtext') and property_exists($item, 'fulltext') ) {
+				$item->text = $item->introtext.$item->fulltext;
+			}
+		}
+
+		$dispatcher->trigger('onContentPrepare', [$context, &$item, &$item->params, 0]);
 	}
 
 	/**
