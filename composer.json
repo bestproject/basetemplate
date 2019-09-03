@@ -15,5 +15,16 @@
         }
     },
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "scripts": {
+        "post-install-cmd": [
+            "@build"
+        ],
+        "build": [
+            "BestProject\\Command\\Build::execute"
+        ]
+    },
+    "scripts-descriptions": {
+        "build": "Build template."
+    }
 }

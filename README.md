@@ -3,20 +3,20 @@ A Joomla! template that can be used to create templates for Bootstrap 4. It cont
 
 ## Requirements
 * PHP 7
-* Composer installed globaly
+* Composer installed globally
 * Node
 
 ## Installation
-* Just copy contents of this directory to a new template folder in /templates directory and run for example like this: `http://example.com/templates/yourtemplate/build.php`
-* I youre creating template on a remote server (eg. hosting or vps) download the changes.
+* Just copy contents of this directory to a new template folder in /templates directory.
 * Install all php requirements: `composer install`
+* Build template: `composer build`
 * Install all required assets: `npm install`
 
 ## Usage
 Template uses `Webpack Encore` to build assets. Most of the required things should be configured out of the box in template. If you need something more please refer the [documentation](https://symfony.com/doc/current/frontend.html).
 
 ### Development environment start
-Webpack can build youre template assets on the fly after each change in JS or SCSS files. Just run the command below:
+Webpack can build your template assets on the fly after each change in JS or SCSS files. Just run the command below:
 * `npm run watch`
 
 ### Build template for production
