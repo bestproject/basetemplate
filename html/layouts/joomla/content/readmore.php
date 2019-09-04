@@ -13,21 +13,21 @@ $params = $displayData['params'];
 $item = $displayData['item'];
 ?>
 
-<p class="readmore text-right">
-	<a class="btn btn-default" href="<?php echo $displayData['link']; ?>" itemprop="url">
-		<span class="icon-chevron-right"></span>
+<div class="readmore text-right pt-2">
+    <a class="btn btn-outline-primary" href="<?php echo $displayData['link']; ?>" itemprop="url">
 		<?php if (!$params->get('access-view')) :
 			echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
-		elseif ($readmore = $item->alternative_readmore) :
+        elseif ($readmore = $item->alternative_readmore) :
 			echo $readmore;
 			if ($params->get('show_readmore_title', 0) != 0) :
 				echo JHtml::_('string.truncate', ($item->title), $params->get('readmore_limit'));
 			endif;
-		elseif ($params->get('show_readmore_title', 0) == 0) :
+        elseif ($params->get('show_readmore_title', 0) == 0) :
 			echo JText::sprintf('COM_CONTENT_READ_MORE_TITLE');
 		else :
 			echo JText::_('COM_CONTENT_READ_MORE');
 			echo JHtml::_('string.truncate', ($item->title), $params->get('readmore_limit'));
 		endif; ?>
-	</a>
-</p>
+        <i class="fas fa-angle-right ml-1" aria-hidden="true"></i>
+    </a>
+</div>

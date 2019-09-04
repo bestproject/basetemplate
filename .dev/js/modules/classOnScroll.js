@@ -15,28 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function ( $ ) {
+import $ from 'jquery';
 
-    /**
-     * Scroll to section if link starts with #
-     */
-    $.fn.scrollToSection = function(){
-        var $elements = $('a[href*="#"]');
-        
-        for(var i=0, ic=$elements.length; i<ic; i++) {
-            var $href = $($elements[i]).attr('href');
-            if( $href.charAt(0)==='#' && $($elements[i]).attr('id')!=='back-to-top' ) {
-                $($elements[i]).click(function(e){
-                    e.preventDefault();
-                    
-                    $('html,body').animate({
-                        scrollTop: $($(this).attr('href')).offset().top
-                    }, 700); 
-                });
+/**
+ * Changes elements class on scroll
+ */
+$.fn.classOnScroll = function (scrolledClass = "scrolled") {
+
+    this.each(function (idx, el) {
+        $(window).scroll(function () {
+            var scroll = $(window).scrollTop();
+            var $element = $(el);
+            if (scroll > 0) {
+                $element.addClass(scrolledClass);
+            } else {
+                $element.removeClass(scrolledClass);
             }
-            
-        }
-        
-    };
- 
-}( jQuery ));
+        });
+    });
+
+};

@@ -25,8 +25,14 @@ Encore
         './.dev/sass/index.scss',
         './.dev/js/theme.js'
     ])
-    .addEntry('slider',[
-        './.dev/js/slider.js'
+    .addEntry('animated', [
+        './.dev/js/animated.js'
+    ])
+    .addEntry('backtotop', [
+        './.dev/js/backtotop.js'
+    ])
+    .addEntry('classonscroll', [
+        './.dev/js/classonscroll.js'
     ])
     .addStyleEntry('editor',[
         './.dev/sass/editor.scss'

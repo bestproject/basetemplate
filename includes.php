@@ -4,6 +4,7 @@ use BestProject\TemplateHelper;
 use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 defined('_JEXEC') or die;
 
@@ -18,7 +19,7 @@ require_once __DIR__ . '/vendor/autoload.php';
  */
 /* @var $doc HtmlDocument */
 /* @var $app CMSApplication */
-
+$base_uri     = Uri::base(true);
 $app          = Factory::getApplication();
 $params       = $this->params;
 $debug        = (bool) $app->get('debug', 0);
@@ -30,11 +31,12 @@ $active       = $menu->getActive();
 $default      = $menu->getDefault($language);
 $sitename     = $app->get('sitename');
 $sitetitle    = $params->get('sitetitle');
-$logoFile     = $params->get('logoFile');
-$logoFile     = empty($logoFile) ? '' : JUri::base() . '/images/logo/' . $logoFile;
+$logoFile     = $params->get('logoFile', '-1');
+$logoFile     = $logoFile !== '-1' ? $base_uri . '/images/logo/' . $logoFile : '';
 $slogan       = $params->get('sitedescription');
-$faviconFile  = $params->get('faviconFile','');
-$faviconFile  = $faviconFile!=='-1' ? $faviconFile : '';$copyrights   = $params->get('copyrights', $sitename);
+$faviconFile  = $params->get('faviconFile', '-1');
+$faviconFile  = $faviconFile !== '-1' ? $base_uri . '/images/icons/' . $faviconFile : '';
+$copyrights   = $params->get('copyrights', $sitename);
 $is_frontpage = (($active AND $active->id == $default->id) ? true : false);
 $is_subpage   = !$is_frontpage;
 $view         = $app->input->get('view');
@@ -53,7 +55,9 @@ try
 	if (!file_exists($path_entrypoints))
 	{
 		throw new Exception('There is no entrypoints.json file in youre template assets directory. Did you run [npm run dev] ?', 500);
-	} else {
+	}
+	else
+	{
 
 		// Force media version update
 		$doc->setMediaVersion(filemtime($path_entrypoints));
@@ -71,38 +75,40 @@ catch (Exception $e)
 	$app->close();
 }
 
+// Include animate.css and animated.js
 if ($params->get('vendors_animated'))
 {
-	TemplateHelper::addScriptDeclaration('
-
-		// Run animations when element enters the screen
-		jQuery(function($){
-			$(document).Animated();
-		});
-
-	');
+	TemplateHelper::addEntryPointAssets('animated');
 }
+
+// Include back-to-top script
 if ($params->get('back_to_top'))
 {
-	TemplateHelper::addScriptDeclaration('
+	$button_text = JText::_('TPL_BASETHEME_BACK_TO_TOP');
+	TemplateHelper::addEntryPointAssets('backtotop');
+	TemplateHelper::addScriptDeclaration("
 
 		// Add scroll to top button
 		jQuery(function($){
-			$(document).backToTopButton("' . JText::_('TPL_BASETHEME_BACK_TO_TOP') . '");
+			$(document).backToTopButton({
+		        button_text: '$button_text',
+		    });
 		});
 
-	');
+	");
 }
-if ($params->get('menu_fixed'))
+
+// Add a class to navbar on scroll
+$has_menu_fixed = $params->get('menu_fixed');
+if ($has_menu_fixed)
 {
-	TemplateHelper::addScriptDeclaration('
-
-		// Add "scrolled" class to #nav after windows scroll
+	TemplateHelper::addEntryPointAssets('classonscroll');
+	TemplateHelper::addScriptDeclaration("
+		// Add 'scrolled' class to #nav after windows scroll
 		jQuery(function($){
-			$(document).menuClassOnScroll();
+			$('#nav').classOnScroll();
 		});
-
-	');
+	");
 }
 
 /**
@@ -110,7 +116,7 @@ if ($params->get('menu_fixed'))
  */
 if (!empty($faviconFile))
 {
-	$this->addFavicon('images/icons/' . $faviconFile);
+	$this->addFavicon($faviconFile);
 }
 
 /**
@@ -164,7 +170,6 @@ else
 /**
  * == LAYOUT OPTIONS ===========================================================
  */
-$has_menu_fixed = $params->get('menu_fixed');
 
 
 /**

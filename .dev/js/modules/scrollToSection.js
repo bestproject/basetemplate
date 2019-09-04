@@ -18,20 +18,23 @@
 import $ from 'jquery';
 
 /**
- * Changes navbar class on scroll
+ * Scroll to section if link starts with #
  */
-$.fn.menuClassOnScroll = function(scrolledClass = "scrolled"){
+$.fn.scrollToSection = function (speed = 700) {
+    var $elements = $('a[href*="#"]');
 
-    this.scrollTest = function(){
-        var scroll = $(window).scrollTop();
-        var $nav = $("#nav");
-        if (scroll > 0) {
-            $nav.addClass(scrolledClass);
-        } else {
-            $nav.removeClass(scrolledClass);
+    for (var i = 0, ic = $elements.length; i < ic; i++) {
+        var $href = $($elements[i]).attr('href');
+        if ($href.charAt(0) === '#' && $href.length > 1) {
+            $($elements[i]).click(function (e) {
+                e.preventDefault();
+
+                $('html,body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, speed);
+            });
         }
-    };
 
-    $(window).scroll(this.scrollTest);
+    }
 
 };

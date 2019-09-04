@@ -112,7 +112,7 @@ function pagination_list_render($list)
 		}
 	}
 
-	$html = '<ul class="pagination">';
+	$html = '<ul class="pagination w-100">';
 	//$html .= $list['start']['data'];
 	$html .= $list['previous']['data'];
 

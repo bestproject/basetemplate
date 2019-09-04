@@ -7,6 +7,7 @@ use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Version;
 use Joomla\Registry\Registry;
+use Mobile_Detect;
 
 /**
  * Template helper.
@@ -16,29 +17,38 @@ use Joomla\Registry\Registry;
 abstract class TemplateHelper
 {
 	/**
+	 * Conversion settings for lonelyLetter method.
+	 *
+	 * @since 1.5.0
+	 */
+	const LONELY = [
+		[' i ', ' z ', ' o ', ' a ', ' u '],
+		[' i&nbsp;', ' z&nbsp;', ' o&nbsp;', ' a&nbsp;', ' u&nbsp;']
+	];
+	/**
 	 * Template params.
 	 *
 	 * @var Registry
+	 *
 	 * @since 1.0.0
 	 */
 	private static $params;
-
 	/**
-	 * Current templae name.
+	 * Current template name.
 	 *
 	 * @var string
+	 *
 	 * @since 1.0.0
 	 */
 	private static $template;
-
 	/**
 	 * Scripts that should be placed in the bottom of body tag.
 	 *
 	 * @var array
+	 *
 	 * @since 1.0.0
 	 */
 	private static $scripts = [];
-
 	/**
 	 * Manifest cache avoiding multiple disc reads.
 	 *
@@ -52,7 +62,9 @@ abstract class TemplateHelper
 	 * Render scripts that should be in the top of head section.
 	 *
 	 * @return string
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public static function renderCodeHeadTop(): string
@@ -64,7 +76,9 @@ abstract class TemplateHelper
 	 * Get template parameters.
 	 *
 	 * @return Registry
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	private static function getParams(): Registry
@@ -81,7 +95,9 @@ abstract class TemplateHelper
 	 * Render scripts that should be in the bottom of head section.
 	 *
 	 * @return string
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public static function renderCodeHeadBottom(): string
@@ -93,7 +109,9 @@ abstract class TemplateHelper
 	 * Render scripts that should be in the top of body section.
 	 *
 	 * @return string
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public static function renderCodeBodyTop(): string
@@ -105,7 +123,9 @@ abstract class TemplateHelper
 	 * Render scripts that should be in the bottom of body section.
 	 *
 	 * @return string
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public static function renderCodeBodyBottom(): string
@@ -134,12 +154,12 @@ abstract class TemplateHelper
 			{
 				$attributes_string .= ' ' . $attribute . (!empty($value) ? '="' . $value . '"' : '');
 			}
-			$attributes_string = (!empty($attributes_string) ? ' '.trim($attributes_string):'');
+			$attributes_string = (!empty($attributes_string) ? ' ' . trim($attributes_string) : '');
 
 			if (stripos($url, "\n") === false)
 			{
 				$script_url = (substr_compare($url, 'http', 0, 4) === 0 ? $url : $url . '?' . $mediaVersion);
-				$buffer .= '<script src="' . $script_url . '"' . $attributes_string . '></script>' . "\n";
+				$buffer     .= '<script src="' . $script_url . '"' . $attributes_string . '></script>' . "\n";
 			}
 			else
 			{
@@ -153,28 +173,19 @@ abstract class TemplateHelper
 	/**
 	 * Convert fields array mapped by ID to NAME mapped array.
 	 *
-	 * @param   array|object    $item       Fields array or an object with jcfields property.
-	 * @param   string          $context    Plugin context eg. com_content.article
+	 * @param   array|object  $item  Fields array or an object with jcfields property.
 	 *
 	 * @return ObjectFields
 	 *
 	 * @since 1.0.0
 	 */
-	public static function getFieldsMap($item, string $context = 'com_content.article'): ObjectFields
+	public static function getFieldsMap($item): ObjectFields
 	{
 
 		// Find fields list
 		$fields = $item;
-
-		// If this is object, try to look for its fields list
-		if (is_object($item));
+		if (is_object($item))
 		{
-
-			// Fields property doesn't exists so load them using fields plugin
-			if( !property_exists($item,'jcfields') ) {
-				static::getObjectFields($item, $context);
-			}
-
 			$fields = $item->jcfields;
 		}
 
@@ -190,37 +201,14 @@ abstract class TemplateHelper
 	}
 
 	/**
-	 * Load object custom fields using Content plugin onContentPrepare event.
-	 *
-	 * @param object $item      Object holding the fields.
-	 * @param string $context   Plugin context. eg. com_content.article
-	 *
-	 * @since 1.5
-	 */
-	public static function getObjectFields(object &$item, string $context = 'com_content.article')
-	{
-		$dispatcher = JEventDispatcher::getInstance();
-		PluginHelper::importPlugin('content');
-
-		// Make sure event has something to work on
-		if( !property_exists($item, 'text') ) {
-
-			// If this is an article, join its text into one property
-			if( property_exists($item, 'introtext') and property_exists($item, 'fulltext') ) {
-				$item->text = $item->introtext.$item->fulltext;
-			}
-		}
-
-		$dispatcher->trigger('onContentPrepare', [$context, &$item, &$item->params, 0]);
-	}
-
-	/**
 	 * Get asset url using manifest.json build by webpack in /templates/THEME_NAME/assets/build.
 	 *
 	 * @param   string  $url  Internal URL (eg. templates/test/assets/build/theme.css)
 	 *
 	 * @return string
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public static function getAssetUrl(string $url): string
@@ -242,6 +230,7 @@ abstract class TemplateHelper
 	 * @return array
 	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	public static function getManifest(): array
@@ -264,7 +253,9 @@ abstract class TemplateHelper
 	 * Get current template name.
 	 *
 	 * @return string
+	 *
 	 * @throws Exception
+	 *
 	 * @since 1.0.0
 	 */
 	private static function getTemplate(): string
@@ -280,24 +271,49 @@ abstract class TemplateHelper
 	/**
 	 * Include entry point assets from manifest file.
 	 *
-	 * @param   string  $name  Name of the entry point.
+	 * @param   string  $name         Name of the entry point.
+	 * @param   string  $nameDesktop  Name of the entry point.
 	 *
 	 *
 	 * @throws Exception
 	 * @since 1.0.0
 	 */
-	public static function addEntryPointAssets(string $name)
+	public static function addEntryPointAssets(string $name, string $nameDesktop = '')
 	{
 		$manifest = static::getManifest();
 
 		// Assets files
-		$cssFilePath = 'templates/' . static::getTemplate() . '/assets/build/' . $name . '.css';
-		$jsFilePath  = 'templates/' . static::getTemplate() . '/assets/build/' . $name . '.js';
+		$cssFilePath           = 'templates/' . static::getTemplate() . '/assets/build/' . $name . '.css';
+		$cssDesktopAlternative = 'templates/' . static::getTemplate() . '/assets/build/' . $nameDesktop . '.css';
+		$jsFilePath            = 'templates/' . static::getTemplate() . '/assets/build/' . $name . '.js';
 
 		// If css asset exists
 		if (key_exists($cssFilePath, $manifest))
 		{
-			Factory::getDocument()->addStyleSheet($manifest[$cssFilePath], ['version' => 'auto']);
+			$attribs = [
+				'id' => 'assets-general-' . $name,
+			];
+
+			if (!empty($nameDesktop))
+			{
+
+				$detect    = new Mobile_Detect();
+				$isDesktop = !($detect->isMobile() or $detect->isTablet());
+
+				if ($isDesktop and key_exists($cssDesktopAlternative, $manifest))
+				{
+					$attribs['id'] = 'assets-desktop-' . $name;
+					Factory::getDocument()->addStyleSheet($manifest[$cssDesktopAlternative], ['version' => 'auto'], $attribs);
+				}
+				else
+				{
+					Factory::getDocument()->addStyleSheet($manifest[$cssFilePath], ['version' => 'auto'], $attribs);
+				}
+			}
+			else
+			{
+				Factory::getDocument()->addStyleSheet($manifest[$cssFilePath], ['version' => 'auto'], $attribs);
+			}
 		}
 
 		// If js asset exists
@@ -407,4 +423,33 @@ abstract class TemplateHelper
 			$scripts = array_merge($entry, $scripts);
 		}
 	}
+
+	/**
+	 * Return title divided on |
+	 *
+	 * @param   string  $title  Title to split.
+	 *
+	 * @return string
+	 *
+	 * @since 1.0.0
+	 */
+	public static function splitTitle(string $title): string
+	{
+		return str_ireplace(['|'], ['<br>'], $title);
+	}
+
+	/**
+	 * Convert lonely letters in text to always join next word.
+	 *
+	 * @param   string  $text  Text to convert.
+	 *
+	 * @return string
+	 *
+	 * @since 1.0.0
+	 */
+	public static function lonelyLetter(string $text): string
+	{
+		return str_replace(static::LONELY[0], static::LONELY[1], $text);
+	}
+
 }

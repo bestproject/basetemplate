@@ -2,8 +2,8 @@
 
 namespace BestProject\Command;
 
-use Exception;
 use Composer\Script\Event;
+use Exception;
 
 /**
  * Base template build composer command.
@@ -25,13 +25,22 @@ class Build
 	protected $name;
 
 	/**
-	 * Template base directory. eg. /var/www/templates/basetheme
+	 * Template base directory. eg. /var/www/example.com/templates/basetheme
 	 *
 	 * @var string
 	 *
 	 * @since 1.0
 	 */
 	protected $base;
+
+	/**
+	 * System root directory. eg. /var/www/example.com
+	 *
+	 * @var string
+	 *
+	 * @since 1.0
+	 */
+	protected $root;
 
 	/**
 	 * Run all required methods to create new theme.
@@ -43,6 +52,7 @@ class Build
 
 		// Get required directories
 		$this->base = dirname(dirname(__DIR__));
+		$this->root = dirname(dirname($this->base));
 		$this->name = basename($this->base);
 
 		// If template can't be build
@@ -92,20 +102,25 @@ class Build
 
 		// Run build task
 		$success = true;
-		try {
+		try
+		{
 			$this->prepareLanguageFiles();
 			$this->prepareDetailsFile();
 			$this->prepareIndexFile();
 			$this->prepareIncludesFile();
+			$this->createImagesDirectories();
 
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
 			$success = false;
-			$this->write("Error while building template: ".$e->getMessage());
+			$this->write("Error while building template: " . $e->getMessage());
 		}
 
 		// Template build is successful
-		if( $success ) {
-			$this->write("Finished.");
+		if ($success)
+		{
+			$this->write("Finish.");
 		}
 
 	}
@@ -126,7 +141,7 @@ class Build
 		{
 
 			// If this is not top directory
-			if (!in_array($language_dir, ['.','..']))
+			if (!in_array($language_dir, ['.', '..']))
 			{
 
 				// Walk trough language files
@@ -196,6 +211,31 @@ class Build
 		$buff = file_get_contents($path);
 		$buff = str_replace('BASETHEME', strtoupper($this->name), $buff);
 		file_put_contents($path, $buff);
+	}
+
+	/**
+	 * Create all the directories template needs o work as expected.
+	 *
+	 * @since 2.0
+	 */
+	protected function createImagesDirectories()
+	{
+		$this->write("Preparing directories in /images ...");
+
+		$logo_path  = $this->root . '/images/logo';
+		$icons_path = $this->root . '/images/icons';
+
+		// Create logo directory
+		if (!file_exists($logo_path))
+		{
+			mkdir($logo_path, 0755);
+		}
+
+		// Create icons directory
+		if (!file_exists($icons_path))
+		{
+			mkdir($icons_path, 0755);
+		}
 	}
 
 	/**

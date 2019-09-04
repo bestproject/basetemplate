@@ -19,28 +19,30 @@ $canEdit = $displayData['params']->get('access-edit');
 	<?php if (empty($displayData['print'])) : ?>
 
 		<?php if ($canEdit || $displayData['params']->get('show_print_icon') || $displayData['params']->get('show_email_icon')) : ?>
-			<div class="btn-group pull-right">
-				<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-cog"></span><span class="fa"></span> </a>
+            <div class="btn-group float-right">
+                <a class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fas fa-cog" aria-hidden="true"></i>
+                </a>
 				<?php // Note the actions class is deprecated. Use dropdown-menu instead. ?>
-				<ul class="dropdown-menu">
+                <ul class="dropdown-menu">
 					<?php if ($displayData['params']->get('show_print_icon')) : ?>
-						<li class="print-icon"><?php echo str_ireplace('icon-print','fa fa-print',JHtml::_('icon.print_popup', $displayData['item'], $displayData['params'])); ?> </li>
+                        <li class="dropdown-item print-icon"><?php echo str_ireplace('icon-print', 'fa fa-print', JHtml::_('icon.print_popup', $displayData['item'], $displayData['params'])); ?> </li>
 					<?php endif; ?>
 					<?php if ($displayData['params']->get('show_email_icon')) : ?>
-						<li class="email-icon"><?php echo str_ireplace('icon-envelope','fa fa-envelope',JHtml::_('icon.email', $displayData['item'], $displayData['params'])); ?> </li>
+                        <li class="dropdown-item email-icon"><?php echo str_ireplace('icon-envelope', 'fa fa-envelope', JHtml::_('icon.email', $displayData['item'], $displayData['params'])); ?> </li>
 					<?php endif; ?>
 					<?php if ($canEdit) : ?>
-						<li class="edit-icon"><?php echo str_ireplace('icon-edit','fa fa-edit',JHtml::_('icon.edit', $displayData['item'], $displayData['params'])); ?> </li>
+                        <li class="dropdown-item edit-icon"><?php echo str_ireplace('icon-edit', 'fa fa-edit', JHtml::_('icon.edit', $displayData['item'], $displayData['params'])); ?> </li>
 					<?php endif; ?>
-				</ul>
-			</div>
+                </ul>
+            </div>
 		<?php endif; ?>
 
 	<?php else : ?>
 
-		<div class="pull-right">
+        <div class="float-right">
 			<?php echo JHtml::_('icon.print_screen', $displayData['item'], $displayData['params']); ?>
-		</div>
+        </div>
 
 	<?php endif; ?>
 </div>

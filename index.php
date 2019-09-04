@@ -176,7 +176,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <?php endif ?>
 
             <div class="container">
-                <div class="wrapper row justify-content-center justify-content-xl-between align-items-center">
+                <div class="wrapper row justify-content-center justify-content-xl-between align-items-center py-3">
                     <!--Copyrights info-->
                     <span class="copyrights text-muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
 
@@ -195,7 +195,8 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <jdoc:include type="modules" name="debug" style="none" />
         </div>
         <?php endif ?>
-        <?php echo TemplateHelper::renderScripts() ?>
+
+		<?php echo TemplateHelper::renderScripts() ?>
         <?php echo TemplateHelper::renderCodeBodyBottom() ?>
     </body>
 </html>

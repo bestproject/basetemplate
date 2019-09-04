@@ -5,27 +5,26 @@
 //----------------------------------------
 
 // Bootstrap updates
-@import "bootstrap/theme";
-@import "bootstrap/navbar";
-@import "bootstrap/alerts";
-@import "bootstrap/pagination";
+@import "components/alerts";
+@import "components/back_to_top";
+@import "components/bg";
+@import "components/flip";
+@import "components/module_title";
+@import "components/navbar";
+@import "components/page_header";
+@import "components/pagination";
+@import "components/module_preview";
 
 // Components styling
-@import "components/components";
-@import "components/com_content";
-@import "components/com_contact";
+@import "extensions/com_contact";
+@import "extensions/com_content";
 
 // Modules styling
-@import "modules/modules";
-@import "modules/mod_articles_category";
-@import "modules/mod_custom";
-@import "modules/mod_menu";
+@import "extensions/mod_articles_category";
+@import "extensions/mod_custom";
+@import "extensions/mod_menu";
 
 // Page styling
 @import "pages/all";
 @import "pages/frontpage";
 @import "pages/subpage";
-
-// Parts
-@import "parts/back_to_top";
-@import "parts/flip";
