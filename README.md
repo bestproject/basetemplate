@@ -8,5 +8,5 @@ It saves your time but also gives you a possibility to build lightweight website
 * [Installation](.docs/installation.md)
 * [Template file structure](.docs/filestructure.md)
 * [Available module positions](.docs/positions.md)
-* [Build in libraries](.docs/libraries.md)
+* [Build-in libraries](.docs/libraries.md)
 * [Development](.docs/development.md)
