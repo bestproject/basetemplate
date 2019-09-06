@@ -108,8 +108,7 @@ class Build
 			$this->prepareDetailsFile();
 			$this->prepareIndexFile();
 			$this->prepareIncludesFile();
-			$this->createImagesDirectories();
-
+			$this->createTemplateDirectories();
 		}
 		catch (Exception $e)
 		{
@@ -218,12 +217,13 @@ class Build
 	 *
 	 * @since 2.0
 	 */
-	protected function createImagesDirectories()
+	protected function createTemplateDirectories()
 	{
-		$this->write("Preparing directories in /images ...");
+		$this->write("Preparing template directories ...");
 
-		$logo_path  = $this->root . '/images/logo';
-		$icons_path = $this->root . '/images/icons';
+		$logo_path   = $this->root . '/images/logo';
+		$icons_path  = $this->root . '/images/icons';
+		$assets_path = $this->base . '/assets/build';
 
 		// Create logo directory
 		if (!file_exists($logo_path))
@@ -235,6 +235,12 @@ class Build
 		if (!file_exists($icons_path))
 		{
 			mkdir($icons_path, 0755);
+		}
+
+		// Create assets build directory
+		if (!file_exists($assets_path))
+		{
+			mkdir($assets_path, 0755, true);
 		}
 	}
 
