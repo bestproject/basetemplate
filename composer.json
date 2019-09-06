@@ -17,7 +17,7 @@
     "minimum-stability": "stable",
     "require": {},
     "scripts": {
-        "post-install-cmd": [
+        "post-autoload-dump": [
             "@build"
         ],
         "build": [
