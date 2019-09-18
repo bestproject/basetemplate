@@ -72,6 +72,12 @@ abstract class Bootstrap4
 	public static function position($position, $itemClassSfx = '', $rowClass = 'row', $columns = true)
 	{
 		$modules = \JModuleHelper::getModules($position);
+
+		// There are no modules in this position, do not create any HTML
+		if( empty($modules) ) {
+			return;
+		}
+
 		$html    = '';
 
 		// Wrap around modules if columns are enabled
