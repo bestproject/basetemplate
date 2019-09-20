@@ -7,6 +7,7 @@
  */
 namespace BestProject;
 
+use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Registry\Registry;
 
 /**
@@ -78,7 +79,7 @@ abstract class Bootstrap4
 			return;
 		}
 
-		$html    = '';
+		$html = '';
 
 		// Wrap around modules if columns are enabled
 		if ($columns OR !empty($rowClass))
