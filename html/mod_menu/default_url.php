@@ -30,7 +30,16 @@ if ($item->menu_image)
 }
 else
 {
-	$linktype = '<span>'.$item->title.'</span>';
+	$menu_image_css = $item->params->get('menu_image_css');
+	if (!empty($menu_image_css))
+	{
+		$linktype = '<i class="' . $menu_image_css . ' d-none d-xl-inline-flex" aria-hidden="true"></i>';
+		$linktype .= '<span class="d-inline-flex d-xl-none">' . $item->title . '</span>';
+	}
+	else
+	{
+		$linktype = '<span>' . $item->title . '</span>';
+	}
 }
 
 if( $item->deeper ) {
