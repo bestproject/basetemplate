@@ -3,13 +3,13 @@
 namespace BestProject;
 
 use Exception;
+use JEventDispatcher;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Version;
 use Joomla\Registry\Registry;
 use Mobile_Detect;
-use JEventDispatcher;
-use Joomla\CMS\Plugin\PluginHelper;
 
 /**
  * Template helper.
@@ -209,7 +209,7 @@ abstract class TemplateHelper
 		}
 
 		// Return item fields object
-		return new ObjectFields($map);
+		return new ObjectFields($map, $context);
 	}
 
 	/**
@@ -474,7 +474,9 @@ abstract class TemplateHelper
 	 */
 	public static function splitTitle(string $title): string
 	{
-		return str_ireplace(['|'], ['<br>'], $title);
+		$parts = explode('|', $title);
+
+		return '<div>' . implode('</div><div>', $parts) . '</div>';
 	}
 
 	/**
