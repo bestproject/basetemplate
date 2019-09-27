@@ -75,7 +75,7 @@ final class ObjectFields
 	 */
 	public function has(string $name): bool
 	{
-		return key_exists($name, $this->fields);
+		return key_exists($name, $this->fields) and !empty($this->fields[$name]->value);
 	}
 
 	/**
