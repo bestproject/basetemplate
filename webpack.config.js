@@ -34,6 +34,9 @@ Encore
     .addEntry('classonscroll', [
         './.dev/js/classonscroll.js'
     ])
+    .addEntry('lightbox', [
+        './.dev/js/lightbox.js'
+    ])
     .addStyleEntry('editor',[
         './.dev/sass/editor.scss'
     ])

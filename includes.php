@@ -81,6 +81,12 @@ if ($params->get('vendors_animated'))
 	TemplateHelper::addEntryPointAssets('animated');
 }
 
+// Include magnific-popup with automatic image popup
+if ($params->get('vendors_lightbox'))
+{
+	TemplateHelper::addEntryPointAssets('lightbox');
+}
+
 // Include back-to-top script
 if ($params->get('back_to_top'))
 {
