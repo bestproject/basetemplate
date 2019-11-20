@@ -1,8 +1,6 @@
-var path = require('path');
-
-var templateName = path.basename(__dirname);
-
 var Encore = require('@symfony/webpack-encore');
+var path = require('path');
+var templateName = path.basename(__dirname);
 
 // Template front-end build configuration
 Encore
@@ -14,8 +12,10 @@ Encore
     .enableVersioning(Encore.isProduction())
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
-    .configureBabel(function(babelConfig) {}, {
-        include_node_modules: ['swiper','dom7','ssr-window']
+    .configureBabel(() => {}, {
+        useBuiltIns: 'usage',
+        corejs: 3,
+        includeNodeModules: ['swiper','dom7','ssr-window']
     })
     .addExternals({
         jquery: 'jQuery',
