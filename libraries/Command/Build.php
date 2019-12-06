@@ -228,13 +228,13 @@ class Build
 		// Create logo directory
 		if (!file_exists($logo_path))
 		{
-			mkdir($logo_path, 0755);
+			mkdir($logo_path, 0755, true);
 		}
 
 		// Create icons directory
 		if (!file_exists($icons_path))
 		{
-			mkdir($icons_path, 0755);
+			mkdir($icons_path, 0755, true);
 		}
 
 		// Create assets build directory
