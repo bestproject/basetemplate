@@ -2,6 +2,10 @@ var Encore = require('@symfony/webpack-encore');
 var path = require('path');
 var templateName = path.basename(__dirname);
 
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
+
 // Template front-end build configuration
 Encore
     .setOutputPath('assets/build')
