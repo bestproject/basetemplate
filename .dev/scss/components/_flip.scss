@@ -25,7 +25,7 @@
             transform: rotateY(180deg);
             background-color:$gray-100;
             .page-header [itemprop="name"] {
-                font-family:$fontMain;
+                font-family:$font-family-base;
             }
         }
     }

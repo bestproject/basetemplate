@@ -8,7 +8,8 @@
     "watch": "./node_modules/.bin/encore dev --watch",
     "watch-prod": "./node_modules/.bin/encore prod --watch",
     "prod": "./node_modules/.bin/encore prod",
-    "build": "./node_modules/.bin/encore prod"
+    "build": "./node_modules/.bin/encore prod",
+    "postinstall": "node ./.dev/js/build/postinstall.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,9 @@
     "core-js": "^3.0.0"
   },
   "dependencies": {},
+  "engines": {
+    "node": ">=13.0"
+  },
   "browserslist": [
     "> 0.25%",
     "not dead",

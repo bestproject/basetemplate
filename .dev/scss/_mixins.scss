@@ -1,0 +1,38 @@
+
+// Float clear fix
+@mixin clr(){
+    &:after{
+        clear:both;content:'';display:block;
+    }
+    
+}
+
+// Convert number of pixels to REM
+@mixin toREM($value, $property, $baseInPixels:  14) {
+    #{$property}: ($value / $baseInPixels)*1rem;
+}
+
+// Style the placeholder
+@mixin placeholder($color) {
+     /* Chrome/Opera/Safari */
+    &::-webkit-input-placeholder {
+        color: $color;opacity:1;
+    }
+    /* Firefox 19+ */
+    &::-moz-placeholder { 
+        color: $color;opacity:1;
+    }
+     /* IE 10+ */
+    &:-ms-input-placeholder {
+        color: $color;opacity:1;
+    }
+     /* Firefox 18- */
+    &:-moz-placeholder {
+        color: $color;opacity:1;
+    }
+}
+
+// Enable animations on element
+@mixin anim($time:0.5s) {
+    transition:$time linear all;
+}

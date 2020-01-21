@@ -1,6 +1,7 @@
-var Encore = require('@symfony/webpack-encore');
-var path = require('path');
-var templateName = path.basename(__dirname);
+const Encore = require('@symfony/webpack-encore');
+const path = require('path');
+
+const templateName = path.basename(__dirname);
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -26,7 +27,7 @@ Encore
         joomla: 'Joomla'
     })
     .addEntry('theme',[
-        './.dev/sass/index.scss',
+        './.dev/scss/index.scss',
         './.dev/js/theme.js'
     ])
     .addEntry('animated', [
@@ -41,15 +42,38 @@ Encore
     .addEntry('lightbox', [
         './.dev/js/lightbox.js'
     ])
-    .addStyleEntry('editor',[
-        './.dev/sass/editor.scss'
-    ])
+    .copyFiles({
+        from: './.dev/images',
+        to: 'images/[path][name].[contenthash].[ext]'
+    })
     .configureFilenames({
-        css: function(e) {
-            return (e.chunk.id=='editor' ? '[name].css': '[name]-[hash:6].css');
-        },
-        js: '[name]-[hash:6].js'
+        css: '[name]-[contenthash].css',
+        js: '[name]-[contenthash].js'
     });
 
+const ThemeConfig = Encore.getWebpackConfig();
+
+Encore.reset();
+Encore
+    .setOutputPath('css')
+    .setPublicPath('/templates/'+templateName+'/css')
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
+    .disableSingleRuntimeChunk()
+    .enableSassLoader()
+    .enableSourceMaps(!Encore.isProduction())
+    .configureBabel(() => {}, {
+        useBuiltIns: 'usage',
+        corejs: 3,
+    })
+    .addStyleEntry('editor',[
+        './.dev/scss/editor.scss'
+    ])
+    .configureFilenames({
+        css: '[name].css',
+    });
+
+const EditorConfig = Encore.getWebpackConfig();
+
 // Export configurations
-module.exports = Encore.getWebpackConfig();
+module.exports = [ThemeConfig, EditorConfig];

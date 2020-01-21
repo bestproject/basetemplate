@@ -1,0 +1,23 @@
+@import "mixins";
+
+// Boostrap SASS functions
+@import "node_modules/bootstrap/scss/functions";
+
+// Variables overrides
+@import "variables";
+
+// Boostrap SASS default variables
+@import "node_modules/bootstrap/scss/variables";
+
+// Boostrap SASS default styles
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// Youre custom changes to theme
+@import "theme";
+
+// Responsive changes
+@import "responsive/xs";
+@import "responsive/sm";
+@import "responsive/md";
+@import "responsive/lg";
+@import "responsive/xl";
