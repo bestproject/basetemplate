@@ -42,6 +42,9 @@ Encore
     .addEntry('lightbox', [
         './.dev/js/lightbox.js'
     ])
+    .addEntry('slider', [
+        './.dev/js/slider.js'
+    ])
     .copyFiles({
         from: './.dev/images',
         to: 'images/[path][name].[contenthash].[ext]'
