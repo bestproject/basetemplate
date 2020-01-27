@@ -180,12 +180,9 @@ function pagination_item_active(&$item)
         $display = $item->text;
         $class.= ' hidden-phone';
         $attr = ' aria-hidden="true" aria-disabled="true"';
-        $html = '<li class="'.$class.'"'.$attr.'><span title="' . $item->text . '" class="page-link">' . $display . '</span></li>';
-    } else {
-        $html = '<li class="'.$class.'"'.$attr.'><a title="' . $item->text . '" href="' . $item->link . '" class="page-link">' . $display . '</a></li>';
     }
 
-    return $html;
+    return '<li class="'.$class.'"'.$attr.'><a title="' . $item->text . '" href="' . $item->link . '" class="page-link">' . $display . '</a></li>';
 }
 
 /**
