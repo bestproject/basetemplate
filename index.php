@@ -43,44 +43,49 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
     <body class="site <?php echo $class ?>">
 		<?php echo TemplateHelper::renderCodeBodyTop() ?>
-        <!--Page navigation-->
-        <nav id="nav" class="navbar navbar-expand-xl navbar-light">
 
-            <!--Navigation header-->
-            <div class="container">
+        <header>
 
-                   <!--Logo-->
-                   <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
-                        <?php if ($this->params->get('logoFile')): ?>
-                            <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
-                        <?php else: ?>
-                            <?php echo $sitename ?>
+            <!--Page navigation-->
+            <div id="nav" class="navbar navbar-expand-xl navbar-light">
+
+                <!--Navigation header-->
+                <div class="container">
+
+                       <!--Logo-->
+                       <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
+                            <?php if ($this->params->get('logoFile')): ?>
+                                <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
+                            <?php else: ?>
+                                <?php echo $sitename ?>
+                            <?php endif ?>
+
+                            <?php if( !empty($slogan) ): ?>
+                                <small class="navbar-text"><?php echo $slogan ?></small>
+                            <?php endif ?>
+                        </a>
+
+                        <!--Menu button-->
+                        <?php if( $has_menu ): ?>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
+                            <span class="d-flex align-items-center">
+                                <i class="fas fa-bars" aria-hidden="true"></i>
+                                <span class="toggler-text"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
+                            </span>
+                        </button>
                         <?php endif ?>
 
-                        <?php if( !empty($slogan) ): ?>
-                            <small class="navbar-text"><?php echo $slogan ?></small>
-                        <?php endif ?>
-                    </a>
-
-                    <!--Menu button-->
                     <?php if( $has_menu ): ?>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
-                        <span class="d-flex align-items-center">
-                            <i class="fas fa-bars" aria-hidden="true"></i>
-                            <span class="toggler-text"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
-                        </span>
-                    </button>
+                        <!--Main navigation-->
+                        <div id="main-navigation" class="collapse navbar-collapse">
+                            <?php echo Bootstrap4::position('menu', '', '', false) ?>
+                        </div>
                     <?php endif ?>
+                </div>
 
-                <?php if( $has_menu ): ?>
-                    <!--Main navigation-->
-                    <div id="main-navigation" class="collapse navbar-collapse">
-                        <?php echo Bootstrap4::position('menu', '', '', false) ?>
-                    </div>
-                <?php endif ?>
             </div>
+        </header>
 
-        </nav>
 
         <?php if( $has_slider ): ?>
         <div class="slider">
@@ -90,13 +95,13 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
         <?php if( $has_slider_after ): ?>
         <!--After slider-->
-        <aside id="slider-after">
+        <div id="slider-after">
             <div class="container">
                 <div class="wrapper">
                     <?php echo Bootstrap4::position('slider-after') ?>
                 </div>
             </div>
-        </aside>
+        </div>
         <?php endif ?>
 
         <!--System messages-->
@@ -113,9 +118,9 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
                     <?php if( $has_left ): ?>
                     <!--Left column-->
-                    <aside class="col-12 <?php echo ($has_right?'col-xl-3':'col-xl-4') ?>">
+                    <div class="col-12 <?php echo ($has_right?'col-xl-3':'col-xl-4') ?>">
                         <?php echo Bootstrap4::position('left') ?>
-                    </aside>
+                    </div>
                     <?php endif ?>
 
                     <!--Main content-->
@@ -123,9 +128,9 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
                         <?php if( $has_content_before ): ?>
                         <!--Before content-->
-                        <aside id="content-before">
+                        <div id="content-before">
                             <?php echo Bootstrap4::position('content-before') ?>
-                        </aside>
+                        </div>
                         <?php endif ?>
 
                         <main>
@@ -136,18 +141,18 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
                         <?php if( $has_content_after ): ?>
                         <!--After content-->
-                        <aside id="content-after">
+                        <div id="content-after">
                             <?php echo Bootstrap4::position('content-after') ?>
-                        </aside>
+                        </div>
                         <?php endif ?>
 
                     </div>
 
                     <?php if( $has_right ): ?>
                     <!--Right column-->
-                    <aside class="col-12 <?php echo ($has_left?'col-xl-3':'col-xl-4') ?>">
+                    <div class="col-12 <?php echo ($has_left?'col-xl-3':'col-xl-4') ?>">
                         <?php echo Bootstrap4::position('right') ?>
-                    </aside>
+                    </div>
                     <?php endif ?>
 
                 </div>
@@ -156,13 +161,13 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
         <?php if( $has_footer_before ): ?>
         <!--Before footer-->
-        <aside id="footer-before">
+        <div id="footer-before">
             <div class="container">
                 <div class="wrapper">
                     <?php echo Bootstrap4::position('footer-before') ?>
                 </div>
             </div>
-        </aside>
+        </div>
         <?php endif ?>
 
         <!--Footer-->
