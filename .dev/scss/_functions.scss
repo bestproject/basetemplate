@@ -1,0 +1,5 @@
+
+// Convert number of pixels to REMs
+@function rem($value_in_pixels) {
+    @return ($value_in_pixels/16)*1rem;
+}
