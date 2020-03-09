@@ -105,7 +105,12 @@ abstract class Bootstrap4
 				$column_class .= ' ' . $itemClassSfx;
 			}
 
-			$html .= '<' . $module_tag . ' class="' . trim($column_class) . '">';
+			$attribs = ' class="' . trim($column_class) . '"';
+			if( $module->showtitle ) {
+				$attribs.= ' aria-labeledby="module-'.$module->id.'-title"';
+			}
+
+			$html .= '<' . $module_tag . $attribs .'>';
 
 			$style = $module_params->get('style', 'default');
 			if ($style === '0')
