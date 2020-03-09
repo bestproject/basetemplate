@@ -89,7 +89,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
         <?php if( $has_slider ): ?>
         <div class="slider">
-            <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper') ?>
+            <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper', false) ?>
         </div>
         <?php endif ?>
 
