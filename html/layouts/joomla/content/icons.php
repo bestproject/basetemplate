@@ -15,11 +15,11 @@ $canEdit = $displayData['params']->get('access-edit');
 
 ?>
 
-<div class="icons">
+<div class="icons float-right ml-2 mb-1">
 	<?php if (empty($displayData['print'])) : ?>
 
 		<?php if ($canEdit || $displayData['params']->get('show_print_icon') || $displayData['params']->get('show_email_icon')) : ?>
-            <div class="btn-group float-right">
+            <div class="btn-group">
                 <a class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fas fa-cog" aria-hidden="true"></i>
                 </a>
@@ -40,7 +40,7 @@ $canEdit = $displayData['params']->get('access-edit');
 
 	<?php else : ?>
 
-        <div class="float-right">
+        <div>
 			<?php echo JHtml::_('icon.print_screen', $displayData['item'], $displayData['params']); ?>
         </div>
 
