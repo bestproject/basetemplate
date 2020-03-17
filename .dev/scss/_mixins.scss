@@ -1,10 +1,9 @@
 
 // Float clear fix
-@mixin clr(){
-    &:after{
+@mixin clr($where: after){
+    &::#{$where}{
         clear:both;content:'';display:block;
     }
-    
 }
 
 // Convert number of pixels to REM
