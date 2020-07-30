@@ -19,7 +19,7 @@ final class ObjectFields
 	 * @var array
 	 * @since 1.5.0
 	 */
-	private $fields = [];
+	private $fields;
 
 	/**
 	 * Fields context (usually com_content.article)
@@ -75,7 +75,7 @@ final class ObjectFields
 	 */
 	public function has(string $name): bool
 	{
-		return key_exists($name, $this->fields) and !empty($this->fields[$name]->value);
+		return array_key_exists($name, $this->fields) and !empty($this->fields[$name]->value);
 	}
 
 	/**
@@ -117,29 +117,53 @@ final class ObjectFields
 		return FieldsHelper::render(
 			$this->context,
 			'field.' . $layout,
-			array(
+			[
 				'item'    => '',
 				'context' => $this->context,
 				'field'   => $field
-			)
+			]
 		);
 	}
 
 	/**
-	 * Get the value of a field.
+	 * Get the value of a field. If field don't exists or value is empty, return $default value.
 	 *
 	 * @param   string  $name  Name of a field.
+	 * @param   mixed  $default  Default value to return.
 	 *
-	 * @return string
+	 * @return mixed
 	 *
 	 * @throws Exception
 	 * @since 1.5.0
 	 */
-	public function getValue(string $name): string
+	public function getValue(string $name, $default = '')
 	{
-		$field = $this->get($name);
+		if( $this->has($name) ) {
+			$value = $this->get($name)->value;
+		}
 
-		return $field->value;
+		return empty($value) ? $default : $value ;
+	}
+
+	/**
+	 * Render field if it exists.
+	 *
+	 * @param   string  $name  Field name.
+	 *
+	 * @return string
+	 *
+	 * @throws Exception
+	 * @since 1.0
+	 */
+	public function renderIfExists(string $name): string
+	{
+		$return = '';
+
+		if( $this->has($name) ) {
+			$return = $this->render($name);
+		}
+
+		return $return;
 	}
 
 }
