@@ -99,6 +99,70 @@ final class ObjectFields
 	}
 
 	/**
+	 * Get the value of a field. If field don't exists or value is empty, return $default value.
+	 *
+	 * @param   string  $name     Name of a field.
+	 * @param   mixed   $default  Default value to return.
+	 *
+	 * @return mixed
+	 *
+	 * @throws Exception
+	 * @since 1.5.0
+	 */
+	public function getValue(string $name, $default = '')
+	{
+		if ($this->has($name))
+		{
+			$value = $this->get($name)->value;
+		}
+
+		return empty($value) ? $default : $value;
+	}
+
+	/**
+	 * Get the raw value of a field. If field don't exists or the value is empty, return $default value.
+	 *
+	 * @param   string  $name     Name of a field.
+	 * @param   mixed   $default  Default value to return.
+	 *
+	 * @return mixed
+	 *
+	 * @throws Exception
+	 * @since 1.5.0
+	 */
+	public function getRawValue(string $name, $default = '')
+	{
+		if ($this->has($name))
+		{
+			$rawvalue = $this->get($name)->rawvalue;
+		}
+
+		return empty($rawvalue) ? $default : $rawvalue;
+	}
+
+	/**
+	 * Render field if it exists.
+	 *
+	 * @param   string  $name  Field name.
+	 *
+	 * @return string
+	 *
+	 * @throws Exception
+	 * @since 1.0
+	 */
+	public function renderIfExists(string $name): string
+	{
+		$return = '';
+
+		if ($this->has($name))
+		{
+			$return = $this->render($name);
+		}
+
+		return $return;
+	}
+
+	/**
 	 * Render selected item field.
 	 *
 	 * @param   string  $name  Name of a field.
@@ -123,47 +187,6 @@ final class ObjectFields
 				'field'   => $field
 			]
 		);
-	}
-
-	/**
-	 * Get the value of a field. If field don't exists or value is empty, return $default value.
-	 *
-	 * @param   string  $name  Name of a field.
-	 * @param   mixed  $default  Default value to return.
-	 *
-	 * @return mixed
-	 *
-	 * @throws Exception
-	 * @since 1.5.0
-	 */
-	public function getValue(string $name, $default = '')
-	{
-		if( $this->has($name) ) {
-			$value = $this->get($name)->value;
-		}
-
-		return empty($value) ? $default : $value ;
-	}
-
-	/**
-	 * Render field if it exists.
-	 *
-	 * @param   string  $name  Field name.
-	 *
-	 * @return string
-	 *
-	 * @throws Exception
-	 * @since 1.0
-	 */
-	public function renderIfExists(string $name): string
-	{
-		$return = '';
-
-		if( $this->has($name) ) {
-			$return = $this->render($name);
-		}
-
-		return $return;
 	}
 
 }

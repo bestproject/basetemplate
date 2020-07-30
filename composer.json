@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "BestProject\\":"libraries/"
+            "BestProject\\":"src/"
         }
     },
     "minimum-stability": "stable",
