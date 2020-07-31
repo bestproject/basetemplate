@@ -61,6 +61,15 @@ abstract class TemplateHelper
 	private static $manifestCache;
 
 	/**
+	 * Entry points cache.
+	 *
+	 * @var array
+	 *
+	 * @since 1.5.0
+	 */
+	private static $entrypointsCache;
+
+	/**
 	 * Render scripts that should be in the top of head section.
 	 *
 	 * @return string
@@ -71,7 +80,7 @@ abstract class TemplateHelper
 	 */
 	public static function renderCodeHeadTop(): string
 	{
-		return self::getParams()->get('code_head_top', '');
+		return static::getParams()->get('code_head_top', '');
 	}
 
 	/**
@@ -85,12 +94,12 @@ abstract class TemplateHelper
 	 */
 	private static function getParams(): Registry
 	{
-		if (is_null(self::$params))
+		if (is_null(static::$params))
 		{
-			self::$params = Factory::getApplication()->getTemplate(true)->params;
+			static::$params = Factory::getApplication()->getTemplate(true)->params;
 		}
 
-		return self::$params;
+		return static::$params;
 	}
 
 	/**
@@ -104,7 +113,7 @@ abstract class TemplateHelper
 	 */
 	public static function renderCodeHeadBottom(): string
 	{
-		return self::getParams()->get('code_head_bottom', '');
+		return static::getParams()->get('code_head_bottom', '');
 	}
 
 	/**
@@ -118,7 +127,7 @@ abstract class TemplateHelper
 	 */
 	public static function renderCodeBodyTop(): string
 	{
-		return self::getParams()->get('code_body_top', '');
+		return static::getParams()->get('code_body_top', '');
 	}
 
 	/**
@@ -132,7 +141,7 @@ abstract class TemplateHelper
 	 */
 	public static function renderCodeBodyBottom(): string
 	{
-		return self::getParams()->get('code_body_bottom', '');
+		return static::getParams()->get('code_body_bottom', '');
 	}
 
 	/**
@@ -140,7 +149,7 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.0.0
 	 */
-	public static function renderScripts()
+	public static function renderScripts(): string
 	{
 		$buffer = '';
 
@@ -148,7 +157,7 @@ abstract class TemplateHelper
 		$doc          = Factory::getDocument();
 		$mediaVersion = $doc->getMediaVersion();
 
-		foreach (self::$scripts AS $url => $attributes)
+		foreach (static::$scripts AS $url => $attributes)
 		{
 
 			$attributes_string = '';
@@ -189,7 +198,7 @@ abstract class TemplateHelper
 		$fields = $item;
 
 		// If this is object, try to look for its fields list
-		if (is_object($item)) ;
+		if (is_object($item))
 		{
 
 			// Fields property doesn't exists so load them using fields plugin
@@ -220,7 +229,7 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.5
 	 */
-	public static function getObjectFields(object &$item, string $context = 'com_content.article')
+	public static function getObjectFields(object &$item, string $context = 'com_content.article'): void
 	{
 		$dispatcher = JEventDispatcher::getInstance();
 		PluginHelper::importPlugin('content');
@@ -255,7 +264,7 @@ abstract class TemplateHelper
 		$public_url  = $url;
 		$manifest    = static::getManifest();
 		$relativeUrl = ltrim($url, '/');
-		if (key_exists($relativeUrl, $manifest))
+		if (array_key_exists($relativeUrl, $manifest))
 		{
 			$public_url = $manifest[$relativeUrl];
 		}
@@ -276,16 +285,38 @@ abstract class TemplateHelper
 	{
 		if (is_null(static::$manifestCache))
 		{
-			$manifest_path = JPATH_THEMES . '/' . self::getTemplate() . '/assets/build/manifest.json';
+			$manifest_path = JPATH_THEMES . '/' . static::getTemplate() . '/assets/build/manifest.json';
 
 			static::$manifestCache = [];
 			if (file_exists($manifest_path))
 			{
-				static::$manifestCache = json_decode(file_get_contents($manifest_path), true);
+				static::$manifestCache = json_decode(file_get_contents($manifest_path), true, 512, JSON_THROW_ON_ERROR);
 			}
 		}
 
 		return static::$manifestCache;
+	}
+
+	/**
+	 * Get entry points array.
+	 *
+	 * @return array
+	 * @throws Exception
+	 *
+	 * @since 1.5
+	 */
+	public static function getEntryPoints(): array
+	{
+		if (is_null(static::$entrypointsCache)) {
+			$entrypoints_path = JPATH_THEMES . '/' . static::getTemplate() . '/assets/build/entrypoints.json';
+
+			static::$entrypointsCache = [];
+			if (file_exists($entrypoints_path)) {
+				static::$entrypointsCache = json_decode(file_get_contents($entrypoints_path), true, 512, JSON_THROW_ON_ERROR);
+			}
+		}
+
+		return static::$entrypointsCache;
 	}
 
 	/**
@@ -299,66 +330,46 @@ abstract class TemplateHelper
 	 */
 	private static function getTemplate(): string
 	{
-		if (is_null(self::$template))
+		if (is_null(static::$template))
 		{
-			self::$template = Factory::getApplication()->getTemplate();
+			static::$template = Factory::getApplication()->getTemplate();
 		}
 
-		return self::$template;
+		return static::$template;
 	}
 
 	/**
 	 * Include entry point assets from manifest file.
 	 *
 	 * @param   string  $name         Name of the entry point.
-	 * @param   string  $nameDesktop  Name of the entry point.
 	 *
 	 *
 	 * @throws Exception
 	 * @since 1.0.0
 	 */
-	public static function addEntryPointAssets(string $name, string $nameDesktop = '')
+	public static function addEntryPointAssets(string $name)
 	{
-		$manifest = static::getManifest();
+		$entrypoints = static::getEntryPoints()['entrypoints'];
 
-		// Assets files
-		$cssFilePath           = 'templates/' . static::getTemplate() . '/assets/build/' . $name . '.css';
-		$cssDesktopAlternative = 'templates/' . static::getTemplate() . '/assets/build/' . $nameDesktop . '.css';
-		$jsFilePath            = 'templates/' . static::getTemplate() . '/assets/build/' . $name . '.js';
+		// If there is anything from this entrypoint
+		if (array_key_exists($name, $entrypoints)) {
 
-		// If css asset exists
-		if (key_exists($cssFilePath, $manifest))
-		{
-			$attribs = [
-				'id' => 'assets-general-' . $name,
-			];
+			$attribs = ['data-entrypoint'=>$name];
+			$entrypoint = $entrypoints[$name];
 
-			if (!empty($nameDesktop))
-			{
-
-				$detect    = new Mobile_Detect();
-				$isDesktop = !($detect->isMobile() or $detect->isTablet());
-
-				if ($isDesktop and key_exists($cssDesktopAlternative, $manifest))
-				{
-					$attribs['id'] = 'assets-desktop-' . $name;
-					Factory::getDocument()->addStyleSheet($manifest[$cssDesktopAlternative], ['version' => 'auto'], $attribs);
-				}
-				else
-				{
-					Factory::getDocument()->addStyleSheet($manifest[$cssFilePath], ['version' => 'auto'], $attribs);
+			// If there are css styles in this entry point
+			if (array_key_exists('css', $entrypoint)) {
+				foreach ($entrypoint['css'] as $path) {
+					Factory::getDocument()->addStyleSheet(static::getAssetUrl($path), ['version' => 'auto'], $attribs);
 				}
 			}
-			else
-			{
-				Factory::getDocument()->addStyleSheet($manifest[$cssFilePath], ['version' => 'auto'], $attribs);
-			}
-		}
 
-		// If js asset exists
-		if (key_exists($jsFilePath, $manifest))
-		{
-			static::addScript($manifest[$jsFilePath]);
+			// If there are js scripts in this entry point
+			if (array_key_exists('js', $entrypoint)) {
+				foreach ($entrypoint['js'] as $path) {
+					static::addScript(static::getAssetUrl($path, $attribs));
+				}
+			}
 		}
 	}
 
@@ -370,9 +381,9 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.0.0
 	 */
-	public static function addScript(string $url, array $attributes = [])
+	public static function addScript(string $url, array $attributes = []): void
 	{
-		self::$scripts = array_merge(self::$scripts, [$url => $attributes]);
+		static::$scripts = array_merge(static::$scripts, [$url => $attributes]);
 	}
 
 	/**
@@ -383,7 +394,7 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.0.0
 	 */
-	public static function addScriptDeclaration(string $code, array $attributes = [])
+	public static function addScriptDeclaration(string $code, array $attributes = []): void
 	{
 		static::addScript($code, $attributes);
 	}
@@ -396,7 +407,7 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.0.0
 	 */
-	public static function combineSystemScripts(&$scripts)
+	public static function combineSystemScripts(&$scripts): void
 	{
 		$media = [];
 		$files = [];
