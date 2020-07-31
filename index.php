@@ -201,7 +201,10 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
         </div>
         <?php endif ?>
 
-		<?php echo TemplateHelper::renderScripts() ?>
+        <!--Script rendered-->
+        <jdoc:include type="scripts" name="scripts" style="none"/>
+        <!--End of script rendered-->
+
         <?php echo TemplateHelper::renderCodeBodyBottom() ?>
     </body>
 </html>
