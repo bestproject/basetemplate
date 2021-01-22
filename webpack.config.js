@@ -47,7 +47,7 @@ Encore
     ])
     .copyFiles({
         from: './.dev/images',
-        to: 'images/[path][name].[contenthash].[ext]'
+        to: '[name].[contenthash].[ext]'
     })
     .configureFilenames({
         css: '[name]-[contenthash].css',
