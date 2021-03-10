@@ -17,11 +17,12 @@ Encore
     .enableVersioning(Encore.isProduction())
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
-    .configureBabel(() => {}, {
+    .configureBabel((config) => {}, {
+        includeNodeModules: ['swiper','dom7','ssr-window'],
         useBuiltIns: 'usage',
-        corejs: 3,
-        includeNodeModules: ['swiper','dom7','ssr-window']
+        corejs: 3
     })
+    .autoProvidejQuery()
     .addExternals({
         jquery: 'jQuery',
         joomla: 'Joomla'
@@ -55,6 +56,7 @@ Encore
     });
 
 const ThemeConfig = Encore.getWebpackConfig();
+ThemeConfig.name = 'Template';
 
 Encore.reset();
 Encore
@@ -65,9 +67,10 @@ Encore
     .disableSingleRuntimeChunk()
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
-    .configureBabel(() => {}, {
+    .configureBabel((config) => {}, {
+        includeNodeModules: ['swiper','dom7','ssr-window'],
         useBuiltIns: 'usage',
-        corejs: 3,
+        corejs: 3
     })
     .addStyleEntry('editor',[
         './.dev/scss/editor.scss'
@@ -77,6 +80,7 @@ Encore
     });
 
 const EditorConfig = Encore.getWebpackConfig();
+EditorConfig.name = 'Editor';
 
 // Export configurations
 module.exports = [ThemeConfig, EditorConfig];
