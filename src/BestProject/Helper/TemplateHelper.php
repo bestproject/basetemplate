@@ -1,6 +1,6 @@
 <?php
 
-namespace BestProject;
+namespace BestProject\Helper;
 
 use Exception;
 use JEventDispatcher;

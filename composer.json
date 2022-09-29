@@ -12,8 +12,7 @@
     "autoload": {
         "psr-4": {
             "BestProject\\":"src/BestProject/"
-        },
-        "files": ["src/Joomla/CMS/Document/Renderer/Html/ScriptsRenderer.php"]
+        }
     },
     "minimum-stability": "stable",
     "require": {},

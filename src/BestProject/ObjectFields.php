@@ -61,7 +61,7 @@ final class ObjectFields
 			throw new \RuntimeException('This item does not have a field called "' . $name . '"".', 500);
 		}
 
-		return (array) json_decode($this->get($name)->rawvalue);
+		return (array)json_decode($this->get($name)->rawvalue, false, 512, JSON_THROW_ON_ERROR);
 	}
 
 	/**

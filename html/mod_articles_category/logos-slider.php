@@ -7,7 +7,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-use BestProject\TemplateHelper;
+use BestProject\Helper\TemplateHelper;
+use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die;
 
@@ -55,6 +56,11 @@ TemplateHelper::addScriptDeclaration("
         var ModArticlesCategoryLogos{$module->id} = new Swiper('#$id', $options);
     });
 ");
+
+/**
+ * @var array $list List of items
+ * @var Registry $params Module params.
+ */
 ?>
 <div class="articles-category logos d-flex w-100 justify-content-center">
     <div id="<?php echo $id ?>"  class="swiper-container flex-shrink-1">
@@ -63,13 +69,15 @@ TemplateHelper::addScriptDeclaration("
 				$images = json_decode($item->images);
 				?>
                 <div class="swiper-slide">
-					<?php if ($params->get('link_titles') == 1) : ?>
-                    <a class="mod-articles-category-title <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
-						<?php endif ?>
-                        <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" />
-						<?php if ($params->get('link_titles') == 1) : ?>
-                    </a>
-				<?php endif ?>
+                    <?php if ((int)$params->get('link_titles') === 1) : ?>
+                        <a class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center p-2 rounded-lg <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
+                            <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" />
+                        </a>
+                    <?php else: ?>
+                        <div class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center p-2 rounded-lg <?php echo $item->active; ?>">
+                            <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" />
+                        </div>
+                    <?php endif ?>
                 </div>
 			<?php endforeach ?>
 
