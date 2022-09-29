@@ -20,9 +20,9 @@ import $ from 'jquery';
 /**
  * Adds a back to top button when page is scrolled
  */
-$.fn.backToTopButton = function (options = {}) {
+$.fn.backToTopButton = (options = {})=>{
 
-    var settings = {
+    const settings = {
         button_text: 'Back to top',
         button_id: 'back-to-top',
         button_class: 'btn btn-default',
@@ -32,7 +32,7 @@ $.fn.backToTopButton = function (options = {}) {
     $.extend(settings, options)
 
     // Create button
-    var $btn = $("<button></button>");
+    const $btn = $("<button></button>");
     $btn.attr({
         'id': settings.button_id,
         'class': 'back-to-top ' + settings.button_class,
@@ -52,9 +52,9 @@ $.fn.backToTopButton = function (options = {}) {
     $('body').append($btn);
 
     // Show/hide button on scroll
-    var scrollTrigger = 100, // px
-        backToTop = function () {
-            var scrollTop = $(window).scrollTop();
+    const scrollTrigger = 100, // px
+        backToTop = ()=>{
+            const scrollTop = $(window).scrollTop();
             if (scrollTop > scrollTrigger) {
                 $btn.addClass('show');
             } else {
@@ -65,7 +65,7 @@ $.fn.backToTopButton = function (options = {}) {
     $(window).on('scroll', backToTop);
 
     // On button click, scroll o top
-    $btn.on('click', function (e) {
+    $btn.on('click', (e)=>{
         e.preventDefault();
         $('html,body').animate({
             scrollTop: 0

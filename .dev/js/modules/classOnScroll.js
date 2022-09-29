@@ -20,12 +20,12 @@ import $ from 'jquery';
 /**
  * Changes elements class on scroll
  */
-$.fn.classOnScroll = function (scrolledClass = "scrolled") {
+$.fn.classOnScroll = (scrolledClass = "scrolled")=>{
 
-    this.each(function (idx, el) {
-        $(window).scroll(function () {
-            var scroll = $(window).scrollTop();
-            var $element = $(el);
+    this.each((idx, el)=>{
+        $(window).scroll(()=>{
+            const scroll = $(window).scrollTop();
+            const $element = $(el);
             if (scroll > 0) {
                 $element.addClass(scrolledClass);
             } else {

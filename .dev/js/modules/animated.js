@@ -18,19 +18,18 @@ import $ from 'jquery';
  */
 $.fn.Animated = function () {
 
-    var $window = $(window);
+    const $window = $(window);
 
     $window.on('scroll', revealOnScroll);
 
     function revealOnScroll() {
-        var win_height_padded = $window.height() * 1.1;
-        var scrolled = $window.scrollTop(),
+        const scrolled = $window.scrollTop(),
             win_height_padded = $window.height() * 1.1;
 
         // Showed...
         $('[class*="animated-"]').each(function () {
-            var $this = $(this);
-            var offsetTop = $this.offset().top;
+            const $this = $(this);
+            const offsetTop = $this.offset().top;
 
             if (scrolled + win_height_padded > offsetTop) {
                 $this[0].className = $this[0].className.replace('animated-', 'animated ');
@@ -39,15 +38,15 @@ $.fn.Animated = function () {
 
         // Hidden...
         $(".animated").each(function (index) {
-            var $this = $(this);
-            var offsetTop = $this.offset().top;
+            const $this = $(this);
+            const offsetTop = $this.offset().top;
             if (scrolled + win_height_padded < offsetTop) {
                 $this[0].className = $this[0].className.replace('animated ', 'animated-');
             }
         });
     }
 
-    setTimeout(function () {
+    setTimeout(()=>{
         revealOnScroll();
     }, 100);
 
@@ -55,6 +54,6 @@ $.fn.Animated = function () {
 };
 
 // Run animated
-$(function () {
+$(()=>{
     $(document).Animated();
 });

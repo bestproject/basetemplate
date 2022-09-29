@@ -20,11 +20,11 @@ import $ from 'jquery';
 /**
  * Scroll to section if link starts with #
  */
-$.fn.scrollToSection = function (speed = 700) {
-    var $elements = $('a[href*="#"]');
+$.fn.scrollToSection = (speed = 700)=>{
+    const $elements = $('a[href*="#"]');
 
-    for (var i = 0, ic = $elements.length; i < ic; i++) {
-        var $href = $($elements[i]).attr('href');
+    for (let i = 0, ic = $elements.length; i < ic; i++) {
+        const $href = $($elements[i]).attr('href');
         if ($href.charAt(0) === '#' && $href.length > 1) {
             $($elements[i]).click(function (e) {
                 e.preventDefault();
@@ -36,5 +36,4 @@ $.fn.scrollToSection = function (speed = 700) {
         }
 
     }
-
 };
