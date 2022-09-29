@@ -1,6 +1,6 @@
 {
-    "name": "bestproject/basetheme",
-    "description": "Joomla! 3 base theme build on Bootstrap 4",
+    "name": "bestproject/basetemplate",
+    "description": "Joomla! 4 base theme build on Bootstrap 4",
     "type": "project",
     "license": "GPL-3.0-or-later",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "BestProject\\":"src/"
+            "BestProject\\":"src/BestProject/"
         },
         "files": ["src/Joomla/CMS/Document/Renderer/Html/ScriptsRenderer.php"]
     },

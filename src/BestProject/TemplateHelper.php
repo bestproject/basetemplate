@@ -423,7 +423,7 @@ abstract class TemplateHelper
 	 *
 	 * @since 1.0.0
 	 */
-	public static function combineSystemScripts(&$scripts): void
+	public static function combineSystemScripts(array &$scripts): void
 	{
 		$media = [];
 		$files = [];

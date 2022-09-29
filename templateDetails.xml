@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/2.5/template-install.dtd">
-<extension version="3.6" type="template" client="site">
-	<name>BASETHEME</name>
+<extension type="template" client="site">
+	<name>BASETEMPLATE</name>
 	<version>1.0</version>
 	<creationDate>01/01/2000</creationDate>
 	<author>Artur Stępień</author>
 	<authorEmail>artur.stepien@bestproject.pl</authorEmail>
-	<copyright>Copyright (C) 2018 BASETHEME. All rights reserved.</copyright>
-	<description>TPL_BASETHEME_XML_DESCRIPTION</description>
-	
+	<copyright>Copyright (C) 2022 BASETEMPLATE. All rights reserved.</copyright>
+	<description>TPL_BASETEMPLATE_XML_DESCRIPTION</description>
+	<inheritable>1</inheritable>
+
 	<files>
-		<folder>css</folder>
-		<folder>fonts</folder>
 		<folder>html</folder>
-		<folder>images</folder>
-		<folder>js</folder>
 		<folder>language</folder>
-		<folder>sass</folder>
 		<folder>vendor</folder>
 		<filename>build.php</filename>
 		<filename>error.php</filename>
 		<filename>index.php</filename>
 		<filename>templateDetails.xml</filename>
-		<filename>template_preview.png</filename>
-		<filename>template_thumbnail.png</filename>
 	</files>
-	
+
+	<media destination="templates/site/basetemplate" folder="media" />
+
 	<positions>
 		<position>menu</position>
 		<position>slider</position>
@@ -38,117 +33,113 @@
 		<position>footer</position>
 		<position>footer-menu</position>
 	</positions>
-	
+
 	<languages folder="language">
-		<language tag="pl-PL">pl-PL/pl-PL.tpl_basetheme.ini</language>
-		<language tag="pl-PL">pl-PL/pl-PL.tpl_basetheme.sys.ini</language>
-		<language tag="en-GB">en-GB/en-GB.tpl_basetheme.ini</language>
-		<language tag="en-GB">en-GB/en-GB.tpl_basetheme.sys.ini</language>
+		<language tag="pl-PL">pl-PL/tpl_basetemplate.ini</language>
+		<language tag="pl-PL">pl-PL/tpl_basetemplate.sys.ini</language>
+		<language tag="en-GB">en-GB/tpl_basetemplate.ini</language>
+		<language tag="en-GB">en-GB/tpl_basetemplate.sys.ini</language>
 	</languages>
-	
+
 	<config>
 		<fields name="params">
-			
+
 			<fieldset name="basic">
 
-				<field name="logoFile" class="" type="filelist" default="" directory="images/logo" filter="(jpeg|jpg|png|gif|svg)" hide_default="true"
-					label="TPL_BASETHEME_LOGO_LABEL"
-					description="TPL_BASETHEME_LOGO_DESC" />
+				<field name="logoFile" class="" type="media" default=""
+					   label="TPL_BASETEMPLATE_LOGO_LABEL"
+					   description="TPL_BASETEMPLATE_LOGO_DESC"/>
 
-				<field name="faviconFile" class="" type="filelist" default="" directory="images/icons" filter="(jpeg|jpg|png|gif|svg|ico)" hide_default="true"
-					   label="TPL_BASETHEME_FAVICON_LABEL"
-					   description="TPL_BASETHEME_FAVICON_DESC" />
-					
-				<field name="sitetitle"  type="text" default="BP Basetheme"
-					label="JGLOBAL_TITLE"
-					description="JFIELD_ALT_PAGE_TITLE_LABEL"
-					filter="string" />
+				<field name="sitetitle" type="text" default="BP Basetemplate"
+					   label="JGLOBAL_TITLE"
+					   description="JFIELD_ALT_PAGE_TITLE_LABEL"
+					   filter="string"/>
 
-				<field name="sitedescription"  type="text" default=""
-					label="JGLOBAL_DESCRIPTION"
-					description="JGLOBAL_SUBHEADING_DESC"
-					filter="string" />
-                
-                <field name="copyrights"  type="text" default="Best Project"
-					label="TPL_BASETHEME_FIELD_COPYRIGHTS_LABEL"
-					description="TPL_BASETHEME_FIELD_COPYRIGHTS_DESC"
-					filter="string" />
-                
+				<field name="sitedescription" type="text" default=""
+					   label="JGLOBAL_DESCRIPTION"
+					   description="JGLOBAL_SUBHEADING_DESC"
+					   filter="string"/>
+
+				<field name="copyrights" type="text" default="Best Project"
+					   label="TPL_BASETEMPLATE_FIELD_COPYRIGHTS_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_COPYRIGHTS_DESC"
+					   filter="string"/>
+
 			</fieldset>
-            
-            <fieldset name="layout">
-                <field name="menu_fixed" type="radio"
-                    default="0" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_MENU_FIXED_LABEL"
-                    description="TPL_BASETHEME_FIELD_MENU_FIXED_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-            </fieldset>
 
-            <fieldset name="functionality">
-                <field name="vendors_lightbox" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_LIGHTBOX_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_LIGHTBOX_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="vendors_animated" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_VENDORS_ANIMATED_LABEL"
-                    description="TPL_BASETHEME_FIELD_VENDORS_ANIMATED_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-                <field name="back_to_top" type="radio"
-                    default="1" class="btn-group btn-group-yesno"
-                    label="TPL_BASETHEME_FIELD_BACK_TO_TOP_LABEL"
-                    description="TPL_BASETHEME_FIELD_BACK_TO_TOP_DESC"
-                    filter="INT">
-                    <option value="1">JYES</option>
-                    <option value="0">JNO</option>
-                </field>
-				<field name="messages_debug" type="radio"
-					   default="0" class="btn-group btn-group-yesno"
-					   label="TPL_BASETHEME_FIELD_MESSAGES_DEBUG_LABEL"
-					   description="TPL_BASETHEME_FIELD_MESSAGES_DEBUG_DESC"
-					   filter="INT">
+			<fieldset name="layout">
+				<field name="menu_fixed" type="radio"
+					   default="0"
+					   label="TPL_BASETEMPLATE_FIELD_MENU_FIXED_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_MENU_FIXED_DESC"
+					   layout="joomla.form.field.radio.switcher"
+					   filter="boolean"
+				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-            </fieldset>
-            
-            <fieldset name="advanced" label="TPL_BASETHEME_FIELDSET_ADVANCED_LABEL">
-                
-                <field name="code_head"  type="spacer"
-					label="TPL_BASETHEME_FIELD_CODE_HEAD_LABEL" />
-                <field name="code_head_top"  type="textarea" default=""
-					label="TPL_BASETHEME_FIELD_CODE_TOP_LABEL"
-					description="TPL_BASETHEME_FIELD_CODE_HEAD_TOP_DESC"
-					filter="raw" />
-                <field name="code_head_bottom"  type="textarea" default=""
-					label="TPL_BASETHEME_FIELD_CODE_BOTTOM_LABEL"
-					description="TPL_BASETHEME_FIELD_CODE_HEAD_BOTTOM_DESC"
-					filter="raw" />
-                
-                <field name="code_body"  type="spacer"
-					label="TPL_BASETHEME_FIELD_CODE_BODY_LABEL" />
-                <field name="code_body_top"  type="textarea" default=""
-					label="TPL_BASETHEME_FIELD_CODE_TOP_LABEL"
-					description="TPL_BASETHEME_FIELD_CODE_BODY_TOP_DESC"
-					filter="raw" />
-                <field name="code_body_bottom"  type="textarea" default=""
-					label="TPL_BASETHEME_FIELD_CODE_BOTTOM_LABEL"
-					description="TPL_BASETHEME_FIELD_CODE_BODY_BOTTOM_DESC"
-					filter="raw" />
-                
-            </fieldset>
-			
+			</fieldset>
+
+			<fieldset name="functionality">
+				<field name="vendors_lightbox" type="radio"
+					   default="1"
+					   label="TPL_BASETEMPLATE_FIELD_VENDORS_LIGHTBOX_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_VENDORS_LIGHTBOX_DESC"
+					   layout="joomla.form.field.radio.switcher"
+					   filter="boolean"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="vendors_animated" type="radio"
+					   default="1"
+					   label="TPL_BASETEMPLATE_FIELD_VENDORS_ANIMATED_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_VENDORS_ANIMATED_DESC"
+					   layout="joomla.form.field.radio.switcher"
+					   filter="boolean"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="back_to_top" type="radio"
+					   default="1"
+					   label="TPL_BASETEMPLATE_FIELD_BACK_TO_TOP_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_BACK_TO_TOP_DESC"
+					   layout="joomla.form.field.radio.switcher"
+					   filter="boolean"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="advanced" label="TPL_BASETEMPLATE_FIELDSET_ADVANCED_LABEL">
+
+				<field name="code_head" type="spacer"
+					   label="TPL_BASETEMPLATE_FIELD_CODE_HEAD_LABEL"/>
+				<field name="code_head_top" type="textarea" default=""
+					   label="TPL_BASETEMPLATE_FIELD_CODE_TOP_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_CODE_HEAD_TOP_DESC"
+					   filter="raw"/>
+				<field name="code_head_bottom" type="textarea" default=""
+					   label="TPL_BASETEMPLATE_FIELD_CODE_BOTTOM_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_CODE_HEAD_BOTTOM_DESC"
+					   filter="raw"/>
+
+				<field name="code_body" type="spacer"
+					   label="TPL_BASETEMPLATE_FIELD_CODE_BODY_LABEL"/>
+				<field name="code_body_top" type="textarea" default=""
+					   label="TPL_BASETEMPLATE_FIELD_CODE_TOP_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_CODE_BODY_TOP_DESC"
+					   filter="raw"/>
+				<field name="code_body_bottom" type="textarea" default=""
+					   label="TPL_BASETEMPLATE_FIELD_CODE_BOTTOM_LABEL"
+					   description="TPL_BASETEMPLATE_FIELD_CODE_BODY_BOTTOM_DESC"
+					   filter="raw"/>
+
+			</fieldset>
+
 		</fields>
 	</config>
-	
+
 </extension>

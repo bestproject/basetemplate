@@ -2,7 +2,7 @@
 
 // Prepare document head
 require_once __DIR__.'/includes.php';
-use BestProject\Bootstrap3;
+use BestProject\Bootstrap;
 
 
 /**

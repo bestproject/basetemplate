@@ -1,6 +1,6 @@
 <?php
 /**
- * A Boostrap 4 class for processing Joomla 3 modules position.
+ * A Boostrap class for processing Joomla 4 modules position.
  *
  * @copyright Grupa Best Sp. z o.o.
  * @license   MIT
@@ -15,19 +15,19 @@ use Joomla\Registry\Registry;
  *
  * @since 1.5
  */
-abstract class Bootstrap4
+abstract class Bootstrap
 {
 
 	/**
 	 * Returns a Bootstrap 4 column classes build from desktop column size.
 	 *
-	 * @param   Integer  $size  Size of a column (from 0 to 12)
+	 * @param   int  $size  Size of a column (from 0 to 12)
 	 *
 	 * @return  string
 	 *
 	 * @since 1.5
 	 */
-	public static function getColumnClass($size)
+	public static function getColumnClass(int $size): string
 	{
 		switch ($size)
 		{
@@ -70,24 +70,24 @@ abstract class Bootstrap4
 	 *
 	 * @since 1.5
 	 */
-	public static function position($position, $itemClassSfx = '', $rowClass = 'row', $columns = true)
+	public static function position(string $position, string $itemClassSfx = '', string $rowClass = 'row', bool $columns = true): string
 	{
 		$modules = \JModuleHelper::getModules($position);
 
 		// There are no modules in this position, do not create any HTML
 		if( empty($modules) ) {
-			return;
+			return '';
 		}
 
 		$html = '';
 
 		// Wrap around modules if columns are enabled
-		if ($columns OR !empty($rowClass))
+		if ($columns || !empty($rowClass))
 		{
 			$html .= '<div class="' . $rowClass . '">';
 		}
 
-		foreach ($modules AS $module)
+		foreach ($modules as $module)
 		{
 			$module_params = new Registry($module->params);
 			$module_tag    = $module_params->get('module_tag', 'h3');
@@ -123,7 +123,7 @@ abstract class Bootstrap4
 		}
 
 		// Wrap around modules if columns are enabled
-		if ($columns OR !empty($rowClass))
+		if ($columns || !empty($rowClass))
 		{
 			$html .= '</div>';
 		}

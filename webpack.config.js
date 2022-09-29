@@ -1,7 +1,7 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
-
 const templateName = path.basename(__dirname);
+const PostBuildPlugin = require('./.dev/js/build/PostBuildPlugin');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -9,8 +9,8 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 // Template front-end build configuration
 Encore
-    .setOutputPath('assets/build')
-    .setPublicPath('/templates/'+templateName+'/assets/build')
+    .setOutputPath('../../media/templates/site/'+templateName)
+    .setPublicPath('/media/templates/site/'+templateName)
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSassLoader()
@@ -46,41 +46,23 @@ Encore
     .addEntry('slider', [
         './.dev/js/slider.js'
     ])
-    .copyFiles({
-        from: './.dev/images',
-        to: '[name].[contenthash].[ext]'
-    })
-    .configureFilenames({
-        css: '[name]-[contenthash].css',
-        js: '[name]-[contenthash].js'
-    });
-
-const ThemeConfig = Encore.getWebpackConfig();
-ThemeConfig.name = 'Template';
-
-Encore.reset();
-Encore
-    .setOutputPath('css')
-    .setPublicPath('/templates/'+templateName+'/css')
-    .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
-    .disableSingleRuntimeChunk()
-    .enableSassLoader()
-    .enableSourceMaps(!Encore.isProduction())
-    .configureBabel((config) => {}, {
-        includeNodeModules: ['swiper','dom7','ssr-window'],
-        useBuiltIns: 'usage',
-        corejs: 3
-    })
     .addStyleEntry('editor',[
         './.dev/scss/editor.scss'
     ])
+    .copyFiles([
+        {from: './.dev/images', to: 'images/[name].[contenthash].[ext]'},
+        {from: './.dev/fonts', to: 'fonts/[name].[contenthash].[ext]'},
+    ])
+    .addPlugin(new PostBuildPlugin)
     .configureFilenames({
-        css: '[name].css',
-    });
+        js: '[name]-[contenthash].js',
+        css: '[name]-[contenthash].css',
+        assets: '[name]-[contenthash].css',
+    })
+;
 
-const EditorConfig = Encore.getWebpackConfig();
-EditorConfig.name = 'Editor';
+const TemplateConfig = Encore.getWebpackConfig();
+TemplateConfig.name = 'Template';
 
 // Export configurations
-module.exports = [ThemeConfig, EditorConfig];
+module.exports = [TemplateConfig];

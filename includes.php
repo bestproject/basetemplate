@@ -90,7 +90,7 @@ if ($params->get('vendors_lightbox'))
 // Include back-to-top script
 if ($params->get('back_to_top'))
 {
-	$button_text = JText::_('TPL_BASETHEME_BACK_TO_TOP');
+	$button_text = JText::_('TPL_BASETEMPLATE_BACK_TO_TOP');
 	TemplateHelper::addEntryPointAssets('backtotop');
 	TemplateHelper::addScriptDeclaration("
 

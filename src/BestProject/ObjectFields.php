@@ -58,7 +58,7 @@ final class ObjectFields
 	{
 		if (!$this->has($name))
 		{
-			throw new Exception('This item does not have a field called "' . $name . '"".', 500);
+			throw new \RuntimeException('This item does not have a field called "' . $name . '"".', 500);
 		}
 
 		return (array) json_decode($this->get($name)->rawvalue);
@@ -92,7 +92,7 @@ final class ObjectFields
 	{
 		if (!$this->has($name))
 		{
-			throw new Exception('This item does not have a field called "' . $name . '"".', 500);
+			throw new \RuntimeException('This item does not have a field called "' . $name . '"".', 500);
 		}
 
 		return $this->fields[$name];

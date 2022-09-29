@@ -1,7 +1,7 @@
 {
-  "name": "basetheme",
+  "name": "basetemplate",
   "version": "2.0.0",
-  "description": "Joomla! 3 base theme build on Bootstrap 4",
+  "description": "Joomla! 4 base template build on Bootstrap 5",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "encore dev",
@@ -13,28 +13,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://artur-stepien@github.com/bestproject/basetheme.git"
+    "url": "git+https://artur-stepien@github.com/bestproject/basetemplate.git"
   },
   "private": true,
   "author": "Artur Stepien",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/bestproject/basetheme/issues"
+    "url": "https://github.com/bestproject/basetemplate/issues"
   },
-  "homepage": "https://github.com/bestproject/basetheme#readme",
+  "homepage": "https://github.com/bestproject/basetemplate#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "@symfony/webpack-encore": "^0.31.1",
+    "@fortawesome/fontawesome-free": "^6.2.0",
+    "@symfony/webpack-encore": "^4.0.0",
     "animate.css": "^4.1.1",
-    "bootstrap": "^4.6.0",
-    "core-js": "^3.9.1",
+    "bootstrap": "^5.2.1",
+    "core-js": "^3.25.3",
     "file-loader": "^6.2.0",
     "magnific-popup": "^1.1.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.3",
     "popper.js": "^1.16.1",
-    "sass-loader": "^9.0.1",
-    "swiper": "^6.5.0",
-    "webpack-notifier": "^1.13.0"
+    "sass-loader": "^13.0.2",
+    "swiper": "^8.4.2",
+    "webpack-notifier": "^1.15.0"
   },
   "engines": {
     "node": ">=13.0"

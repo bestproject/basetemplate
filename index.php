@@ -7,7 +7,7 @@
 //$this->addHeadLink('templates/'.$this->template.'/images/image.jpg', 'preload', 'rel', ['as'=>'image']);
 
 
-use BestProject\Bootstrap4;
+use BestProject\Bootstrap;
 use BestProject\TemplateHelper;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Menu\MenuItem;
@@ -67,10 +67,10 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
                         <!--Menu button-->
                         <?php if( $has_menu ): ?>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?>">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="<?php echo JText::_('TPL_BASETEMPLATE_TOGGLE_NAVIGATION') ?>">
                             <span class="d-flex align-items-center">
                                 <i class="fas fa-bars" aria-hidden="true"></i>
-                                <span class="toggler-text"><?php echo JText::_('TPL_BASETHEME_TOGGLE_NAVIGATION') ?></span>
+                                <span class="toggler-text"><?php echo JText::_('TPL_BASETEMPLATE_TOGGLE_NAVIGATION') ?></span>
                             </span>
                         </button>
                         <?php endif ?>
@@ -78,7 +78,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                     <?php if( $has_menu ): ?>
                         <!--Main navigation-->
                         <div id="main-navigation" class="collapse navbar-collapse">
-                            <?php echo Bootstrap4::position('menu', '', '', false) ?>
+                            <?php echo Bootstrap::position('menu', '', '', false) ?>
                         </div>
                     <?php endif ?>
                 </div>
@@ -89,7 +89,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
         <?php if( $has_slider ): ?>
         <div class="slider">
-            <?php echo Bootstrap4::position('slider', 'jumbotron text-center', 'wrapper', false) ?>
+            <?php echo Bootstrap::position('slider', 'jumbotron text-center', 'wrapper', false) ?>
         </div>
         <?php endif ?>
 
@@ -98,7 +98,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
         <div id="slider-after">
             <div class="container">
                 <div class="wrapper">
-                    <?php echo Bootstrap4::position('slider-after') ?>
+                    <?php echo Bootstrap::position('slider-after') ?>
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                     <?php if( $has_left ): ?>
                     <!--Left column-->
                     <div class="col-12 <?php echo ($has_right?'col-xl-3':'col-xl-4') ?>">
-                        <?php echo Bootstrap4::position('left') ?>
+                        <?php echo Bootstrap::position('left') ?>
                     </div>
                     <?php endif ?>
 
@@ -129,7 +129,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                         <?php if( $has_content_before ): ?>
                         <!--Before content-->
                         <div id="content-before">
-                            <?php echo Bootstrap4::position('content-before') ?>
+                            <?php echo Bootstrap::position('content-before') ?>
                         </div>
                         <?php endif ?>
 
@@ -142,7 +142,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                         <?php if( $has_content_after ): ?>
                         <!--After content-->
                         <div id="content-after">
-                            <?php echo Bootstrap4::position('content-after') ?>
+                            <?php echo Bootstrap::position('content-after') ?>
                         </div>
                         <?php endif ?>
 
@@ -151,7 +151,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
                     <?php if( $has_right ): ?>
                     <!--Right column-->
                     <div class="col-12 <?php echo ($has_left?'col-xl-3':'col-xl-4') ?>">
-                        <?php echo Bootstrap4::position('right') ?>
+                        <?php echo Bootstrap::position('right') ?>
                     </div>
                     <?php endif ?>
 
@@ -164,7 +164,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
         <div id="footer-before">
             <div class="container">
                 <div class="wrapper">
-                    <?php echo Bootstrap4::position('footer-before') ?>
+                    <?php echo Bootstrap::position('footer-before') ?>
                 </div>
             </div>
         </div>
@@ -176,7 +176,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
             <?php if( $has_footer ): ?>
             <!--Footer modules-->
             <div class="container">
-                <?php echo Bootstrap4::position('footer') ?>
+                <?php echo Bootstrap::position('footer') ?>
             </div>
             <?php endif ?>
 
@@ -187,7 +187,7 @@ $this->addHeadLink('https://fonts.googleapis.com/css?family=Roboto:100,200,300,4
 
                     <?php if( $has_footer_menu ): ?>
                         <!--Footer menu-->
-                        <?php echo Bootstrap4::position('footer-menu', '', 'footer-menu') ?>
+                        <?php echo Bootstrap::position('footer-menu', '', 'footer-menu') ?>
                     <?php endif ?>
                 </div>
             </div>
