@@ -22,7 +22,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 /* @var $app CMSApplication */
 /* @var $this HtmlDocument */
 /* @var $wa WebAssetManager */
-$base_uri     = Uri::base(true);
+$base_uri     = Uri::root(true);
 $app          = Factory::getApplication();
 $params       = $this->params;
 $debug        = (bool) $app->get('debug', 0);
@@ -35,7 +35,7 @@ $default      = $menu->getDefault($language);
 $sitename     = $app->get('sitename');
 $sitetitle    = $params->get('sitetitle');
 $logoFile     = $params->get('logoFile', '-1');
-$logoFile     = $logoFile !== '-1' ? $base_uri . '/images/logo/' . $logoFile : '';
+$logoFile     = $logoFile !== '-1' ? $base_uri . '/' . htmlspecialchars($logoFile, ENT_QUOTES) : '';
 $slogan       = $params->get('sitedescription');
 $faviconFile  = $params->get('faviconFile', '-1');
 $faviconFile  = $faviconFile !== '-1' ? $base_uri . '/images/icons/' . $faviconFile : '';
