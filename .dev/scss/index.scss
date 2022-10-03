@@ -10,8 +10,8 @@
 // Boostrap SASS default variables
 @import "node_modules/bootstrap/scss/variables";
 
-// Boostrap SASS default styles
-@import "node_modules/bootstrap/scss/bootstrap";
+// Default boostrap components list
+@import "_bootstrap";
 
 // Youre custom changes to theme
 @import "theme";
