@@ -48,34 +48,30 @@ $wa->registerAndUseStyle('fontscheme.current', $fonts_uri, [],['media' => 'print
 <body class="site <?php echo $class ?>">
 <?php echo TemplateHelper::renderCodeBodyTop() ?>
 
-<header>
+<header id="navigation" class="shadow-sm pb-2 navbar navbar-expand-md navbar-light">
 
-    <!--Page navigation-->
-    <div id="nav" class="navbar navbar-expand-xl navbar-light">
+    <!--Navigation header-->
+    <div class="container">
 
-        <!--Navigation header-->
-        <div class="container">
-
-            <!--Logo-->
-            <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
-                <?php if ($this->params->get('logoFile')): ?>
-                    <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
-                <?php else: ?>
-                    <?php echo $sitename ?>
-                <?php endif ?>
-
-                <?php if( !empty($slogan) ): ?>
-                    <small class="navbar-text"><?php echo $slogan ?></small>
-                <?php endif ?>
-            </a>
-
-            <!--Menu button-->
-            <?php if( $has_menu ): ?>
-                <?php echo Bootstrap::position('menu', '', '', false) ?>
+        <!--Logo-->
+        <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
+            <?php if ($logoFile): ?>
+                <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
+            <?php else: ?>
+                <?php echo $sitename ?>
             <?php endif ?>
-        </div>
 
+            <?php if( !empty($slogan) ): ?>
+                <small class="navbar-text visually-hidden"><?php echo $slogan ?></small>
+            <?php endif ?>
+        </a>
+
+        <!--Menu button-->
+        <?php if( $has_menu ): ?>
+            <?php echo Bootstrap::position('menu', '', '', false) ?>
+        <?php endif ?>
     </div>
+
 </header>
 
 <?php if( $has_slider ): ?>
