@@ -20,7 +20,7 @@ import $ from 'jquery';
 /**
  * Changes elements class on scroll
  */
-$.fn.classOnScroll = (scrolledClass = "scrolled")=>{
+$.fn.classOnScroll = function(scrolledClass = "scrolled") {
 
     this.each((idx, el)=>{
         $(window).scroll(()=>{

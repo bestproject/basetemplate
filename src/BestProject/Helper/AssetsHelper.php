@@ -127,15 +127,19 @@ class AssetsHelper
 
             // Add Styles
             if (array_key_exists('css', $entryPoints[$entryPoint])) {
+                $idx = 1;
                 foreach ($entryPoints[$entryPoint]['css'] as $stylesheet) {
-                    $webAssetManager->registerAndUseStyle($entryPoint.'-style', JUri::root(true) . trim($stylesheet, '/'));
+                    $webAssetManager->registerAndUseStyle($entryPoint.'-style-'.$idx, JUri::root(true) . trim($stylesheet, '/'));
+                    $idx++;
                 }
             }
 
             // Add scripts
             if (array_key_exists('js', $entryPoints[$entryPoint])) {
+                $idx = 1;
                 foreach ($entryPoints[$entryPoint]['js'] as $script) {
-                    $webAssetManager->registerAndUseScript($entryPoint.'-script', JUri::root(true) . trim($script, '/'), [], [], ['jquery']);
+                    $webAssetManager->registerAndUseScript($entryPoint.'-script'.$idx, JUri::root(true) . trim($script, '/'));
+                    $idx++;
                 }
             }
         }

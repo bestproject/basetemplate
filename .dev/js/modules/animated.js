@@ -16,13 +16,13 @@ import $ from 'jquery';
 /**
  * Run animate.css animations on element reveal.
  */
-$.fn.Animated = function () {
+$.Animated = ()=>{
 
     const $window = $(window);
 
     $window.on('scroll', revealOnScroll);
 
-    function revealOnScroll() {
+    let revealOnScroll = ()=>{
         const scrolled = $window.scrollTop(),
             win_height_padded = $window.height() * 1.1;
 
@@ -55,5 +55,5 @@ $.fn.Animated = function () {
 
 // Run animated
 $(()=>{
-    $(document).Animated();
+    $.Animated();
 });
