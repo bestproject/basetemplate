@@ -1,4 +1,4 @@
-import Swiper from 'swiper';
-import 'swiper/css';
+import 'swiper/css/bundle';
+import Swiper from 'swiper/bundle';
 
 window.Swiper = global.Swiper = Swiper;

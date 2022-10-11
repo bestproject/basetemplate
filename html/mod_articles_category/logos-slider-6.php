@@ -7,12 +7,14 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-use BestProject\Helper\TemplateHelper;
+use BestProject\Helper\AssetsHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\WebAsset\WebAssetManager;
 use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die;
 
-TemplateHelper::addEntryPointAssets('slider');
+AssetsHelper::addEntryPointAssets('slider');
 
 $id = 'mod_articles_category_slider' . $module->id;
 
@@ -32,14 +34,14 @@ $options = [
     // Loop the slides
     'loop' => 'true',
 
-    // Number of slides per view
-    'slidesPerView' => 6,
-
     // Space between slides
     'spaceBetween' => 20,
 
     // Responsive settings
     'breakpoints' => [
+        1300 => [
+	        'slidesPerView' => 6,
+        ],
         1170 => [
 	        'slidesPerView' => 3,
         ],
@@ -50,8 +52,13 @@ $options = [
 ];
 
 
-$options = json_encode((object)$options);
-TemplateHelper::addScriptDeclaration("
+$options = json_encode((object)$options, JSON_THROW_ON_ERROR);
+
+/**
+ * @var WebAssetManager $wa
+ */
+$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+$wa->addInlineScript("
     jQuery(function($){
         var ModArticlesCategoryLogos{$module->id} = new Swiper('#$id', $options);
     });
@@ -63,19 +70,19 @@ TemplateHelper::addScriptDeclaration("
  */
 ?>
 <div class="articles-category logos d-flex w-100 justify-content-center">
-    <div id="<?php echo $id ?>"  class="swiper-container flex-shrink-1">
+    <div id="<?php echo $id ?>"  class="swiper flex-shrink-1">
         <div class="swiper-wrapper">
 			<?php foreach( $list AS $item ):
 				$images = json_decode($item->images);
 				?>
                 <div class="swiper-slide">
                     <?php if ((int)$params->get('link_titles') === 1) : ?>
-                        <a class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center p-2 rounded-lg <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
-                            <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" />
+                        <a class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 rounded-lg <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
+                            <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" class="img-fluid m-1" />
                         </a>
                     <?php else: ?>
-                        <div class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center p-2 rounded-lg <?php echo $item->active; ?>">
-                            <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" />
+                        <div class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 rounded-lg <?php echo $item->active; ?>">
+                            <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" class="img-fluid m-1" />
                         </div>
                     <?php endif ?>
                 </div>
