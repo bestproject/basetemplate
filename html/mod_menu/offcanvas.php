@@ -24,7 +24,7 @@ $module_id = 'offcanvas-menu-'.$module->id;
 
     <div class="d-none d-md-block">
         <?php
-        $nav_class_suffix = 'flex-column flex-md-row';
+        $nav_class_suffix = 'navbar-nav flex-column flex-md-row';
         require __DIR__ . '/horizontal.php'; ?>
     </div>
 
@@ -37,7 +37,7 @@ $module_id = 'offcanvas-menu-'.$module->id;
         </div>
         <div class="offcanvas-body">
             <?php
-            $nav_class_suffix = 'flex-column flex-md-row';
+            $nav_class_suffix = 'navbar-nav flex-column flex-md-row';
             require __DIR__ . '/horizontal.php'; ?>
         </div>
     </div>

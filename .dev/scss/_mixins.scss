@@ -35,3 +35,7 @@
 @mixin anim($time:0.5s) {
     transition:$time linear all;
 }
+// Put a white overlay on an image.
+@mixin overlay-white() {
+    filter: brightness(0) invert(1);
+}

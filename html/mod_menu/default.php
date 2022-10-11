@@ -73,7 +73,7 @@ $start = (int) $params->get('startLevel', 1);
         }
     }
 
-    echo '<li class="' . implode(' ', $class) . '">';
+    echo '<li class="d-flex align-items-center ' . implode(' ', $class) . '">';
 
     switch ($item->type) :
         case 'separator':

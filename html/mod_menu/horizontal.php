@@ -10,6 +10,6 @@
 
 defined('_JEXEC') or die;
 
-$nav_class_suffix = 'flex-column flex-md-row';
+$nav_class_suffix = $nav_class_suffix ?? 'flex-column flex-md-row';
 
 require __DIR__.'/default.php';
