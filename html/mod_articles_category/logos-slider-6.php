@@ -40,13 +40,16 @@ $options = [
     // Responsive settings
     'breakpoints' => [
         1300 => [
-	        'slidesPerView' => 6,
+            'slidesPerView' => 6,
         ],
         1170 => [
-	        'slidesPerView' => 3,
+            'slidesPerView' => 3,
         ],
         768 => [
-	        'slidesPerView' => 1,
+            'slidesPerView' => 2,
+        ],
+        0 => [
+            'slidesPerView' => 1,
         ],
     ]
 ];
