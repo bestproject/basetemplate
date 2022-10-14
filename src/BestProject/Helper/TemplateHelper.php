@@ -7,7 +7,9 @@ use Exception;
 use JEventDispatcher;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\Event\Event;
 use Joomla\Registry\Registry;
+use RuntimeException;
 
 /**
  * Template helper.
@@ -150,6 +152,7 @@ abstract class TemplateHelper
      *
      * @return ObjectFields
      *
+     * @throws Exception
      * @since 1.0.0
      */
     public static function getFieldsMap($item, string $context = 'com_content.article'): ObjectFields
@@ -161,7 +164,7 @@ abstract class TemplateHelper
         // If this is object, try to look for its fields list
         if (is_object($item)) {
 
-            // Fields property doesn't exists so load them using fields plugin
+            // Fields property doesn't exist so load them using fields plugin
             if (!property_exists($item, 'jcfields')) {
                 static::getObjectFields($item, $context);
             }
@@ -185,21 +188,29 @@ abstract class TemplateHelper
      * @param   object  $item     Object holding the fields.
      * @param   string  $context  Plugin context. eg. com_content.article
      *
+     * @throws Exception
      * @since 1.5
      */
     public static function getObjectFields(object $item, string $context = 'com_content.article'): void
     {
-        $dispatcher = JEventDispatcher::getInstance();
+        $dispatcher = Factory::getApplication()->getDispatcher();
+        $event = new Event('onContentPrepare', [$context, &$item, &$item->params, 0]);
+
         PluginHelper::importPlugin('content');
 
         // Make sure event has something to work on
         // If this is an article, join its text into one property
-        if (!property_exists($item, 'text') && property_exists($item, 'introtext') && property_exists($item,
-                'fulltext')) {
+        if (!property_exists($item, 'text') && property_exists($item, 'introtext') && property_exists($item, 'fulltext')) {
             $item->text = $item->introtext . $item->fulltext;
         }
 
-        $dispatcher->trigger('onContentPrepare', [$context, &$item, &$item->params, 0]);
+        // Check if requirements are met
+        if( !property_exists($item, 'text') ) {
+            throw new RuntimeException('This object has no [text] property. Unable to build objects map');
+        }
+
+        // Dispatch event
+        $dispatcher->dispatch($event->getName(), $event);
     }
 
     /**
