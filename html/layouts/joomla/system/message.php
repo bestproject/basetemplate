@@ -46,30 +46,21 @@ Text::script('JCLOSE');
 Text::script('JOK');
 Text::script('JOPEN');
 
-// Alerts progressive enhancement
-$document->getWebAssetManager()
-    ->useStyle('webcomponent.joomla-alert')
-    ->useScript('messages');
-
 $messages = [];
 
 foreach ($msgList as $type => $msgs) {
     // JS loaded messages
     $messages[] = [$alert[$type] ?? $type => $msgs];
+
     // Noscript fallback
     if (!empty($msgs)) {
-        $msgOutput .= '<div class="alert alert-' . ($alert[$type] ?? $type) . '">';
+        $msgOutput .= '<div class="alert alert-' . ($alert[$type] ?? $type) . ' alert-dismissible fade show" role="alert">';
         foreach ($msgs as $msg) :
             $msgOutput .= $msg;
         endforeach;
+        $msgOutput .= '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="'.Text::_('JCLOSE').'"></button>';
         $msgOutput .= '</div>';
     }
 }
-
-if ($msgOutput !== '') {
-    $msgOutput = '<noscript>' . $msgOutput . '</noscript>';
-}
-
-$document->addScriptOptions('joomla.messages', $messages);
 ?>
-<div id="system-message-container" aria-live="polite"><?php echo $msgOutput; ?></div>
+<div id="system-message-container" class="container my-5" aria-live="polite"><?php echo $msgOutput; ?></div>
