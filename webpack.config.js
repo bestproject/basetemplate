@@ -23,6 +23,7 @@ Encore
         corejs: 3
     })
     .autoProvidejQuery()
+    .enablePostCssLoader()
     .addExternals({
         jquery: 'jQuery',
         joomla: 'Joomla'
