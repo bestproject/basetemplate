@@ -22,6 +22,7 @@ import $ from 'jquery';
  */
 $.fn.classOnScroll = function(scrolledClass = "scrolled") {
 
+    // On scroll check the element
     this.each((idx, el)=>{
         $(window).scroll(()=>{
             const scroll = $(window).scrollTop();
@@ -32,6 +33,17 @@ $.fn.classOnScroll = function(scrolledClass = "scrolled") {
                 $element.removeClass(scrolledClass);
             }
         });
+    });
+
+    // On load check the element
+    this.each((idx, el)=>{
+        const scroll = $(window).scrollTop();
+        const $element = $(el);
+        if (scroll > 0) {
+            $element.addClass(scrolledClass);
+        } else {
+            $element.removeClass(scrolledClass);
+        }
     });
 
 };

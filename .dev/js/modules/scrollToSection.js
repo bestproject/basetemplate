@@ -22,18 +22,32 @@ import $ from 'jquery';
  */
 $.fn.scrollToSection = (speed = 700)=>{
     const $elements = $('a[href*="#"]');
+    const $navbarOffset = $('#navigation').height() + 25;
 
+    // Scrolling function
+    const scrollTo = function(query){
+
+        $('html,body').animate({
+            scrollTop: $(query).offset().top - $navbarOffset
+        }, speed);
+    }
+
+    // Bind to every link
     for (let i = 0, ic = $elements.length; i < ic; i++) {
         const $href = $($elements[i]).attr('href');
         if ($href.charAt(0) === '#' && $href.length > 1) {
+
+            // Click scrolls to section
             $($elements[i]).click(function (e) {
                 e.preventDefault();
 
-                $('html,body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, speed);
+                scrollTo($(this).attr('href'));
             });
         }
+    }
 
+    // On first run detect if this is a current link
+    if( window.location.hash && $(window.location.hash).length ) {
+        scrollTo($(window.location.hash));
     }
 };
