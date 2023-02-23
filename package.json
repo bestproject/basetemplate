@@ -23,20 +23,21 @@
   },
   "homepage": "https://github.com/bestproject/basetemplate#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.2.0",
-    "@symfony/webpack-encore": "^4.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@fortawesome/fontawesome-free": "^6.3",
+    "@symfony/webpack-encore": "^4.0",
     "animate.css": "^4.1.1",
-    "bootstrap": "^5.2.1",
-    "core-js": "^3.25.3",
-    "file-loader": "^6.2.0",
-    "magnific-popup": "^1.1.0",
-    "node-sass": "^7.0.3",
-    "popper.js": "^1.16.1",
-    "sass-loader": "^13.0.2",
-    "swiper": "^8.4.2",
-    "webpack-notifier": "^1.15.0",
     "autoprefixer": "^10.4",
-    "postcss-loader": "^7.0"
+    "bootstrap": "^5.2",
+    "core-js": "^3.9.1",
+    "file-loader": "^6.2",
+    "magnific-popup": "^1.1",
+    "sass": "^1.0",
+    "popper.js": "^1.16",
+    "postcss-loader": "^7.0",
+    "sass-loader": "^13.0",
+    "swiper": "^9.0",
+    "webpack-notifier": "^1.13.0"
   },
   "engines": {
     "node": ">=13.0"
