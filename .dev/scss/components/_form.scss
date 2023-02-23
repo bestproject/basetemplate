@@ -1,6 +1,8 @@
+@use "sass:math";
+
 .form-group {
     .form-control-feedback {
-        margin-bottom:$spacer/3;display:block;
+        margin-bottom: math.div($spacer, 3);display:block;
     }
 
     &.has-danger {

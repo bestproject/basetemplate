@@ -28,7 +28,7 @@
     "@symfony/webpack-encore": "^4.0",
     "animate.css": "^4.1.1",
     "autoprefixer": "^10.4",
-    "bootstrap": "^5.2",
+    "bootstrap": "^5.2.3",
     "core-js": "^3.9.1",
     "file-loader": "^6.2",
     "magnific-popup": "^1.1",
