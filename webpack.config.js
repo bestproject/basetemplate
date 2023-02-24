@@ -7,6 +7,14 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
+let themeAssets = [
+    './.dev/scss/index.scss',
+    './.dev/js/theme.js',
+]
+if( Encore.isDev() ) {
+    themeAssets = themeAssets.concat(['./.dev/scss/dev.scss']);
+}
+
 // Template front-end build configuration
 Encore
     .setOutputPath('../../media/templates/site/'+templateName)
@@ -28,10 +36,9 @@ Encore
         jquery: 'jQuery',
         joomla: 'Joomla'
     })
-    .addEntry('theme',[
-        './.dev/scss/index.scss',
-        './.dev/js/theme.js'
-    ])
+    .addEntry('theme',
+        themeAssets
+    )
     .addEntry('animated', [
         './.dev/js/animated.js'
     ])

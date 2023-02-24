@@ -4,7 +4,6 @@ defined('_JEXEC') or die;
 
 use BestProject\Bootstrap;
 use BestProject\Helper\TemplateHelper;
-use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Menu\MenuItem;
 use Joomla\CMS\Menu\SiteMenu;
