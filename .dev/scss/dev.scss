@@ -1,0 +1,52 @@
+@use "sass:math";
+
+@import "mixins";
+@import "functions";
+
+// Boostrap SASS functions
+@import "~bootstrap/scss/functions";
+
+// Variables overrides
+@import "variables";
+
+// Boostrap SASS default variables
+@import "~bootstrap/scss/variables";
+
+// Bootstrap base methods
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+body {
+    &:after {
+        position: fixed;
+        top:50%;right:$spacer;
+        z-index:99999999;
+        font-size:rem(16);
+        font-weight: 500;
+        color:white;
+        background:$danger;
+        display:block;
+        padding: math.div($spacer, 2) $spacer;
+        @include media-breakpoint-only('xxl') {
+            content:'XXL';
+        }
+        @include media-breakpoint-only('xl') {
+            content:'XL';
+        }
+        @include media-breakpoint-only('lg') {
+            content:'LG';
+        }
+        @include media-breakpoint-only('md') {
+            content:'MD';
+        }
+        @include media-breakpoint-only('sm') {
+            content:'SM';
+        }
+        @include media-breakpoint-only('xs') {
+            content:'XS';
+        }
+    }
+}
