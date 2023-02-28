@@ -3,6 +3,7 @@
 defined('_JEXEC') or die;
 
 use BestProject\Bootstrap;
+use BestProject\Helper\ImageHelper;
 use BestProject\Helper\TemplateHelper;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Menu\MenuItem;
@@ -24,11 +25,12 @@ require_once __DIR__.'/includes.php';
 /** == FONTS ========================================================= */
 $fonts_uri = 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap';
 
+$wa->registerAndUseStyle('fontscheme.current', $fonts_uri, [],['rel' => 'lazy-stylesheet', 'crossorigin' => 'anonymous']);
+
 $this->getPreloadManager()->preconnect('https://fonts.googleapis.com/', ['crossorigin' => 'anonymous']);
 $this->getPreloadManager()->preconnect('https://fonts.gstatic.com/', ['crossorigin' => 'anonymous']);
-$this->getPreloadManager()->preload($fonts_uri, ['as' => 'style', 'crossorigin' => 'anonymous']);
+$this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')->getUri(), ['as' => 'style', 'crossorigin' => 'anonymous']);
 
-$wa->registerAndUseStyle('fontscheme.current', $fonts_uri, [],['media' => 'print', 'rel' => 'lazy-stylesheet', 'onload' => 'this.media=\'all\'', 'crossorigin' => 'anonymous'])
 
 
 /** == CUSTOM VARIABLES ============================================== */
@@ -55,7 +57,7 @@ $wa->registerAndUseStyle('fontscheme.current', $fonts_uri, [],['media' => 'print
         <!--Logo-->
         <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
             <?php if ($logoFile): ?>
-                <img src="<?php echo $logoFile ?>" alt="<?php echo $sitename ?>" />
+                <img src="<?php echo $logoFile ?>" <?php echo ImageHelper::getSizeAttributes($logoFile) ?> alt="<?php echo $sitename ?>" />
             <?php else: ?>
                 <?php echo $sitename ?>
             <?php endif ?>
