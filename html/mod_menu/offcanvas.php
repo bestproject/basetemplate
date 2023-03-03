@@ -31,7 +31,7 @@ $module_id = 'offcanvas-menu-'.$module->id;
     <div class="offcanvas offcanvas-end d-flex d-md-none" tabindex="-1" id="<?php echo $module_id ?>" aria-labelledby="<?php echo $module_id ?>-title">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="<?php echo $module_id ?>-title"><?php echo $module->title ?></h5>
-            <button type="button" class="btn-close btn btn-outline-primary px-2 py-1 mt-1 me-1" data-bs-dismiss="offcanvas" aria-label="<?php echo Text::_('JCLOSE') ?>">
+            <button type="button" class="btn-close btn btn-outline-primary px-2 py-1 mt-1 me-1 d-flex align-items-center" data-bs-dismiss="offcanvas" aria-label="<?php echo Text::_('JCLOSE') ?>">
                 <i class="fas fa-xmark" aria-hidden="true"></i>
             </button>
         </div>

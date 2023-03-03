@@ -3,7 +3,7 @@
 namespace BestProject;
 
 use Exception;
-use FieldsHelper;
+use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 
 /**
  * Class helping with item custom fields.
