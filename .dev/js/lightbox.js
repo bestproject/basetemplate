@@ -30,7 +30,7 @@ $(()=>{
         });
 
         // Single image lightbox
-        $notIgnored.filter("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").magnificPopup({
+        $notIgnored.filter(":not([data-gallery])").filter("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.png'],a[href$='.gif']").magnificPopup({
             type:'image',
             image: {
                 verticalFit: true
