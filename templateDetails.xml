@@ -53,6 +53,10 @@
 					   label="TPL_BASETEMPLATE_LOGO_LABEL"
 					   description="TPL_BASETEMPLATE_LOGO_DESC"/>
 
+				<field name="faviconFile" class="" type="media" default=""
+					   label="TPL_BASETEMPLATE_FAVICONFILE_LABEL"
+					   description="TPL_BASETEMPLATE_FAVICONFILE_DESC"/>
+
 				<field name="sitetitle" type="text" default="BP Basetemplate"
 					   label="JGLOBAL_TITLE"
 					   description="JFIELD_ALT_PAGE_TITLE_LABEL"

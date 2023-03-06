@@ -38,7 +38,7 @@ $logoFile     = $params->get('logoFile', '-1');
 $logoFile     = $logoFile !== '-1' ? $base_uri . '/' . htmlspecialchars($logoFile, ENT_QUOTES) : '';
 $slogan       = $params->get('sitedescription');
 $faviconFile  = $params->get('faviconFile', '-1');
-$faviconFile  = $faviconFile !== '-1' ? $base_uri . '/images/icons/' . $faviconFile : '';
+$faviconFile  = $faviconFile !== '-1' ? $base_uri . '/' . htmlspecialchars($faviconFile, ENT_QUOTES) : '';
 $copyrights   = $params->get('copyrights', $sitename);
 $is_frontpage = (($active AND $active->id == $default->id) ? true : false);
 $is_subpage   = !$is_frontpage;
