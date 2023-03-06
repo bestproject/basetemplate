@@ -38,7 +38,7 @@ $(()=>{
         });
 
         // youtube lightbox
-        $notIngored.filter("a[href*='youtube.']").magnificPopup({
+        $notIgnored.filter("a[href*='youtube.']").magnificPopup({
             disableOn: 700,
             type: 'iframe',
             mainClass: 'mfp-fade',
