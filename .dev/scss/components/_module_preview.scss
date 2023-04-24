@@ -1,0 +1,42 @@
+body {
+    .mod-preview {
+        background: none !important;
+        border-radius: 0;
+        border: .1rem dotted $dark;
+        margin: 0;
+        position: relative;
+        box-shadow: inset 0 0 0 .1rem rgba($white, 1);
+        min-height: 3rem;
+
+        &:hover {
+            box-shadow: inset 0 0 0 .1rem rgba($white, 1);
+            border-style: solid;
+
+            .mod-preview-info {
+                display: block;
+            }
+        }
+
+        .mod-preview-info {
+            padding: 1.5rem 2rem;
+            margin: 0;
+            z-index: 99999999;
+            background: $dark;
+            display: none;
+            border-radius: 0;
+            text-align: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            line-height: 1.625;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 0 1.5rem rgba($black, .3);
+        }
+
+        .mod-preview-wrapper {
+            margin: 0;
+        }
+    }
+}

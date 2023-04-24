@@ -1,111 +1,108 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  mod_menu
  *
- * @copyright   Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
+ * @copyright   (C) 2020 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
-// Note. It is important to remove spaces between elements.
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\Utilities\ArrayHelper;
 
-$default = JFactory::getApplication()->getMenu()->getDefault(JFactory::getLanguage()->getTag());
+/** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
+//$wa = $app->getDocument()->getWebAssetManager();
+//$wa->registerAndUseScript('nav', 'media/templates/site/cassiopeia/js/mod_menu/menu.min.js', [], ['defer' => true], ['navjs']);
+
+$attributes          = [];
+$nav_class_suffix = $nav_class_suffix ?? 'flex-column';
+$attributes['class'] = 'mod-menu mod-menu_dropdown nav '. $nav_class_suffix .' ' . $class_sfx;
+
+if ($tagId = $params->get('tag_id', '')) {
+    $attributes['id'] = $tagId;
+}
+
+$start = (int) $params->get('startLevel', 1);
 
 ?>
-<ul class="nav <?php echo $class_sfx ?> <?php echo $params->get('moduleclass_sfx') ?>"<?php
-		$tag = '';
+<ul <?php echo ArrayHelper::toString($attributes); ?>>
+<?php foreach ($list as $i => &$item) {
+    // Skip sub-menu items if they are set to be hidden in the module's options
+    if (!$showAll && $item->level > $start) {
+        continue;
+    }
 
-		if ($params->get('tag_id') != null)
-		{
-			$tag = $params->get('tag_id') . '';
-			echo ' id="' . $tag . '"';
-		}
-	?>>
-	<?php
-	foreach ($list as $i => &$item)
-	{
+    $itemParams = $item->getParams();
+    $class      = [];
+    $class[]    = 'nav-item item-' . $item->id . ' level-' . ($item->level - $start + 1);
 
-		// No images allowed in this menu type
-		$item->menu_image = null;
+    if ($item->id == $default_id) {
+        $class[] = 'default';
+    }
 
-		$class = 'nav-item';
-		$class.= ' item-' . $item->id;
+    if ($item->id == $active_id || ($item->type === 'alias' && $itemParams->get('aliasoptions') == $active_id)) {
+        $class[] = 'current';
+    }
 
-		if (($item->id == $active_id) OR ($item->type == 'alias' AND $item->params->get('aliasoptions') == $active_id))
-		{
-			$class .= ' current';
-		}
+    if (in_array($item->id, $path)) {
+        $class[] = 'active';
+    } elseif ($item->type === 'alias') {
+        $aliasToId = $itemParams->get('aliasoptions');
 
-		if( $item->id==$default->id ) {
-			$class .= ' default';
-		}
+        if (count($path) > 0 && $aliasToId == $path[count($path) - 1]) {
+            $class[] = 'active';
+        } elseif (in_array($aliasToId, $path)) {
+            $class[] = 'alias-parent-active';
+        }
+    }
 
-		if (in_array($item->id, $path))
-		{
-			$class .= ' active';
-		}
-		elseif ($item->type == 'alias')
-		{
-			$aliasToId = $item->params->get('aliasoptions');
+    if ($item->type === 'separator') {
+        $class[] = 'divider';
+    }
 
-			if (count($path) > 0 && $aliasToId == $path[count($path) - 1])
-			{
-				$class .= ' active';
-			}
-			elseif (in_array($aliasToId, $path))
-			{
-				$class .= ' alias-parent-active';
-			}
-		}
+    if ($showAll) {
+        if ($item->deeper) {
+            $class[] = 'deeper';
+        }
 
-		if ($item->type == 'separator')
-		{
-			$class .= ' divider';
-		}
+        if ($item->parent) {
+            $class[] = 'parent';
+        }
+    }
 
-		if ($item->parent)
-		{
-			$class .= ' parent';
-		}
+    echo '<li class="d-flex align-items-center ' . implode(' ', $class) . '">';
 
-		if (!empty($class))
-		{
-			$class = ' class="' . trim($class) . '"';
-		}
+    switch ($item->type) :
+        case 'separator':
+        case 'component':
+        case 'heading':
+        case 'url':
+            require ModuleHelper::getLayoutPath('mod_menu', 'default_' . $item->type);
+            break;
 
-		echo '<li' . $class . '>';
+        default:
+            require ModuleHelper::getLayoutPath('mod_menu', 'default_url');
+    endswitch;
 
-		// Render the menu item.
-		switch ($item->type) :
-			case 'separator':
-			case 'url':
-			case 'component':
-			case 'heading':
-				require JModuleHelper::getLayoutPath('mod_menu', 'default_' . $item->type);
-				break;
+    switch (true) :
+        // The next item is deeper.
+        case $showAll && $item->deeper:
+            echo '<ul class="mm-collapse">';
+            break;
 
-			default:
-				require JModuleHelper::getLayoutPath('mod_menu', 'default_url');
-				break;
-		endswitch;
+        // The next item is shallower.
+        case $item->shallower:
+            echo '</li>';
+            echo str_repeat('</ul></li>', $item->level_diff);
+            break;
 
-		// The next item is deeper.
-		if ($item->deeper)
-		{
-			echo '<ul class="dropdown-menu">';
-		}
-		elseif ($item->shallower)
-		{
-			// The next item is shallower.
-			echo '</li>';
-			echo str_repeat('</ul></li>', $item->level_diff);
-		}
-		else
-		{
-			// The next item is on the same level.
-			echo '</li>';
-		}
-	}
-	?></ul>
+        // The next item is on the same level.
+        default:
+            echo '</li>';
+            break;
+    endswitch;
+}
+?></ul>

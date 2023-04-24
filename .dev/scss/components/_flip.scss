@@ -1,0 +1,37 @@
+.flip-wrapper {
+    perspective: 1000px;
+    .flip {
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        position: relative;
+        padding-top:56%;
+        .flip-front,.flip-back {
+
+            position: absolute;
+            top: 0;left: 0;
+            bottom:0;right:0;
+
+        }
+        .flip-front {
+            z-index: 2;background-color:white;
+            /* for firefox 31 */
+            transform: rotateY(0deg);
+            img {
+                max-width:70%;max-height:80%;
+            }
+            backface-visibility: hidden;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+            background-color:$gray-100;
+            .page-header [itemprop="name"] {
+                font-family:$font-family-base;
+            }
+        }
+    }
+    &:hover {
+        .flip {
+            transform: rotateY(180deg);
+        }
+    }
+}

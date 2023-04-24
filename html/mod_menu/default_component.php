@@ -1,82 +1,80 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  mod_menu
  *
- * @copyright   Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
+ * @copyright   (C) 2020 Open Source Matters, Inc. <https://www.joomla.org>
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
 
-$item->anchor_css.= ' nav-link';
+use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\HTML\HTMLHelper;
 
-if( $item->deeper AND count($item->tree)<=1 ) {
-    if( stripos($params->get('layout', 'default'), ':dropdown')!=='false') {
-        $attrib = ' ';
-        $dropdown_class = ' dropdown-toggle';
-        $dropdown_attrib = ' data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"';
+$attributes = [];
+
+if ($item->anchor_title) {
+    $attributes['title'] = $item->anchor_title;
+}
+
+
+if ($item->anchor_css) {
+    $attributes['class'] = $item->anchor_css;
+}
+
+if ($item->anchor_rel) {
+    $attributes['rel'] = $item->anchor_rel;
+}
+
+if ($item->id == $active_id) {
+    $attributes['aria-current'] = 'location';
+
+    if ($item->current) {
+        $attributes['aria-current'] = 'page';
+    }
+}
+
+$attributes['class'] = $attributes['class'] ?? '';
+$attributes['class'].= ' nav-link d-flex align-items-center';
+
+$linktype = $item->title;
+
+if ($item->menu_icon) {
+    // The link is an icon
+    if ($itemParams->get('menu_text', 1)) {
+        // If the link text is to be displayed, the icon is added with aria-hidden
+        $linktype = '<span class="p-2 ' . $item->menu_icon . '" aria-hidden="true"></span>' . $item->title;
     } else {
-        $attrib = '';
+        // If the icon itself is the link, it needs a visually hidden text
+        $linktype = '<span class="p-2 ' . $item->menu_icon . '" aria-hidden="true"></span><span class="visually-hidden">' . $item->title . '</span>';
     }
-} else {
-	$item->anchor_css.= ' ';
-	$attrib ='';
-}
+} elseif ($item->menu_image) {
+    // The link is an image, maybe with an own class
+    $image_attributes = [];
 
-if (in_array($item->id, $path))
-{
-    $item->anchor_css .= ' active';
-}
-elseif ($item->type == 'alias')
-{
-    $aliasToId = $item->params->get('aliasoptions');
-
-    if (count($path) > 0 && $aliasToId == $path[count($path) - 1])
-    {
-        $item->anchor_css .= ' active';
+    if ($item->menu_image_css) {
+        $image_attributes['class'] = $item->menu_image_css;
     }
-    elseif (in_array($aliasToId, $path))
-    {
-        $item->anchor_css .= ' alias-parent-active';
+
+    $linktype = HTMLHelper::_('image', $item->menu_image, $item->title, $image_attributes);
+
+    if ($itemParams->get('menu_text', 1)) {
+        $linktype .= '<span class="image-title">' . $item->title . '</span>';
     }
 }
 
-// Note. It is important to remove spaces between elements.
-$class = $item->anchor_css ? 'class="' . trim($item->anchor_css) . '" ' : '';
-$title = $item->anchor_title ? 'title="' . $item->anchor_title . '" ' : '';
+if ($item->browserNav == 1) {
+    $attributes['target'] = '_blank';
+} elseif ($item->browserNav == 2) {
+    $options = 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes';
 
-if ($item->menu_image)
-{
-	$item->params->get('menu_text', 1) ?
-	$linktype = '<img src="' . $item->menu_image . '" alt="' . $item->title . '" /><span class="title">' . $item->title . '</span> ' :
-	$linktype = '<img src="' . $item->menu_image . '" alt="' . $item->title . '" />';
-}
-else
-{
-	$linktype = '<span>'.$item->title.'</span>';
+    $attributes['onclick'] = "window.open(this.href, 'targetWindow', '" . $options . "'); return false;";
 }
 
-$dropdown = '';
-if( stripos($params->get('layout', 'default'), ':dropdown')!=='false') {
-    if( $item->deeper AND count($item->tree)<=1 ) {
-        $dropdown = ' <button type="button"  class="btn '.$dropdown_class.'" '.$dropdown_attrib.'></button>';
-    }
-}
+echo HTMLHelper::link(OutputFilter::ampReplace(htmlspecialchars($item->flink, ENT_COMPAT, 'UTF-8', false)), $linktype, $attributes);
 
-switch ($item->browserNav)
-{
-	default:
-	case 0:
-?><a <?php echo $class,$attrib ?>href="<?php echo $item->flink; ?>" <?php echo $title; ?>><?php echo $linktype; ?></a><?php echo $dropdown;
-		break;
-	case 1:
-		// _blank
-?><a <?php echo $class,$attrib ?>href="<?php echo $item->flink; ?>" target="_blank" <?php echo $title; ?>><?php echo $linktype; ?></a><?php echo $dropdown;
-		break;
-	case 2:
-	// Use JavaScript "window.open"
-?><a <?php echo $class,$attrib ?>href="<?php echo $item->flink; ?>" onclick="window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes');return false;" <?php echo $title; ?>><?php echo $linktype; ?></a>
-<?php echo $dropdown;
-		break;
+if ($showAll && $item->deeper) {
+    echo '<button class="mm-collapsed mm-toggler mm-toggler-link" aria-haspopup="true" aria-expanded="false" aria-label="' . $item->title . '"></button>';
 }

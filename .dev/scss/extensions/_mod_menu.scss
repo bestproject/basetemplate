@@ -1,0 +1,33 @@
+ul.navbar-nav {
+    a {
+        display:block;
+        &.dropdown-toggle {
+            padding-right:1rem !important;
+        }
+    }
+    &>li {
+        &>a {
+            &::after {
+                transform: translateY(-50%);
+                position: absolute;
+                right: 0;
+                top: 50%;
+            }
+        }
+    }
+    .dropdown-menu {
+        padding-top:0;padding-bottom:0;
+        a::after {
+            transform: rotate(-90deg) translateY(-50%);
+            position: absolute;
+            right: 0;
+            top: 50%;
+        }
+        .dropdown-menu {
+            top: 0;
+            left: 100%; 
+            margin-left: .1rem;
+            margin-right: .1rem;
+        }
+    }
+}

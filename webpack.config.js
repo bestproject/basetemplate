@@ -1,8 +1,19 @@
-var path = require('path');
+const Encore = require('@symfony/webpack-encore');
+const path = require('path');
+const templateName = path.basename(__dirname);
+const PostBuildPlugin = require('./.dev/js/build/PostBuildPlugin');
 
-var templateName = path.basename(__dirname);
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
 
-var Encore = require('@symfony/webpack-encore');
+let themeAssets = [
+    './.dev/scss/index.scss',
+    './.dev/js/theme.js',
+]
+if( Encore.isDev() ) {
+    themeAssets = themeAssets.concat(['./.dev/scss/dev.scss']);
+}
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -10,36 +21,60 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 // Template front-end build configuration
 Encore
-    .setOutputPath('assets/build')
-    .setPublicPath('/templates/'+templateName+'/assets/build')
+    .setOutputPath('../../media/templates/site/'+templateName)
+    .setPublicPath('/media/templates/site/'+templateName)
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSassLoader()
     .enableVersioning(Encore.isProduction())
-    .disableSingleRuntimeChunk()
-    .addExternals({
-        jquery: 'jQuery'
+    .enableSingleRuntimeChunk()
+    .enableSourceMaps(!Encore.isProduction())
+    .configureBabel((config) => {}, {
+        includeNodeModules: ['swiper','dom7','ssr-window'],
+        useBuiltIns: 'usage',
+        corejs: 3
     })
-    .addEntry('theme',[
-        './.dev/sass/index.scss',
-        './.dev/js/theme.js'
-    ]);
-    
-const themeConfig = Encore.getWebpackConfig();
+    .autoProvidejQuery()
+    .enablePostCssLoader()
+    .addExternals({
+        jquery: 'jQuery',
+        joomla: 'Joomla'
+    })
+    .addEntry('theme',
+        themeAssets
+    )
+    .addEntry('animated', [
+        './.dev/js/animated.js'
+    ])
+    .addEntry('backtotop', [
+        './.dev/js/backtotop.js'
+    ])
+    .addEntry('classonscroll', [
+        './.dev/js/classonscroll.js'
+    ])
+    .addEntry('lightbox', [
+        './.dev/js/lightbox.js'
+    ])
+    .addEntry('slider', [
+        './.dev/js/slider.js'
+    ])
+    .addStyleEntry('editor',[
+        './.dev/scss/editor.scss'
+    ])
+    .copyFiles([
+        {from: './.dev/images', to: 'images/[name].[contenthash].[ext]'},
+        {from: './.dev/fonts', to: 'fonts/[name].[contenthash].[ext]'},
+    ])
+    .addPlugin(new PostBuildPlugin)
+    .configureFilenames({
+        js: '[name]-[contenthash].js',
+        css: '[name]-[contenthash].css',
+        assets: '[name]-[contenthash].css',
+    })
+;
 
-// Template editor build configuration
-Encore.reset();
-Encore
-    .setOutputPath('assets/build')
-    .setPublicPath('/templates/'+templateName+'/assets/build')
-    .enableBuildNotifications()
-    .enableSassLoader()
-    .disableSingleRuntimeChunk()
-    .addEntry('editor',[
-        './.dev/sass/editor.scss'
-    ]);
-    
-const editorConfig = Encore.getWebpackConfig();
+const TemplateConfig = Encore.getWebpackConfig();
+TemplateConfig.name = 'Template';
 
 // Export configurations
-module.exports = [themeConfig, editorConfig];
+module.exports = [TemplateConfig];
