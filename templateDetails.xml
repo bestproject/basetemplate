@@ -64,7 +64,6 @@
 
 				<field name="sitedescription" type="text" default=""
 					   label="JGLOBAL_DESCRIPTION"
-					   description="JGLOBAL_SUBHEADING_DESC"
 					   filter="string"/>
 
 				<field name="copyrights" type="text" default="Best Project"
