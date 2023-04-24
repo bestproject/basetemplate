@@ -169,7 +169,7 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
     <?php endif ?>
 
     <div class="container">
-        <div class="wrapper row justify-content-center justify-content-xl-between align-items-center py-3">
+        <div class="wrapper justify-content-center justify-content-xl-between align-items-center py-3">
             <!--Copyrights info-->
             <span class="copyrights text-muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
 
