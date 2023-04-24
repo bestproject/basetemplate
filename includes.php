@@ -4,6 +4,7 @@ use BestProject\Helper\AssetsHelper;
 use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
 
@@ -22,6 +23,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 /* @var $app CMSApplication */
 /* @var $this HtmlDocument */
 /* @var $wa WebAssetManager */
+/* @var $params Joomla\Registry\Registry */
 $base_uri     = Uri::root(true);
 $app          = Factory::getApplication();
 $params       = $this->params;
@@ -47,7 +49,7 @@ $layout       = $app->input->get('layout');
 $wa           = $this->getWebAssetManager();
 
 /** == JAVA SCRIPT ============================================================== */
-JHTML::_('jquery.framework');
+$wa->useScript('jquery');
 
 /** == DISABLE SYSTEM ASSETS ==================================================== */
 
@@ -92,7 +94,7 @@ if ($params->get('vendors_lightbox'))
 // Include back-to-top script
 if ($params->get('back_to_top'))
 {
-    $button_text = JText::_('TPL_STORAGE_BACK_TO_TOP');
+    $button_text = Text::_('TPL_STORAGE_BACK_TO_TOP');
     AssetsHelper::addEntryPointAssets('backtotop');
     AssetsHelper::addScriptDeclaration("
 
@@ -193,11 +195,3 @@ if ($params->get('messages_debug', 0))
     $app->enqueueMessage('This is a sample notice message. Suspendisse pretium sodales mauris, quis semper lacus fermentum eu.', 'notice');
     $app->enqueueMessage('This is a simple message. Suspendisse pretium sodales mauris, quis semper lacus fermentum eu.', 'message');
 }
-
-/**
- * == Disable JQuery============================================================
- */
-$app->registerEvent('onBeforeRender', function($e = null) use ($wa, $app){
-    $wa->disableScript('jquery');
-    $wa->disableScript('jquery-noconflict');
-});
