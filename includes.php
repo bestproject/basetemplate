@@ -94,7 +94,7 @@ if ($params->get('vendors_lightbox'))
 // Include back-to-top script
 if ($params->get('back_to_top'))
 {
-    $button_text = Text::_('TPL_STORAGE_BACK_TO_TOP');
+    $button_text = Text::_('TPL_BASETEMPLATE_BACK_TO_TOP');
     AssetsHelper::addEntryPointAssets('backtotop');
     AssetsHelper::addScriptDeclaration("
 
