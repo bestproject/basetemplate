@@ -15,6 +15,10 @@ if( Encore.isDev() ) {
     themeAssets = themeAssets.concat(['./.dev/scss/dev.scss']);
 }
 
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
+
 // Template front-end build configuration
 Encore
     .setOutputPath('../../media/templates/site/'+templateName)
