@@ -1,3 +1,6 @@
 node_modules
-vendor
-assets/build
+assets/build/*
+!assets/build
+!assets/build/.gitkeep
+/vendor/composer/*
+/vendor/autoload.php

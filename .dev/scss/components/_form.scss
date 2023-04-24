@@ -1,0 +1,32 @@
+@use "sass:math";
+
+.form-group {
+    .form-control-feedback {
+        margin-bottom: math.div($spacer, 3);display:block;
+    }
+
+    &.has-danger {
+        .form-control-feedback {
+            font-size:$font-size-sm;
+            color:$danger;
+        }
+    }
+    &.has-warning {
+        .form-control-feedback {
+            font-size:$font-size-sm;
+            color:$warning;
+        }
+    }
+    &.has-info {
+        .form-control-feedback {
+            font-size:$font-size-sm;
+            color:$info;
+        }
+    }
+    &.has-success {
+        .form-control-feedback {
+            font-size:$font-size-sm;
+            color:$success;
+        }
+    }
+}

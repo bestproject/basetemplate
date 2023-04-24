@@ -1,0 +1,12 @@
+.back-to-top {
+    @include anim();
+    position:fixed;right:0;bottom:3rem;padding:.5rem 1.5rem;
+    opacity:0;background:$primary;color:$white;
+    border-bottom:.3rem solid darken($primary, 30%);
+    &.show {
+        right:3rem;opacity:1;
+        &:hover {
+            background:darken($primary, 30%);
+        }
+    }
+}
