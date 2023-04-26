@@ -12,6 +12,10 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 
+/**
+ * @var object $module
+ */
+
 $collapseLayout = true;
 $module_id = 'offcanvas-menu-'.$module->id;
 ?>
@@ -35,7 +39,7 @@ $module_id = 'offcanvas-menu-'.$module->id;
                 <i class="fas fa-xmark" aria-hidden="true"></i>
             </button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body py-2">
             <?php
             $nav_class_suffix = 'navbar-nav flex-column flex-lg-row';
             require __DIR__ . '/horizontal.php'; ?>
