@@ -32,7 +32,7 @@
 }
 
 // Enable animations on element
-@mixin anim($time:0.5s) {
+@mixin anim($time:0.2s) {
     transition:$time linear all;
 }
 // Put a white overlay on an image.
