@@ -22,6 +22,13 @@ if ($item->anchor_title) {
 $attributes['class'] = 'mod-menu__separator dropdown-divider';
 $attributes['class'] .= $item->anchor_css ? ' ' . $item->anchor_css : null;
 
+if( $showAll && $item->deeper ) {
+    $attributes['class'].= ' dropdown-toggle';
+    $attributes['data-bs-toggle'] = 'dropdown';
+    $attributes['aria-haspopup'] = 'true';
+    $attributes['aria-expanded'] = 'false';
+}
+
 $linktype = $item->title;
 
 if ($item->menu_icon) {
@@ -48,11 +55,4 @@ if ($item->menu_icon) {
     }
 }
 
-if ($showAll && $item->deeper) {
-    $attributes['class'] .= ' mm-collapsed mm-toggler mm-toggler-nolink';
-    $attributes['aria-haspopup'] = 'true';
-    $attributes['aria-expanded'] = 'false';
-    echo '<button ' . ArrayHelper::toString($attributes) . '>' . $linktype . '</button>';
-} else {
-    echo '<span ' . ArrayHelper::toString($attributes) . '>' . $linktype . '</span>';
-}
+echo '<span ' . ArrayHelper::toString($attributes) . '>' . $linktype . '</span>';

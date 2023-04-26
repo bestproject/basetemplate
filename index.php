@@ -49,7 +49,7 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
 <body class="site <?php echo $class ?>">
 <?php echo TemplateHelper::renderCodeBodyTop() ?>
 
-<header id="navigation" class="shadow-sm pb-2 navbar navbar-expand-md navbar-light">
+<header id="navigation" class="shadow-sm pb-2 navbar navbar-expand-lg navbar-light">
 
     <!--Navigation header-->
     <div class="container">

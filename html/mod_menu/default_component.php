@@ -39,6 +39,13 @@ if ($item->id == $active_id) {
 $attributes['class'] = $attributes['class'] ?? '';
 $attributes['class'].= ' nav-link d-flex align-items-center';
 
+if( $showAll && $item->deeper ) {
+    $attributes['class'].= ' dropdown-toggle';
+    $attributes['data-bs-toggle'] = 'dropdown';
+    $attributes['aria-haspopup'] = 'true';
+    $attributes['aria-expanded'] = 'false';
+}
+
 $linktype = $item->title;
 
 if ($item->menu_icon) {
@@ -74,7 +81,3 @@ if ($item->browserNav == 1) {
 }
 
 echo HTMLHelper::link(OutputFilter::ampReplace(htmlspecialchars($item->flink, ENT_COMPAT, 'UTF-8', false)), $linktype, $attributes);
-
-if ($showAll && $item->deeper) {
-    echo '<button class="mm-collapsed mm-toggler mm-toggler-link" aria-haspopup="true" aria-expanded="false" aria-label="' . $item->title . '"></button>';
-}

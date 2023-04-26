@@ -17,11 +17,11 @@ $collapseLayout = true;
 
 <nav aria-label="<?php echo htmlspecialchars($module->title, ENT_QUOTES, 'UTF-8'); ?>">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo $module->id; ?>" aria-controls="collapse-<?php echo $module->id; ?>" aria-expanded="false" aria-label="<?php echo Text::_('MOD_MENU_TOGGLE'); ?>">
-        <span class="icon-menu" aria-hidden="true"></span>
+        <i class="fas fa-hamburger" aria-hidden="true"></i>
     </button>
     <div class="collapse navbar-collapse" id="collapse-<?php echo $module->id; ?>">
         <?php
-        $nav_class_suffix = 'navbar-nav flex-column flex-md-row';
+        $nav_class_suffix = 'navbar-nav flex-column flex-lg-row';
         require __DIR__ . '/horizontal.php'; ?>
     </div>
 </nav>
