@@ -41,7 +41,9 @@ abstract class ImageHelper
                 $attributes['height'] = $height;
             }
         } else {
-            $details = parse_url($details);
+
+            parse_str( parse_url( $details, PHP_URL_QUERY), $details );
+
             if( array_key_exists('width', $details) && $details['width']>0 && array_key_exists('height', $details) && $details['height']>0 ) {
                 $attributes['width'] = $details['width'];
                 $attributes['height'] = $details['height'];
