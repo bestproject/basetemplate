@@ -182,7 +182,7 @@ class AssetsHelper
     }
 
     /**
-     * Get asset url using manifest.json build by webpack in `media/templates/site/BASETEMPLATE`.
+     * Get asset url using manifest.json build by webpack in `media/templates/site/basetemplate`.
      *
      * @param   string  $url       Internal URL (eg. media/templates/site/basetemplate/theme.css)
      * @param   bool    $relative  Is this a relative url? (e.g. theme.css)
@@ -199,7 +199,6 @@ class AssetsHelper
         if ($relative) {
             $url = (rtrim(self::getAssetsRootUrl(), '/')) . '/' . $url;
         }
-
 
         $key = ltrim($url, '/');
         if (array_key_exists($key, $manifest)) {
