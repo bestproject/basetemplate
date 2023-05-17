@@ -11,7 +11,7 @@ use Joomla\CMS\Helper\ModuleHelper;
 use Joomla\Registry\Registry;
 
 /**
- * Build to return Bootstrap3 classes in modules and templates.
+ * Build to return Bootstrap 5 classes in modules and templates.
  *
  * @since 1.5
  */
@@ -19,7 +19,7 @@ abstract class Bootstrap
 {
 
 	/**
-	 * Returns a Bootstrap 4 column classes build from desktop column size.
+	 * Returns a Bootstrap 5 column classes build from desktop column size.
 	 *
 	 * @param   int  $size  Size of a column (from 0 to 12)
 	 *
