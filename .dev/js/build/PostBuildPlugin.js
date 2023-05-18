@@ -35,8 +35,15 @@ class PostBuildPlugin {
 
             // Template editor.css rename
             if( manifest[assets_relative_path+'/editor.css'] ) {
-                fs.rename(root_path+manifest[assets_relative_path+'/editor.css'], assets_path+'/editor.css', ()=>{});
-                manifest[assets_relative_path+'/editor.css'] = '/'+assets_relative_path+'/editor.css';
+                fs.rename(root_path+manifest[assets_relative_path+'/editor.css'], assets_path+'/css/editor.css', ()=>{});
+                manifest[assets_relative_path+'/editor.css'] = '/'+assets_relative_path+'/css/editor.css';
+
+                fs.copyFile(assets_path+'/css/editor.css', assets_path+'/css/editor.min.css', (err) => {
+                    if (err) throw err;
+                    console.log('editor.css was copied to editor.min.css');
+                });
+
+                manifest[assets_relative_path+'/editor.min.css'] = '/'+assets_relative_path+'/css/editor.min.css';
             }
 
             // Update manifest

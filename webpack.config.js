@@ -67,9 +67,9 @@ Encore
     ])
     .addPlugin(new PostBuildPlugin)
     .configureFilenames({
-        js: '[name]-[contenthash].js',
-        css: '[name]-[contenthash].css',
-        assets: '[name]-[contenthash].css',
+        js: 'js/[name]-[contenthash].js',
+        css: 'css/[name]-[contenthash].css',
+        assets: '[name]-[contenthash].[ext]',
     })
 ;
 
