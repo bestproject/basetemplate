@@ -8,10 +8,7 @@
  */
 
 use BestProject\Helper\AssetsHelper;
-use BestProject\Helper\TemplateHelper;
 use Joomla\CMS\Factory;
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
 use Joomla\Registry\Registry;
 
@@ -49,15 +46,23 @@ $options = [
     // Center slides
     'centeredSlides' => true,
 
+    'navigation' => [
+        'prevEl' => "#$id-prev",
+        'nextEl' => "#$id-next",
+    ],
+
     // Responsive settings
     'breakpoints' => [
         1300 => [
-            'slidesPerView' => min($count, 3),
+            'slidesPerView' => min($count, 6),
         ],
         1170 => [
-            'slidesPerView' => min($count, 2),
+            'slidesPerView' => min($count, 3),
         ],
         768 => [
+            'slidesPerView' => min($count, 2),
+        ],
+        0 => [
             'slidesPerView' => 1,
         ],
     ]
@@ -77,25 +82,26 @@ $wa->addInlineScript("
 ");
 
 ?>
-<div class="articles-category logos d-flex w-100 justify-content-center">
-    <div id="<?php echo $id ?>"  class="swiper flex-shrink-1 w-100">
+<div class="mod-articlescategory logos d-flex w-100 justify-content-center position-relative flex-shrink-1 px-lg-7">
+    <div id="<?php echo $id ?>"  class="swiper w-100">
         <div class="swiper-wrapper">
-            <?php foreach( $list AS $item ):
-                $images = json_decode($item->images);
-                ?>
+			<?php foreach( $list AS $item ):
+				$images = json_decode($item->images);
+				?>
                 <div class="swiper-slide">
                     <?php if ((int)$params->get('link_titles') === 1) : ?>
-                        <a class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 rounded-lg <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
+                        <a class="mod-articles-category-title flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
                             <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" class="img-fluid m-1" />
                         </a>
                     <?php else: ?>
-                        <div class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 rounded-lg <?php echo $item->active; ?>">
+                        <div class="mod-articles-category-title flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 <?php echo $item->active; ?>">
                             <img src="<?php echo $images->image_intro ?>" alt="<?php echo $item->title ?>" class="img-fluid m-1" />
                         </div>
                     <?php endif ?>
                 </div>
-            <?php endforeach ?>
-
+			<?php endforeach ?>
         </div>
     </div>
+    <div id="<?php echo $id ?>-prev" class="articles-button-prev btn btn-outline-dark d-none d-md-block" role="button"><i class="fas fa-arrow-left" aria-hidden="true"></i></div>
+    <div id="<?php echo $id ?>-next" class="articles-button-next btn btn-outline-dark d-none d-md-block" role="button"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>
 </div>

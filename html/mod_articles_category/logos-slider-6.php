@@ -14,9 +14,15 @@ use Joomla\Registry\Registry;
 
 defined('_JEXEC') or die;
 
+/**
+ * @var array $list List of items
+ * @var Registry $params Module params.
+ */
+
 AssetsHelper::addEntryPointAssets('slider');
 
 $id = 'mod_articles_category_slider' . $module->id;
+$count = count($list);
 
 $options = [
     'autoplay' => [
@@ -37,16 +43,19 @@ $options = [
     // Space between slides
     'spaceBetween' => 20,
 
+    // Center slides
+    'centeredSlides' => true,
+
     // Responsive settings
     'breakpoints' => [
         1300 => [
-            'slidesPerView' => 6,
+            'slidesPerView' => min($count, 6),
         ],
         1170 => [
-            'slidesPerView' => 3,
+            'slidesPerView' => min($count, 3),
         ],
         768 => [
-            'slidesPerView' => 2,
+            'slidesPerView' => min($count, 2),
         ],
         0 => [
             'slidesPerView' => 1,
@@ -67,17 +76,13 @@ $wa->addInlineScript("
     });
 ");
 
-/**
- * @var array $list List of items
- * @var Registry $params Module params.
- */
 ?>
 <div class="articles-category logos d-flex w-100 justify-content-center">
-    <div id="<?php echo $id ?>"  class="swiper flex-shrink-1">
+    <div id="<?php echo $id ?>" class="swiper flex-shrink-1 w-100">
         <div class="swiper-wrapper">
-			<?php foreach( $list AS $item ):
-				$images = json_decode($item->images);
-				?>
+            <?php foreach( $list AS $item ):
+                $images = json_decode($item->images);
+                ?>
                 <div class="swiper-slide">
                     <?php if ((int)$params->get('link_titles') === 1) : ?>
                         <a class="mod-articles-category-title border flex-grow-1 d-flex bg-white align-items-center justify-content-center h-100 p-2 rounded-lg <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
@@ -89,7 +94,7 @@ $wa->addInlineScript("
                         </div>
                     <?php endif ?>
                 </div>
-			<?php endforeach ?>
+            <?php endforeach ?>
 
         </div>
     </div>
