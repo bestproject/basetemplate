@@ -56,6 +56,7 @@ function copyTemplateFile(from, to, replaceStrings = []) {
 
 // Copy variables
 copyTemplateFile('/node_modules/bootstrap/scss/_variables.scss', '/.dev/scss/_variables.scss')
+copyTemplateFile('/node_modules/bootstrap/scss/_variables-dark.scss', '/.dev/scss/_variables-dark.scss')
 
 // Copy main boostrap file to allow disabling some components
 copyTemplateFile('/node_modules/bootstrap/scss/bootstrap.scss', '/.dev/scss/_bootstrap.scss', {

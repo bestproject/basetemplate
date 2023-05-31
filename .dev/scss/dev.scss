@@ -8,13 +8,14 @@
 
 // Variables overrides
 @import "variables";
+@import "variables-dark";
 
 // Boostrap SASS default variables
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
 
 // Bootstrap base methods
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
