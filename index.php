@@ -5,7 +5,6 @@ defined('_JEXEC') or die;
 use BestProject\Bootstrap;
 use BestProject\Helper\ImageHelper;
 use BestProject\Helper\TemplateHelper;
-use Ien\Helper\IenHelper;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Menu\MenuItem;
 use Joomla\CMS\Menu\SiteMenu;
@@ -198,4 +197,4 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
 <?php
 
 // Remove build-in bootstrap scripts and styles to avoid duplication
-IenHelper::removeAssets($wa, ['bootstrap'],['bootstrap']);
+TemplateHelper::removeAssets($wa, ['bootstrap'],['bootstrap']);
