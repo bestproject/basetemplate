@@ -2,6 +2,8 @@
 
 namespace BestProject\Helper;
 
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\Utilities\ArrayHelper;
 
 /**
@@ -55,5 +57,44 @@ abstract class ImageHelper
         }
 
         return '';
+    }
+
+
+
+    /**
+     * Get attributes from Joomla! image url.
+     * @param string $url
+     *
+     * @return array
+     */
+    public static function getImageAttributes(string $url): array
+    {
+        // Get details from url
+        $details = HTMLHelper::_('cleanImageURL', $url);
+
+        // Flatten the array
+        $attributes = $details->attributes;
+        $attributes['src'] = $details->url;
+
+        return $attributes;
+    }
+
+    /**
+     * Get image HTML code from Joomla! image url.
+     *
+     * @param   string  $url            Joomla! image url
+     * @param   array   $attributes     Custom attributes.
+     *
+     * @return string
+     */
+    public static function render(string $url, array $attributes = []): string
+    {
+        $attributes += self::getImageAttributes($url);
+
+        if( !array_key_exists('loading', $attributes) ) {
+            $attributes['loading'] = 'lazy';
+        }
+
+        return LayoutHelper::render('joomla.html.image', $attributes);
     }
 }
