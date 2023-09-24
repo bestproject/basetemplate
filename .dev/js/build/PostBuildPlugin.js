@@ -23,25 +23,25 @@ class PostBuildPlugin {
 
             // Template thumbnail rename
             if( manifest[assets_relative_path+'/images/template_preview.png'] ) {
-                fs.rename(root_path+manifest[assets_relative_path+'/images/template_preview.png'], assets_path+'/images/template_preview.png', ()=>{});
+                fs.renameSync(root_path+manifest[assets_relative_path+'/images/template_preview.png'], assets_path+'/images/template_preview.png');
                 manifest[assets_relative_path+'/images/template_preview.png'] = '/'+assets_relative_path+'/images/template_preview.png';
             }
 
             // Template thumbnail rename
             if( manifest[assets_relative_path+'/images/template_thumbnail.png'] ) {
-                fs.rename(root_path+manifest[assets_relative_path+'/images/template_thumbnail.png'], assets_path+'/images/template_thumbnail.png', ()=>{});
+                fs.renameSync(root_path+manifest[assets_relative_path+'/images/template_thumbnail.png'], assets_path+'/images/template_thumbnail.png');
                 manifest[assets_relative_path+'/images/template_thumbnail.png'] = '/'+assets_relative_path+'/images/template_thumbnail.png';
             }
 
             // Template editor.css rename
             if( manifest[assets_relative_path+'/editor.css'] ) {
-                fs.rename(root_path+manifest[assets_relative_path+'/editor.css'], assets_path+'/css/editor.css', ()=>{});
+                fs.renameSync(root_path+manifest[assets_relative_path+'/editor.css'], assets_path+'/css/editor.css');
                 manifest[assets_relative_path+'/editor.css'] = '/'+assets_relative_path+'/css/editor.css';
 
-                fs.copyFile(assets_path+'/css/editor.css', assets_path+'/css/editor.min.css', (err) => {
-                    if (err) throw err;
-                    console.log('editor.css was copied to editor.min.css');
-                });
+                fs.copyFileSync(assets_path+'/css/editor.css', assets_path+'/css/editor.min.css');
+                if (  !fs.existsSync(assets_path+'/css/editor.min.css') ) {
+                    throw Error('editor.css was copied to editor.min.css');
+                }
 
                 manifest[assets_relative_path+'/editor.min.css'] = '/'+assets_relative_path+'/css/editor.min.css';
             }
