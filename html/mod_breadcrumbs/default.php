@@ -13,7 +13,7 @@ use Joomla\CMS\WebAsset\WebAssetManager;
 defined('_JEXEC') or die;
 ?>
 
-<ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb<?php echo $moduleclass_sfx; ?>">
+<ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
 	<?php if ($params->get('showHere', 1)) : ?>
 		<li>
 			<?php echo JText::_('MOD_BREADCRUMBS_HERE'); ?>&#160;
