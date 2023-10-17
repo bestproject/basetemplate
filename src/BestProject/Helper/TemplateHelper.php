@@ -7,6 +7,7 @@ use Exception;
 use JEventDispatcher;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\WebAsset\WebAssetManager;
 use Joomla\CMS\WebAsset\WebAssetManagerInterface;
 use Joomla\Event\Event;
 use Joomla\Registry\Registry;
@@ -244,37 +245,44 @@ abstract class TemplateHelper
         return str_replace(static::LONELY[0], static::LONELY[1], $text);
     }
 
-
-
     /**
      * Remove styles and script that contain a certain text in its name.
      *
-     * @param   WebAssetManagerInterface  $webAssetManager Website assets manager.
-     * @param   array                     $scripts  Array of script names parts.
-     * @param   array                     $styles   Array of style names parts.
+     * @param   WebAssetManagerInterface  $webAssetManager  Website assets manager.
+     * @param   array                     $scripts          Array of script names parts.
+     * @param   array                     $styles           Array of style names parts.
      *
      * @return void
+     * @throws Exception
      */
     public static function removeAssets(WebAssetManagerInterface $webAssetManager, array $scripts = [], array $styles = []): void
     {
-        $registered_scripts = $webAssetManager->getAssets('script');
-        $registered_styles = $webAssetManager->getAssets('style');
+        Factory::getApplication()->registerEvent('onBeforeRender', function() use ($webAssetManager, $scripts, $styles){
+            /**
+             * @var WebAssetManager $wa
+             */
 
-        foreach( $registered_scripts as $key=>$script ) {
-            foreach( $scripts as $remove ) {
-                if( stripos($key, $remove)!==false ) {
-                    $webAssetManager->disableAsset('script', $key);
+            $registered_scripts = $webAssetManager->getAssets('script');
+            $registered_styles = $webAssetManager->getAssets('style');
+
+            foreach( $registered_scripts as $key=>$script ) {
+                foreach( $scripts as $remove ) {
+                    if( stripos($key, $remove)!==false ) {
+                        $webAssetManager->disableAsset('script', $key);
+                    }
                 }
             }
-        }
 
-        foreach( $registered_styles as $key=>$style ) {
-            foreach( $styles as $remove ) {
-                if( stripos($key, $remove)!==false ) {
-                    $webAssetManager->disableAsset('style', $key);
+            foreach( $registered_styles as $key=>$style ) {
+                foreach( $styles as $remove ) {
+                    if( stripos($key, $remove)!==false ) {
+                        $webAssetManager->disableAsset('style', $key);
+                    }
                 }
             }
-        }
+
+        });
+
     }
 
 }
