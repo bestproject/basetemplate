@@ -18,6 +18,12 @@ use Joomla\Registry\Registry;
 /* @var $default MenuItem */
 /* @var $params Registry */
 /* @var $wa WebAssetManager */
+/* @var $homepage_url string */
+/* @var $class string */
+/* @var $logoFile string */
+/* @var $sitename string */
+/* @var $direction string */
+/* @var $language string */
 
 // Prepare document head
 require_once __DIR__.'/includes.php';
@@ -55,7 +61,7 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
     <div class="container">
 
         <!--Logo-->
-        <a class="navbar-brand" href="<?php echo JURI::Base() ?>" title="<?php echo $sitename ?>">
+        <a class="navbar-brand" href="<?php echo $homepage_url ?>" title="<?php echo $sitename ?>">
             <?php if ($logoFile): ?>
                 <img src="<?php echo $logoFile ?>" <?php echo ImageHelper::getSizeAttributes($logoFile) ?> alt="<?php echo $sitename ?>" />
             <?php else: ?>

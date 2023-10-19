@@ -5,6 +5,7 @@ use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
 
@@ -47,6 +48,7 @@ $is_subpage   = !$is_frontpage;
 $view         = $app->input->get('view');
 $layout       = $app->input->get('layout');
 $wa           = $this->getWebAssetManager();
+$homepage_url = Route::_('index.php?Itemid='.$menu->getDefault($app->getLanguage()->getTag())->id);
 
 /** == JAVA SCRIPT ============================================================== */
 $wa->useScript('jquery');
