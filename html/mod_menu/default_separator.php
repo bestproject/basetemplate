@@ -29,7 +29,7 @@ if( $showAll && $item->deeper ) {
     $attributes['aria-expanded'] = 'false';
 }
 
-$linktype = $item->title;
+$linktype = '';
 
 if ($item->menu_icon) {
     // The link is an icon

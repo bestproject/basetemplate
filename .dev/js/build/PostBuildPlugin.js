@@ -22,19 +22,19 @@ class PostBuildPlugin {
             let manifest = JSON.parse(buffer);
 
             // Template thumbnail rename
-            if( manifest[assets_relative_path+'/images/template_preview.png'] ) {
+            if( manifest[assets_relative_path+'/images/template_preview.png'] && fs.existsSync(root_path+manifest[assets_relative_path+'/images/template_preview.png']) ) {
                 fs.renameSync(root_path+manifest[assets_relative_path+'/images/template_preview.png'], assets_path+'/images/template_preview.png');
                 manifest[assets_relative_path+'/images/template_preview.png'] = '/'+assets_relative_path+'/images/template_preview.png';
             }
 
             // Template thumbnail rename
-            if( manifest[assets_relative_path+'/images/template_thumbnail.png'] ) {
+            if( manifest[assets_relative_path+'/images/template_thumbnail.png'] && fs.existsSync(root_path+manifest[assets_relative_path+'/images/template_thumbnail.png']) ) {
                 fs.renameSync(root_path+manifest[assets_relative_path+'/images/template_thumbnail.png'], assets_path+'/images/template_thumbnail.png');
                 manifest[assets_relative_path+'/images/template_thumbnail.png'] = '/'+assets_relative_path+'/images/template_thumbnail.png';
             }
 
             // Template editor.css rename
-            if( manifest[assets_relative_path+'/editor.css'] ) {
+            if( manifest[assets_relative_path+'/editor.css'] && fs.existsSync(root_path+manifest[assets_relative_path+'/editor.css']) ) {
                 fs.renameSync(root_path+manifest[assets_relative_path+'/editor.css'], assets_path+'/css/editor.css');
                 manifest[assets_relative_path+'/editor.css'] = '/'+assets_relative_path+'/css/editor.css';
 
