@@ -2,20 +2,20 @@
 @import "functions";
 
 // Boostrap SASS functions
-@import "node_modules/bootstrap/scss/functions";
+@import "~bootstrap/scss/functions";
 
 // Variables overrides
 @import "variables";
 @import "variables-dark";
 
 // Boostrap SASS default variables
-@import "node_modules/bootstrap/scss/variables";
-@import "node_modules/bootstrap/scss/variables-dark";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
 
 // Default boostrap components list
 @import "_bootstrap";
 
-// Youre custom changes to theme
+// Your custom changes to theme
 @import "theme";
 
 // Responsive changes
