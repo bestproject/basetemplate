@@ -13,7 +13,7 @@
             position:sticky;top:0;background:white;box-shadow: 0 0 1.5rem 0 rgba(black, .15);z-index:1500;
         }
     }
-    .mod-menu-offset {
+    .mod-menu-offcanvas {
         &.desktop-menu {
             .dropdown-menu {
                 @include media-breakpoint-up(lg) {
