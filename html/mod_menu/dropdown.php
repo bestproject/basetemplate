@@ -11,26 +11,13 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Helper\ModuleHelper;
-use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
 
-/**
- * @var array $list
- * @var bool $showAll
- * @var int $active_id
- * @var array $path
- * @var int $default_id
- * @var object $module
- * @var object $active
- * @var string $class_sfx
- * @var Registry $params
- */
 $attributes          = [];
 $nav_class_suffix = $nav_class_suffix ?? 'flex-column';
-$attributes['class'] = 'mod-menu nav '. $nav_class_suffix .' ' . $class_sfx .' mod-menu-default';
+$attributes['class'] = 'mod-menu nav '. $nav_class_suffix .' ' . $class_sfx;
 
-$tagId = $params->get('tag_id', 'mod-menu-default-'.$module->id);
-if ($tagId) {
+if ($tagId = $params->get('tag_id', '')) {
     $attributes['id'] = $tagId;
 }
 
@@ -47,14 +34,13 @@ $start = (int) $params->get('startLevel', 1);
         $itemParams = $item->getParams();
         $class      = [];
         $class[]    = 'nav-item item-' . $item->id . ' level-' . ($item->level - $start + 1);
-        $submenuClass = ['nav','flex-column','flex-nowrap','collapse','ps-3'];
 
         if ($item->id == $default_id) {
             $class[] = 'default';
         }
 
         if ($item->id == $active_id || ($item->type === 'alias' && $itemParams->get('aliasoptions') == $active_id)) {
-            $class[] = 'active';
+            $class[] = 'current';
         }
 
         if (in_array($item->id, $path)) {
@@ -81,37 +67,26 @@ $start = (int) $params->get('startLevel', 1);
             if ($item->parent) {
                 $class[] = 'parent';
             }
-
-            if( in_array($item->id, $active->tree) ) {
-                $submenuClass[] = ' show';
-            }
         }
 
-        echo '<li class="' . implode(' ', $class) . '">';
+        echo '<li class="d-flex align-items-center flex-wrap ' . implode(' ', $class) . '">';
 
         switch ($item->type) :
             case 'separator':
             case 'component':
             case 'heading':
             case 'url':
-                require ModuleHelper::getLayoutPath('mod_menu', 'default_' . $item->type);
+                require ModuleHelper::getLayoutPath('mod_menu', 'dropdown_' . $item->type);
                 break;
 
             default:
-                require ModuleHelper::getLayoutPath('mod_menu', 'default_url');
+                require ModuleHelper::getLayoutPath('mod_menu', 'dropdown_url');
         endswitch;
 
         switch (true) :
             // The next item is deeper.
             case $showAll && $item->deeper:
-
-                $submenuAttributes = [
-                    'class' => implode(' ', $submenuClass),
-                    'id' => 'mod-menu-'.$module->id.'-submenu-'.$item->id,
-                    'data-bs-parent' => '#'.$tagId,
-                ];
-
-                echo '<ul '.ArrayHelper::toString($submenuAttributes).'>';
+                echo '<ul class="dropdown-menu shadow-sm">';
                 break;
 
             // The next item is shallower.

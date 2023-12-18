@@ -24,9 +24,13 @@ $attributes['class'] .= $item->anchor_css ? ' ' . $item->anchor_css : null;
 
 if( $showAll && $item->deeper ) {
     $attributes['class'].= ' dropdown-toggle';
-    $attributes['data-bs-toggle'] = 'dropdown';
-    $attributes['aria-haspopup'] = 'true';
+    $attributes['data-bs-toggle'] = 'collapse';
+    $attributes['data-bs-target'] = '#mod-menu-'.$module->id.'-submenu-'.$item->id;
     $attributes['aria-expanded'] = 'false';
+}
+if( in_array($item->id, $active->tree) ) {
+    $attributes['class'] .= ' active';
+    $attributes['aria-expanded'] = 'true';
 }
 
 $linktype = $item->title;
@@ -35,10 +39,10 @@ if ($item->menu_icon) {
     // The link is an icon
     if ($itemParams->get('menu_text', 1)) {
         // If the link text is to be displayed, the icon is added with aria-hidden
-        $linktype = '<span class="p-2 ' . $item->menu_icon . '" aria-hidden="true"></span>' . $item->title;
+        $linktype = '<i class=" ' . $item->menu_icon . '" aria-hidden="true"></i>' . $item->title;
     } else {
         // If the icon itself is the link, it needs a visually hidden text
-        $linktype = '<span class="p-2 ' . $item->menu_icon . '" aria-hidden="true"></span><span class="visually-hidden">' . $item->title . '</span>';
+        $linktype = '<i class=" ' . $item->menu_icon . '" aria-hidden="true"></i><span class="visually-hidden">' . $item->title . '</span>';
     }
 } elseif ($item->menu_image) {
     // The link is an image, maybe with an own class

@@ -19,22 +19,18 @@ if ($item->anchor_title) {
     $attributes['title'] = $item->anchor_title;
 }
 
-$attributes['class'] = 'mod-menu__separator dropdown-divider';
+$attributes['class'] = 'mod-menu__heading nav-header';
 $attributes['class'] .= $item->anchor_css ? ' ' . $item->anchor_css : null;
-$attributes['id'] = "menu-item-{$item->alias}";
 
 if( $showAll && $item->deeper ) {
     $attributes['class'].= ' dropdown-toggle';
-    $attributes['data-bs-toggle'] = 'collapse';
-    $attributes['data-bs-target'] = '#mod-menu-'.$module->id.'-submenu-'.$item->id;
+    $attributes['data-bs-toggle'] = 'dropdown';
+    $attributes['data-bs-offset'] = '0,0';
+    $attributes['aria-haspopup'] = 'true';
     $attributes['aria-expanded'] = 'false';
 }
-if( in_array($item->id, $active->tree) ) {
-    $attributes['class'] .= ' active';
-    $attributes['aria-expanded'] = 'true';
-}
 
-$linktype = '';
+$linktype = $item->title;
 
 if ($item->menu_icon) {
     // The link is an icon

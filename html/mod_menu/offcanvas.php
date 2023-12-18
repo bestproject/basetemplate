@@ -20,15 +20,16 @@ $collapseLayout = true;
 $module_id = 'offcanvas-menu-'.$module->id;
 ?>
 
-<nav aria-label="<?php echo htmlspecialchars($module->title, ENT_QUOTES, 'UTF-8'); ?>">
+<nav aria-label="<?php echo htmlspecialchars($module->title, ENT_QUOTES, 'UTF-8'); ?>" class="d-flex justify-content-end justify-content-lg-start">
 
-    <button class="btn btn-outline-primary d-inline-flex d-lg-none px-3 py-2" id="<?php echo $module_id ?>-activator" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo $module_id; ?>"  aria-controls="<?php echo $module_id; ?>" aria-expanded="false" aria-label="<?php echo Text::_('MOD_MENU_TOGGLE'); ?>">
-        <i class="fas fa-bars" aria-hidden="true"></i>
+    <button class="btn btn-outline-primary d-inline-flex align-items-center d-lg-none px-3 py-2 my-3" id="<?php echo $module_id ?>-activator" type="button" data-bs-toggle="offcanvas" data-bs-target="#<?php echo $module_id; ?>"  aria-controls="<?php echo $module_id; ?>" aria-expanded="false" aria-label="<?php echo Text::_('MOD_MENU_TOGGLE'); ?>">
+        <i class="fas fa-bars me-3" aria-hidden="true"></i>
+        <span><?php echo Text::_('TPL_ULC_MENU') ?></span>
     </button>
 
     <div class="d-none d-lg-block">
         <?php
-        $nav_class_suffix = 'navbar-nav flex-column flex-lg-row';
+        $nav_class_suffix = 'mod-menu-offcanvas flex-column flex-lg-row desktop-menu';
         require __DIR__ . '/horizontal.php'; ?>
     </div>
 
@@ -41,8 +42,8 @@ $module_id = 'offcanvas-menu-'.$module->id;
         </div>
         <div class="offcanvas-body py-2">
             <?php
-            $nav_class_suffix = 'navbar-nav flex-column flex-lg-row';
-            require __DIR__ . '/horizontal.php'; ?>
+            $nav_class_suffix = 'mod-menu-offcanvas flex-column flex-lg-row mobile-menu';
+            require __DIR__ . '/default.php'; ?>
         </div>
     </div>
 </nav>

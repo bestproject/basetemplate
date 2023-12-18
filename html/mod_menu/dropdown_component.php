@@ -10,8 +10,8 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\Utilities\ArrayHelper;
 
 $attributes = [];
 
@@ -19,22 +19,35 @@ if ($item->anchor_title) {
     $attributes['title'] = $item->anchor_title;
 }
 
-$attributes['class'] = 'mod-menu__separator dropdown-divider';
-$attributes['class'] .= $item->anchor_css ? ' ' . $item->anchor_css : null;
-$attributes['id'] = "menu-item-{$item->alias}";
+
+if ($item->anchor_css) {
+    $attributes['class'] = $item->anchor_css;
+}
+
+if ($item->anchor_rel) {
+    $attributes['rel'] = $item->anchor_rel;
+}
+
+if ($item->id == $active_id) {
+    $attributes['aria-current'] = 'location';
+
+    if ($item->current) {
+        $attributes['aria-current'] = 'page';
+    }
+}
+
+$attributes['class'] = $attributes['class'] ?? '';
+$attributes['class'].= ' nav-link d-flex align-items-center';
 
 if( $showAll && $item->deeper ) {
     $attributes['class'].= ' dropdown-toggle';
-    $attributes['data-bs-toggle'] = 'collapse';
-    $attributes['data-bs-target'] = '#mod-menu-'.$module->id.'-submenu-'.$item->id;
+    $attributes['data-bs-toggle'] = 'dropdown';
+    $attributes['data-bs-offset'] = '0,0';
+    $attributes['aria-haspopup'] = 'true';
     $attributes['aria-expanded'] = 'false';
 }
-if( in_array($item->id, $active->tree) ) {
-    $attributes['class'] .= ' active';
-    $attributes['aria-expanded'] = 'true';
-}
 
-$linktype = '';
+$linktype = $item->title;
 
 if ($item->menu_icon) {
     // The link is an icon
@@ -60,4 +73,12 @@ if ($item->menu_icon) {
     }
 }
 
-echo '<span ' . ArrayHelper::toString($attributes) . '>' . $linktype . '</span>';
+if ($item->browserNav == 1) {
+    $attributes['target'] = '_blank';
+} elseif ($item->browserNav == 2) {
+    $options = 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes';
+
+    $attributes['onclick'] = "window.open(this.href, 'targetWindow', '" . $options . "'); return false;";
+}
+
+echo HTMLHelper::link(OutputFilter::ampReplace(htmlspecialchars($item->flink, ENT_COMPAT, 'UTF-8', false)), $linktype, $attributes);

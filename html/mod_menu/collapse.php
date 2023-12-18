@@ -21,7 +21,7 @@ $collapseLayout = true;
     </button>
     <div class="collapse navbar-collapse" id="collapse-<?php echo $module->id; ?>">
         <?php
-        $nav_class_suffix = 'navbar-nav flex-column flex-lg-row';
+        $nav_class_suffix = 'flex-column flex-lg-row';
         require __DIR__ . '/horizontal.php'; ?>
     </div>
 </nav>

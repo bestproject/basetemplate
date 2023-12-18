@@ -10,6 +10,6 @@
 
 defined('_JEXEC') or die;
 
-$nav_class_suffix = $nav_class_suffix ?? 'flex-column flex-lg-row';
+$nav_class_suffix = $nav_class_suffix ?? 'flex-row flex-wrap nav-inline';
 
 require __DIR__.'/dropdown.php';
