@@ -24,7 +24,7 @@ defined('_JEXEC') or die;
 
 AssetsHelper::addEntryPointAssets('slider');
 
-$id = 'mod_articles_category_slider' . $module->id;
+$id = 'mod_articles_category_slider_' . $module->id;
 $count = count($list);
 
 $options = [
@@ -55,10 +55,16 @@ $options = [
             'slidesPerView' => min($count, 3),
         ],
         1170 => [
-            'slidesPerView' => min($count, 2),
+            'slidesPerView' => min($count, 3),
         ],
         768 => [
-            'slidesPerView' => 1,
+            'slidesPerView' => min($count, 2),
+        ],
+        576 => [
+            'slidesPerView' => min($count, 2),
+        ],
+        0 => [
+            'slidesPerView' => min($count, 1),
         ],
     ]
 ];
