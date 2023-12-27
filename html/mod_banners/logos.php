@@ -99,12 +99,12 @@ $wa->addInlineScript("
 
     <div class="d-flex align-items-center justify-content-center justify-content-md-between flex-wrap flex-md-nowrap">
 
-        <button id="<?php echo "{$id}_prev" ?>" class="d-flex align-items-center order-1 mod-blocks__prev">
+        <button id="<?php echo "{$id}_prev" ?>" class="d-flex align-items-center justify-content-center order-1 mod-blocks__prev">
             <span class="visually-hidden"><?php echo Text::_('JPREV') ?></span>
             <i class="fas fa-arrow-left" aria-hidden="true"></i>
         </button>
 
-        <button id="<?php echo "{$id}_next" ?>" class="d-flex align-items-center order-2 order-md-3 mod-blocks__next">
+        <button id="<?php echo "{$id}_next" ?>" class="d-flex align-items-center justify-content-center order-2 order-md-3 mod-blocks__next">
             <span class="visually-hidden"><?php echo Text::_('JNEXT') ?></span>
             <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </button>
