@@ -1,0 +1,24 @@
+
+.articles-category-alerts {
+    a {
+        color:var(--bs-alert-color);
+        text-decoration: none;
+        &:hover,&:focus {
+            text-decoration: underline;
+        }
+    }
+    .btn-previous,.btn-next {
+        color: var(--bs-danger-text-emphasis);
+        background:none;
+        border:0;width:2em;height:2em;
+        position:absolute;
+        top:50%;transform:translateY(-50%);
+        z-index:5;
+    }
+    .btn-previous {
+        right: calc(#{$spacer*0.5} + 2em);
+    }
+    .btn-next {
+        right:$spacer*0.5;
+    }
+}
