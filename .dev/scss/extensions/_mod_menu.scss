@@ -46,8 +46,10 @@ ul.navbar-nav {
         }
     }
 
-    ul {
-        padding-bottom:$spacer;
+    .open {
+        & + li {
+            margin-top: $spacer;
+        }
     }
 
     --level-spacing: #{rem(24)};

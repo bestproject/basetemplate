@@ -6,22 +6,16 @@ export default function ModMenuCollapse(selector){
     // Make each menu button open or close its submenu
     const $buttons = $menu.find('[role="button"][aria-controls]');
 
-    console.log($buttons);
-
     $buttons.click(function(e){
         e.preventDefault();
         e.stopPropagation();
 
         const $button = $(this);
 
-        console.log('clicked', $button);
-
         // Close
         if( $button.attr('aria-expanded')==='true' ) {
 
             // collapse all in this and lower levels
-            console.log('is expanded');
-
             const $item = $button.parent();
             const $parent = $item.parent();
 
@@ -30,9 +24,10 @@ export default function ModMenuCollapse(selector){
 
                 $sibling.children('a').attr('aria-expanded', 'false');
                 $sibling.children('ul.collapse.show').collapse('hide');
+                $sibling.removeClass('open');
             });
 
-        // Open
+            // Open
         } else {
 
             // collapse all siblings and its lower levels
@@ -41,6 +36,7 @@ export default function ModMenuCollapse(selector){
 
             $item.children('a').attr('aria-expanded', 'true');
             $item.children('ul.collapse').collapse('show');
+            $item.addClass('open');
 
             $parent.children().each((idx, item)=>{
                 const $sibling = $(item);
@@ -48,6 +44,7 @@ export default function ModMenuCollapse(selector){
                 if( !$sibling.is($item) ) {
                     $sibling.find('a').attr('aria-expanded', 'false');
                     $sibling.find('ul.collapse.show').collapse('hide');
+                    $sibling.removeClass('open');
                 }
 
             });
