@@ -57,13 +57,16 @@ $options = [
             'slidesPerView' => min($count, 6),
         ],
         1170 => [
-            'slidesPerView' => min($count, 3),
+            'slidesPerView' => min($count, 4),
         ],
         768 => [
+            'slidesPerView' => min($count, 3),
+        ],
+        576 => [
             'slidesPerView' => min($count, 2),
         ],
         0 => [
-            'slidesPerView' => 1,
+            'slidesPerView' => min($count, 1),
         ],
     ]
 ];

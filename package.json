@@ -36,7 +36,7 @@
     "popper.js": "^1.16",
     "postcss-loader": "^7.0",
     "sass-loader": "^13.0",
-    "swiper": "^9.0",
+    "swiper": "^11.0",
     "webpack-notifier": "^1.13.0"
   },
   "engines": {

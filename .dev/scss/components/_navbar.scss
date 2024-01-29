@@ -1,4 +1,4 @@
-#nav {
+#navigation {
     .navbar-toggler {
         padding:1rem 1.5rem;
         .fas {
@@ -11,6 +11,15 @@
     @include media-breakpoint-up(lg) {
         &.scrolled {
             position:sticky;top:0;background:white;box-shadow: 0 0 1.5rem 0 rgba(black, .15);z-index:1500;
+        }
+    }
+    .mod-menu-offcanvas {
+        &.desktop-menu {
+            .dropdown-menu {
+                @include media-breakpoint-up(lg) {
+                    min-width:rem(320);
+                }
+            }
         }
     }
 }

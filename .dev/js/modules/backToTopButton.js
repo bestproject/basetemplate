@@ -25,7 +25,7 @@ $.fn.backToTopButton = (options = {})=>{
     const settings = {
         button_text: 'Back to top',
         button_id: 'back-to-top',
-        button_class: 'btn btn-default',
+        button_class: 'btn btn-secondary',
         icon_class: 'fas fa-angle-up',
     };
 
