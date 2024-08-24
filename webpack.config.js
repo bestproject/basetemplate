@@ -10,6 +10,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 let themeAssets = [
     './.dev/scss/index.scss',
     './.dev/js/theme.js',
+    // './.dev/js/accessibility.js', # Uncomment if accessibility tools are used
 ]
 if( Encore.isDev() ) {
     themeAssets = themeAssets.concat(['./.dev/scss/dev.scss']);
@@ -25,7 +26,11 @@ Encore
     .setPublicPath('/media/templates/site/'+templateName)
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
-    .enableSassLoader()
+    .enableSassLoader((options) => {
+        options.sassOptions = {
+            quietDeps: true, // disable warning msg
+        }
+    })
     .enableVersioning(Encore.isProduction())
     .enableSingleRuntimeChunk()
     .enableSourceMaps(!Encore.isProduction())
