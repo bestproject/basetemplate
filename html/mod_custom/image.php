@@ -8,6 +8,7 @@
  */
 
 use Joomla\Registry\Registry;
+use BestProject\Helper\ImageHelper;
 
 defined('_JEXEC') or die;
 
@@ -21,4 +22,4 @@ if( empty($image) ) {
     return;
 };
 ?>
-<img src="<?php echo $image ?>" alt="<?php echo htmlspecialchars($module->title) ?>" class="img-fluid" />
+<?php echo ImageHelper::render($image, ['alt'=>htmlspecialchars($module->title), 'class'=>'img-fluid']) ?>
