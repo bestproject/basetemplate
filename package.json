@@ -37,7 +37,8 @@
     "postcss-loader": "^7.0",
     "sass-loader": "^13.0",
     "swiper": "^11.0",
-    "webpack-notifier": "^1.13.0"
+    "webpack-notifier": "^1.13.0",
+    "js-cookie": "^3.0.5"
   },
   "engines": {
     "node": ">=13.0"
