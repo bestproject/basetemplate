@@ -57,10 +57,8 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
 
 <header id="navigation" class="shadow-sm pb-2 navbar navbar-expand-lg navbar-light">
 
-    <!--Navigation header-->
     <div class="container">
 
-        <!--Logo-->
         <a class="navbar-brand" href="<?php echo $homepage_url ?>" title="<?php echo $sitename ?>">
             <?php if ($logoFile): ?>
                 <img src="<?php echo $logoFile ?>" <?php echo ImageHelper::getSizeAttributes($logoFile) ?> alt="<?php echo $sitename ?>" />
@@ -73,9 +71,8 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
             <?php endif ?>
         </a>
 
-        <!--Menu button-->
         <?php if( $has_menu ): ?>
-            <?php echo Bootstrap::position('menu', '', '', false) ?>
+            <jdoc:include type="modules" name="menu" style="none" />
         <?php endif ?>
     </div>
 
@@ -83,22 +80,20 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
 
 <?php if( $has_slider ): ?>
     <div class="slider">
-        <?php echo Bootstrap::position('slider', 'jumbotron text-center', 'wrapper', false) ?>
+        <jdoc:include type="modules" name="slider" />
     </div>
 <?php endif ?>
 
 <?php if( $has_slider_after ): ?>
-    <!--After slider-->
     <div id="slider-after">
         <div class="container">
             <div class="wrapper">
-                <?php echo Bootstrap::position('slider-after') ?>
+                <jdoc:include type="modules" name="slider-after" />
             </div>
         </div>
     </div>
 <?php endif ?>
 
-<!--System messages-->
 <jdoc:include type="message" />
 
 <?php if( $has_content ):
@@ -106,24 +101,20 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
     $content_class = (empty($content_class) && ($has_left || $has_right)) ? 'col-xl-8': $content_class; // Only one column has content
     ?>
 
-    <!--Content blocks-->
     <div class="container">
         <div id="content" class="row">
 
             <?php if( $has_left ): ?>
-                <!--Left column-->
                 <div class="col-12 <?php echo ($has_right ? 'col-xl-3' : 'col-xl-4') ?>">
-                    <?php echo Bootstrap::position('left') ?>
+                    <jdoc:include type="modules" name="left" />
                 </div>
             <?php endif ?>
 
-            <!--Main content-->
             <div class="columns-container col-12 <?php echo $content_class ?>">
 
                 <?php if( $has_content_before ): ?>
-                    <!--Before content-->
                     <div id="content-before">
-                        <?php echo Bootstrap::position('content-before') ?>
+                        <jdoc:include type="modules" name="content-before" />
                     </div>
                 <?php endif ?>
 
@@ -134,18 +125,16 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
                 </main>
 
                 <?php if( $has_content_after ): ?>
-                    <!--After content-->
                     <div id="content-after">
-                        <?php echo Bootstrap::position('content-after') ?>
+                        <jdoc:include type="modules" name="content-after" />
                     </div>
                 <?php endif ?>
 
             </div>
 
             <?php if( $has_right ): ?>
-                <!--Right column-->
                 <div class="col-12 <?php echo ($has_left ? 'col-xl-3' : 'col-xl-4') ?>">
-                    <?php echo Bootstrap::position('right') ?>
+                    <jdoc:include type="modules" name="right" />
                 </div>
             <?php endif ?>
 
@@ -154,34 +143,29 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
 <?php endif ?>
 
 <?php if( $has_footer_before ): ?>
-    <!--Before footer-->
     <div id="footer-before">
         <div class="container">
             <div class="wrapper">
-                <?php echo Bootstrap::position('footer-before') ?>
+                <jdoc:include type="modules" name="footer-before" />
             </div>
         </div>
     </div>
 <?php endif ?>
 
-<!--Footer-->
 <footer>
 
     <?php if( $has_footer ): ?>
-        <!--Footer modules-->
         <div class="container">
-            <?php echo Bootstrap::position('footer') ?>
+            <jdoc:include type="modules" name="footer" />
         </div>
     <?php endif ?>
 
     <div class="container">
         <div class="wrapper d-flex flex-wrap justify-content-center justify-content-xl-between align-items-center py-3">
-            <!--Copyrights info-->
             <span class="copyrights text-muted">© <?php echo date('Y') ?> <?php echo $copyrights ?></span>
 
             <?php if( $has_footer_menu ): ?>
-                <!--Footer menu-->
-                <?php echo Bootstrap::position('footer-menu', '', 'footer-menu') ?>
+                <jdoc:include type="modules" name="footer-menu" style="none" />
             <?php endif ?>
         </div>
     </div>
@@ -189,13 +173,10 @@ $this->getPreloadManager()->preload($wa->getAsset('style', 'fontscheme.current')
 </footer>
 
 <?php if( $has_debug ): ?>
-    <!--System debug data-->
     <jdoc:include type="modules" name="debug" style="none" />
 <?php endif ?>
 
-<!--Script rendered-->
 <jdoc:include type="scripts" />
-<!--End of script rendered-->
 
 <?php echo TemplateHelper::renderCodeBodyBottom() ?>
 </body>
