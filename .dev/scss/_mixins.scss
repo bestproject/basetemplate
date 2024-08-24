@@ -39,3 +39,17 @@
 @mixin overlay-white() {
     filter: brightness(0) invert(1);
 }
+
+// Rules for dark theme color
+@mixin theme-dark(){
+    body[data-bs-theme="dark"] {
+        @content;
+    }
+}
+
+// Rules for light theme color
+@mixin theme-light(){
+    body[data-bs-theme="light"] {
+        @content;
+    }
+}

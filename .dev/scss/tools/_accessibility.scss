@@ -1,0 +1,11 @@
+@include theme-dark {
+    .hide-theme-dark {
+        display:none !important;
+    }
+}
+@include theme-light {
+
+    .hide-theme-light {
+        display:none !important;
+    }
+}
