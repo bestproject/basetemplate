@@ -72,7 +72,7 @@ abstract class Bootstrap
 	 */
 	public static function position(string $position, string $itemClassSfx = '', string $rowClass = 'row', bool $columns = true): string
 	{
-		$modules = \JModuleHelper::getModules($position);
+		$modules = ModuleHelper::getModules($position);
 
 		// There are no modules in this position, do not create any HTML
 		if( empty($modules) ) {
@@ -130,4 +130,9 @@ abstract class Bootstrap
 
 		return $html;
 	}
+
+    public static function has(string $position): bool
+    {
+        return ModuleHelper::getModules($position) !== [];
+    }
 }
