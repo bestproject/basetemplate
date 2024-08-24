@@ -5,6 +5,7 @@ namespace BestProject\Helper;
 use BestProject\ObjectFields;
 use Exception;
 use JEventDispatcher;
+use Joomla\CMS\Event\Content\ContentPrepareEvent;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\WebAsset\WebAssetManager;
@@ -196,7 +197,7 @@ abstract class TemplateHelper
     public static function getObjectFields(object $item, string $context = 'com_content.article'): void
     {
         $dispatcher = Factory::getApplication()->getDispatcher();
-        $event = new Event('onContentPrepare', [$context, &$item, &$item->params, 0]);
+        $event = new ContentPrepareEvent('onContentPrepare', [$context, &$item, &$item->params, 0]);
 
         PluginHelper::importPlugin('content');
 
