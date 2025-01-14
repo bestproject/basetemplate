@@ -22,11 +22,12 @@ if ((string) $module->content === '') {
     return;
 }
 
+$moduleclass_sfx = trim($params->get('moduleclass_sfx', '').' '.($displayData['attribs']['class'] ?? ''));
 $moduleTag              = htmlspecialchars($params->get('module_tag', 'div'), ENT_QUOTES, 'UTF-8');
 $moduleAttribs          = [];
-$moduleAttribs['class'] = 'moduletable ' . htmlspecialchars($params->get('moduleclass_sfx', ''), ENT_QUOTES, 'UTF-8');
+$moduleAttribs['class'] = 'moduletable ' . htmlspecialchars($moduleclass_sfx, ENT_QUOTES, 'UTF-8');
 $bootstrapSize          = (int) $params->get('bootstrap_size', 0);
-$moduleAttribs['class'] .= $bootstrapSize !== 0 ? ' col-md-' . $bootstrapSize : '';
+$moduleAttribs['class'] .= $bootstrapSize > 0 ? ' col-lg-' . $bootstrapSize : '';
 $headerTag              = htmlspecialchars($params->get('header_tag', 'h3'), ENT_QUOTES, 'UTF-8');
 $headerClass            = htmlspecialchars('module-title '.$params->get('header_class', ''), ENT_QUOTES, 'UTF-8');
 $headerAttribs          = [];
