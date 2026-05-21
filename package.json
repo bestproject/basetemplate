@@ -9,7 +9,9 @@
     "watch-prod": "npm encore prod --watch",
     "prod": "encore prod",
     "build": "encore prod",
-    "postinstall": "node .dev/js/build/postinstall.js"
+    "postinstall": "node .dev/js/build/postinstall.js",
+    "stylelint": "stylelint ./.dev/**/*.scss",
+    "stylelint-fix": "stylelint ./.dev/**/*.scss --fix"
   },
   "repository": {
     "type": "git",
