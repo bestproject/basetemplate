@@ -23,22 +23,28 @@
   },
   "homepage": "https://github.com/bestproject/basetemplate#readme",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@fortawesome/fontawesome-free": "^6.3",
-    "@symfony/webpack-encore": "^4.0",
-    "animate.css": "^4.1.1",
-    "autoprefixer": "^10.4",
-    "bootstrap": "^5.3",
-    "core-js": "^3.9.1",
-    "file-loader": "^6.2",
-    "magnific-popup": "^1.1",
-    "sass": "^1.0",
-    "popper.js": "^1.16",
-    "postcss-loader": "^7.0",
-    "sass-loader": "^13.0",
-    "swiper": "^11.0",
-    "webpack-notifier": "^1.13.0",
-    "js-cookie": "^3.0.5"
+    "@babel/core": "7.x",
+    "@babel/plugin-proposal-class-properties": "7.x",
+    "@babel/preset-env": "^7.29.5",
+    "@fortawesome/fontawesome-free": "7.x",
+    "@popperjs/core": "2.x",
+    "@symfony/webpack-encore": "6.x",
+    "autoprefixer": "10.x",
+    "bootstrap": "5.x",
+    "core-js": "3.x",
+    "file-loader": "6.x",
+    "js-cookie": "^3.x",
+    "magnific-popup": "1.x",
+    "postcss-loader": "8.x",
+    "sass": "1.x",
+    "sass-loader": "16.x",
+    "stylelint": "17.x",
+    "stylelint-config-sass-guidelines": "13.x",
+    "stylelint-scss": "7.x",
+    "swiper": "12.x",
+    "webpack": "^5.107.1",
+    "webpack-cli": "^7.0.2",
+    "webpack-notifier": "1.x"
   },
   "engines": {
     "node": ">=13.0"
@@ -47,5 +53,5 @@
     "> 0.25%",
     "not dead",
     "IE 11"
-  ]
+  ],
 }

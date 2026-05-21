@@ -58,9 +58,6 @@ Encore
     .addEntry('theme',
         themeAssets
     )
-    .addEntry('animated', [
-        './.dev/js/animated.js'
-    ])
     .addEntry('backtotop', [
         './.dev/js/backtotop.js'
     ])

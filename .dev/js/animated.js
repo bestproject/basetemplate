@@ -1,1 +1,0 @@
-import './modules/animated';

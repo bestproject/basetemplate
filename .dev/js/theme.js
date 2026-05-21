@@ -1,4 +1,4 @@
-import 'popper.js';
+import { createPopper } from '@popperjs/core';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'bootstrap';
 import './modules/lazy-stylesheet';
