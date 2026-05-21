@@ -8,7 +8,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
 use JsonException;
-use JUri;
 use RuntimeException;
 
 class AssetsHelper
@@ -66,7 +65,7 @@ class AssetsHelper
      * @throws Exception
      * @since 1.1
      */
-    public static function addEntryPointAssets(string $entryPoint, WebAssetManager $webAssetManager = null): void
+    public static function addEntryPointAssets(string $entryPoint, ?WebAssetManager $webAssetManager = null): void
     {
         $entryPoints = self::getEntryPoints();
 
@@ -83,7 +82,7 @@ class AssetsHelper
                 $idx = 1;
                 foreach ($entryPoints[$entryPoint]['css'] as $stylesheet) {
                     $webAssetManager->registerAndUseStyle($entryPoint . '-style-' . $idx,
-                        JUri::root(true) . trim($stylesheet, '/'));
+                        Uri::root(true) . trim($stylesheet, '/'));
                     $idx++;
                 }
             }
@@ -93,7 +92,7 @@ class AssetsHelper
                 $idx = 1;
                 foreach ($entryPoints[$entryPoint]['js'] as $script) {
                     $webAssetManager->registerAndUseScript($entryPoint . '-script' . $idx,
-                        JUri::root(true) . trim($script, '/'));
+                        Uri::root(true) . trim($script, '/'));
                     $idx++;
                 }
             }
@@ -205,7 +204,7 @@ class AssetsHelper
             $public_url = $manifest[$key];
         }
 
-        return JUri::root(true) . trim($public_url, '/');
+        return Uri::root(true) . trim($public_url, '/');
     }
 
     /**
