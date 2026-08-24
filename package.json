@@ -26,7 +26,6 @@
   "homepage": "https://github.com/bestproject/basetemplate#readme",
   "devDependencies": {
     "@babel/core": "8.x",
-    "@babel/plugin-transform-class-properties": "7.x",
     "@babel/preset-env": "8.x",
     "@fortawesome/fontawesome-free": "7.x",
     "@popperjs/core": "2.x",
