@@ -25,7 +25,7 @@ body {
         position: fixed;
         top:50%;right:$spacer;
         z-index:99999999;
-        font-size:rem(16);
+        font-size:to-rem(16);
         font-weight: 500;
         color:white;
         background:$danger;

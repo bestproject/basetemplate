@@ -52,7 +52,7 @@ ul.navbar-nav {
         }
     }
 
-    --level-spacing: #{rem(24)};
+    --level-spacing: #{to-rem(24)};
     .level-1 {
         &>.nav {
             &>.nav-item {

@@ -17,7 +17,7 @@
         &.desktop-menu {
             .dropdown-menu {
                 @include media-breakpoint-up(lg) {
-                    min-width:rem(320);
+                    min-width:to-rem(320);
                 }
             }
         }
