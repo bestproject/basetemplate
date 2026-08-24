@@ -73,6 +73,9 @@ Encore
     .addStyleEntry('editor',[
         './.dev/scss/editor.scss'
     ])
+    .addStyleEntry('fonts',[
+        './.dev/scss/fonts.scss'
+    ])
     .copyFiles([
         {from: './.dev/images', to: 'images/[name].[contenthash].[ext]'},
         {from: './.dev/fonts', to: 'fonts/[name].[contenthash].[ext]'},

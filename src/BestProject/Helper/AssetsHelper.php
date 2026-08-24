@@ -4,6 +4,7 @@ namespace BestProject\Helper;
 
 use Exception;
 use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Document\HtmlDocument;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\WebAsset\WebAssetManager;
@@ -245,6 +246,37 @@ class AssetsHelper
         }
 
         return self::$assets_root_url;
+    }
+
+    public static function addEntrypointStyleAssets(string $entrypoint_name, bool $deferred = false): void
+    {
+
+        $entryPoints = self::getEntryPoints();
+
+        // If no custom assets manager is provided, use default one
+        $webAssetManager = self::getAssetsManager();
+        /**
+         * @var HtmlDocument $doc
+         */
+        $doc = Factory::getApplication()->getDocument();
+
+        // Check if this entry point exists
+        if (array_key_exists($entrypoint_name, $entryPoints)) {
+
+            // Add Styles
+            if (array_key_exists('css', $entryPoints[$entrypoint_name])) {
+                $idx = 1;
+                foreach ($entryPoints[$entrypoint_name]['css'] as $stylesheet) {
+                    if( !$deferred ) {
+                        $webAssetManager->registerAndUseStyle($entrypoint_name . '-style-' . $idx,
+                            Uri::root(true) . trim($stylesheet, '/'));
+                    } else {
+                        $doc->addCustomTag('<link rel="preload" href="'.$stylesheet.'" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="'.$stylesheet.'"></noscript>');
+                    }
+                    $idx++;
+                }
+            }
+        }
     }
 
 }

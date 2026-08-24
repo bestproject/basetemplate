@@ -72,6 +72,7 @@ try
     // Include JavaScript entry point at the bottom
     AssetsHelper::addEntryPointAssets('runtime');
     AssetsHelper::addEntryPointAssets('theme');
+    AssetsHelper::addEntrypointStyleAssets('fonts', true);
 
 }
 catch (Exception $e)
