@@ -1,7 +1,9 @@
-const Encore = require('@symfony/webpack-encore');
-const path = require('path');
+import Encore from '@symfony/webpack-encore';
+import path from 'path';
+import PostBuildPlugin from './.dev/js/build/PostBuildPlugin.js';
+
+const __dirname = import.meta.dirname;
 const templateName = path.basename(__dirname);
-const PostBuildPlugin = require('./.dev/js/build/PostBuildPlugin');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -36,10 +38,8 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .configureBabel((config) => {}, {
         includeNodeModules: ['swiper','dom7','ssr-window'],
-        useBuiltIns: 'usage',
-        corejs: 3
     })
-    .configureTerserPlugin((options)=>{
+    .configureJsMinimizerPlugin((options)=>{
         options.terserOptions = {
             output: {
                 comments: false,
@@ -89,4 +89,4 @@ const TemplateConfig = Encore.getWebpackConfig();
 TemplateConfig.name = 'Template';
 
 // Export configurations
-module.exports = [TemplateConfig];
+export default [TemplateConfig];
