@@ -25,8 +25,9 @@ $.fn.backToTopButton = (options = {})=>{
     const settings = {
         button_text: 'Back to top',
         button_id: 'back-to-top',
-        button_class: 'btn btn-secondary',
-        icon_class: 'fas fa-angle-up',
+        button_class: 'btn btn-sm btn-red px-3',
+        icon_class: 'fas fa-angle-up me-3',
+        time: 500,
     };
 
     $.extend(settings, options)
@@ -69,6 +70,6 @@ $.fn.backToTopButton = (options = {})=>{
         e.preventDefault();
         $('html,body').animate({
             scrollTop: 0
-        }, 700);
+        }, settings.time);
     });
 };
