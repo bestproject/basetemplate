@@ -29,11 +29,26 @@ if ($required) {
     $classes[] = 'required';
 }
 
+/**
+ * @var Joomla\CMS\Form\FormField $field
+ */
+$field = $displayData['field'];
+$type = $field->getAttribute('type');
+$required_html  = '<span class="text-danger" aria-hidden="true">&#160;*</span>';
+if( $required && $type ==='checkbox')
+{
+    if( str_contains($text, '</') ) {
+        $text = substr_replace($text,$required_html, strrpos($text, '</'), 0);
+    } else {
+        $text.= $required_html;
+    }
+}
+
 ?>
 <label id="<?php echo $id; ?>" for="<?php echo $for; ?>"<?php if (!empty($classes)) {
     echo ' class="' . implode(' ', $classes) . '"';
-           } ?>>
-    <?php echo $text; ?><?php if ($required) :
-        ?><span class="star text-danger" aria-hidden="true">&#160;*</span><?php
+} ?>>
+    <?php echo $text; ?><?php if ($required && $type !=='checkbox') :
+        echo $required_html;
     endif; ?>
 </label>
